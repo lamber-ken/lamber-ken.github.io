@@ -20,7 +20,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Apache Hudi">
 <meta property="og:title" content="Gemified Theme – Alpha Release">
-<meta property="og:url" content="http://0.0.0.0:4000/minimal-mistakes/jekyll/gemified-theme-alpha/">
+<meta property="og:url" content="http://0.0.0.0:4000/jekyll/gemified-theme-alpha/">
 
 
   <meta property="og:description" content="Jekyll themes distributed as Ruby gems are finally here to make installing and upgrading much easier. Gone are the days of forking a repo just to “install it”. Or dealing with merge conflicts when pulling in upstream commits to “upgrade it”.">
@@ -40,7 +40,7 @@
 
 
 
-<link rel="canonical" href="http://0.0.0.0:4000/minimal-mistakes/jekyll/gemified-theme-alpha/">
+<link rel="canonical" href="http://0.0.0.0:4000/jekyll/gemified-theme-alpha/">
 
 
 
@@ -51,7 +51,7 @@
     
       "@type": "Person",
       "name": "Michael Rose",
-      "url": "http://0.0.0.0:4000/minimal-mistakes/"
+      "url": "http://0.0.0.0:4000/"
     
   }
 </script>
@@ -64,7 +64,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/minimal-mistakes/feed.xml" type="application/atom+xml" rel="alternate" title="Apache Hudi Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Apache Hudi Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +74,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/minimal-mistakes/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 
 <!--[if IE]>
   <style>
@@ -122,20 +122,20 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/minimal-mistakes/"><img src="/minimal-mistakes/assets/images/hudi.png" alt=""></a>
+          <a class="site-logo" href="/"><img src="/assets/images/hudi.png" alt=""></a>
         
-        <a class="site-title" href="/minimal-mistakes/">
+        <a class="site-title" href="/">
           Apache Hudi
           <span class="site-subtitle">Incubating</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/minimal-mistakes/docs/quick-start-guide/" >Quick-Start Guide</a>
+              <a href="/docs/quick-start-guide/" >Quick-Start Guide</a>
             </li><li class="masthead__menu-item">
-              <a href="/minimal-mistakes/about/" >About</a>
+              <a href="/about/" >About</a>
             </li><li class="masthead__menu-item">
-              <a href="/minimal-mistakes/year-archive/" >Sample Posts</a>
+              <a href="/year-archive/" >Sample Posts</a>
             </li><li class="masthead__menu-item">
-              <a href="/minimal-mistakes/terms/" >Terms &amp; Privacy Policy</a>
+              <a href="/terms/" >Terms &amp; Privacy Policy</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -167,7 +167,7 @@
       
 
       
-        <img src="/minimal-mistakes/assets/images/michael-rose.jpg" alt="Michael Rose" itemprop="image">
+        <img src="/assets/images/michael-rose.jpg" alt="Michael Rose" itemprop="image">
       
     </div>
   
@@ -358,17 +358,17 @@
 
 <p>Add <code class="language-plaintext highlighter-rouge">theme: "minimal-mistakes-jekyll"</code> to your <code class="language-plaintext highlighter-rouge">_config.yml</code> file.</p>
 
-<p>If you’re migrating from an existing Minimal Mistakes site you shouldn’t have to change anything else after this. If it’s a new site consult then docs to <a href="/minimal-mistakes/docs/configuration/">properly config</a>.</p>
+<p>If you’re migrating from an existing Minimal Mistakes site you shouldn’t have to change anything else after this. If it’s a new site consult then docs to <a href="/docs/configuration/">properly config</a>.</p>
 
-<p class="notice--danger"><strong>Please Note:</strong> Paths for image headers, overlays, teasers, <a href="/minimal-mistakes/docs/helpers/#gallery">galleries</a>, and <a href="/minimal-mistakes/docs/helpers/#feature-row">feature rows</a> have changed and now require a full path. Instead of just <code class="language-plaintext highlighter-rouge">image: filename.jpg</code> you’ll need to use the full path eg: <code class="language-plaintext highlighter-rouge">image: assets/images/filename.jpg</code>. The preferred location is now <code class="language-plaintext highlighter-rouge">assets/images</code> but can be placed elsewhere or external hosted. This applies for image references in <code class="language-plaintext highlighter-rouge">_config.yml</code> and <code class="language-plaintext highlighter-rouge">author.yml</code>.</p>
+<p class="notice--danger"><strong>Please Note:</strong> Paths for image headers, overlays, teasers, <a href="/docs/helpers/#gallery">galleries</a>, and <a href="/docs/helpers/#feature-row">feature rows</a> have changed and now require a full path. Instead of just <code class="language-plaintext highlighter-rouge">image: filename.jpg</code> you’ll need to use the full path eg: <code class="language-plaintext highlighter-rouge">image: assets/images/filename.jpg</code>. The preferred location is now <code class="language-plaintext highlighter-rouge">assets/images</code> but can be placed elsewhere or external hosted. This applies for image references in <code class="language-plaintext highlighter-rouge">_config.yml</code> and <code class="language-plaintext highlighter-rouge">author.yml</code>.</p>
 
 <h2 id="step-5-jekyll-new-tweaks">Step 5: <code class="language-plaintext highlighter-rouge">jekyll new</code> Tweaks</h2>
 
 <p>If this is a new site be sure to add the following files to <code class="language-plaintext highlighter-rouge">_data/</code> and customize as you see fit. There is currently no way of bundling them in with the theme, so be sure to consult the docs on how to properly use both.</p>
 
 <ul>
-  <li><a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_data/ui-text.yml"><code class="language-plaintext highlighter-rouge">_data/ui-text.yml</code></a> - UI text <a href="/minimal-mistakes/docs/ui-text/">documentation</a></li>
-  <li><a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_data/navigation.yml"><code class="language-plaintext highlighter-rouge">_data/navigation.yml</code></a> - navigation <a href="/minimal-mistakes/docs/navigation/">documentation</a></li>
+  <li><a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_data/ui-text.yml"><code class="language-plaintext highlighter-rouge">_data/ui-text.yml</code></a> - UI text <a href="/docs/ui-text/">documentation</a></li>
+  <li><a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_data/navigation.yml"><code class="language-plaintext highlighter-rouge">_data/navigation.yml</code></a> - navigation <a href="/docs/navigation/">documentation</a></li>
 </ul>
 
 <p>You’ll also need to:</p>
@@ -428,7 +428,7 @@
       
     
 
-    <li><a href="/minimal-mistakes/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -438,7 +438,7 @@
     </div>
 
     
-  <script src="/minimal-mistakes/assets/js/main.min.js"></script>
+  <script src="/assets/js/main.min.js"></script>
 
 
 
