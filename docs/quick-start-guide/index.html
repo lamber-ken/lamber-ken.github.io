@@ -10,10 +10,10 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Quick-Start Guide - Apache Hudi</title>
-<meta name="description" content="How to quickly install and setup Minimal Mistakes for use with GitHub Pages.">
+<meta name="description" content="This guide provides a quick peek at Hudi’s capabilities using spark-shell. Using Spark datasources, we will walk through code snippets that allows you to insert and update a Hudi dataset of default storage type: Copy on Write. After each write operation we will also show how to read the data both snapshot and incrementally.">
 
 
-  <meta name="author" content="Michael Rose">
+  <meta name="author" content="Quick Links">
 
 
 <meta property="og:type" content="article">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://0.0.0.0:4000/docs/quick-start-guide/">
 
 
-  <meta property="og:description" content="How to quickly install and setup Minimal Mistakes for use with GitHub Pages.">
+  <meta property="og:description" content="This guide provides a quick peek at Hudi’s capabilities using spark-shell. Using Spark datasources, we will walk through code snippets that allows you to insert and update a Hudi dataset of default storage type: Copy on Write. After each write operation we will also show how to read the data both snapshot and incrementally.">
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-14T10:48:42-05:00">
+  <meta property="article:published_time" content="2019-12-15T10:39:55-05:00">
 
 
 
@@ -50,7 +50,7 @@
     "@context": "https://schema.org",
     
       "@type": "Person",
-      "name": "Michael Rose",
+      "name": null,
       "url": "http://0.0.0.0:4000/"
     
   }
@@ -99,6 +99,8 @@
 
 <!-- end custom head snippets -->
 
+<link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
   </head>
 
   <body class="layout--single">
@@ -129,13 +131,15 @@
           <span class="site-subtitle">Incubating</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/docs/quick-start-guide/" >Quick-Start Guide</a>
+              <a href="/docs/quick-start-guide/" target="_self" >Documentation</a>
             </li><li class="masthead__menu-item">
-              <a href="/about/" >About</a>
+              <a href="/community/" target="_self" >Community</a>
             </li><li class="masthead__menu-item">
-              <a href="/year-archive/" >Sample Posts</a>
+              <a href="/releases/" target="_self" >Releases</a>
             </li><li class="masthead__menu-item">
-              <a href="/terms/" >Terms &amp; Privacy Policy</a>
+              <a href="/roadmap/" target="_self" >Roadmap</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://cwiki.apache.org/confluence/display/HUDI/FAQ" target="_blank" >FAQ</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -151,8 +155,6 @@
 
     <div class="initial-content">
       
-
-
 
 <div id="main" role="main">
   
@@ -188,7 +190,7 @@
             
             
 
-            <li><a href="/docs/quick-start-guide/" class="active">Quick-Start Guide</a></li>
+            <li><a href="/docs/quick-start-guide/" class="active">Quick Start</a></li>
           
             
             
@@ -196,7 +198,7 @@
             
             
 
-            <li><a href="/docs/structure/" class="">Structure</a></li>
+            <li><a href="/" class="">Structure</a></li>
           
             
             
@@ -204,7 +206,7 @@
             
             
 
-            <li><a href="/docs/installation/" class="">Installation</a></li>
+            <li><a href="/" class="">User Cases</a></li>
           
             
             
@@ -212,7 +214,15 @@
             
             
 
-            <li><a href="/docs/upgrading/" class="">Upgrading</a></li>
+            <li><a href="/" class="">Talks & Powered By</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/" class="">Comparison</a></li>
           
         </ul>
         
@@ -220,7 +230,7 @@
     
       <li>
         
-          <span class="nav__sub-title">Customization</span>
+          <span class="nav__sub-title">Documentation</span>
         
 
         
@@ -232,7 +242,7 @@
             
             
 
-            <li><a href="/docs/configuration/" class="">Configuration</a></li>
+            <li><a href="/" class="">Concepts</a></li>
           
             
             
@@ -240,7 +250,7 @@
             
             
 
-            <li><a href="/docs/overriding-theme-defaults/" class="">Overriding Theme Defaults</a></li>
+            <li><a href="/" class="">Writing Data</a></li>
           
             
             
@@ -248,7 +258,7 @@
             
             
 
-            <li><a href="/docs/navigation/" class="">Navigation</a></li>
+            <li><a href="/" class="">Querying Data</a></li>
           
             
             
@@ -256,7 +266,7 @@
             
             
 
-            <li><a href="/docs/ui-text/" class="">UI Text</a></li>
+            <li><a href="/" class="">Configuration</a></li>
           
             
             
@@ -264,7 +274,7 @@
             
             
 
-            <li><a href="/docs/authors/" class="">Authors</a></li>
+            <li><a href="/" class="">Performance</a></li>
           
             
             
@@ -272,7 +282,7 @@
             
             
 
-            <li><a href="/docs/layouts/" class="">Layouts</a></li>
+            <li><a href="/" class="">Administering</a></li>
           
         </ul>
         
@@ -280,7 +290,7 @@
     
       <li>
         
-          <span class="nav__sub-title">Content</span>
+          <span class="nav__sub-title">Meta Info</span>
         
 
         
@@ -292,7 +302,7 @@
             
             
 
-            <li><a href="/docs/posts/" class="">Working with Posts</a></li>
+            <li><a href="/" class="">License</a></li>
           
             
             
@@ -300,111 +310,7 @@
             
             
 
-            <li><a href="/docs/pages/" class="">Working with Pages</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/collections/" class="">Working with Collections</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/helpers/" class="">Helpers</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/utility-classes/" class="">Utility Classes</a></li>
-          
-        </ul>
-        
-      </li>
-    
-      <li>
-        
-          <span class="nav__sub-title">Extras</span>
-        
-
-        
-        <ul>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/stylesheets/" class="">Stylesheets</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/javascript/" class="">JavaScript</a></li>
-          
-        </ul>
-        
-      </li>
-    
-      <li>
-        
-          <span class="nav__sub-title">Meta</span>
-        
-
-        
-        <ul>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/history/" class="">History</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/contributing/" class="">Contributing</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/docs-2-2/" class="">Old 2.2 Docs</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/docs/license/" class="">License</a></li>
-          
-            
-            
-
-            
-            
-
-            <li><a href="/terms/" class="">Terms &amp; Privacy Policy</a></li>
+            <li><a href="/" class="">Privacy Policy</a></li>
           
         </ul>
         
@@ -418,10 +324,6 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Quick-Start Guide">
-    <meta itemprop="description" content="How to quickly install and setup Minimal Mistakes for use with GitHub Pages.">
-    <meta itemprop="datePublished" content="December 14, 2019">
-    <meta itemprop="dateModified" content="August 20, 2019">
 
     <div class="page__inner-wrap">
       
@@ -433,208 +335,160 @@
       
 
       <section class="page__content" itemprop="text">
-        <p>Minimal2 Mistakes has been developed as a <a href="http://jekyllrb.com/docs/themes/">Gem-based theme</a> for easier use, and 100% compatible with GitHub Pages when used as a remote theme.</p>
+        <p>This guide provides a quick peek at Hudi’s capabilities using spark-shell. Using Spark datasources, we will walk through 
+code snippets that allows you to insert and update a Hudi dataset of default storage type: 
+<a href="https://hudi.apache.org/concepts.html#copy-on-write-storage">Copy on Write</a>. 
+After each write operation we will also show how to read the data both snapshot and incrementally.</p>
 
-<p><strong>If you enjoy this theme, please consider <a href="https://www.paypal.me/mmistakes">supporting me</a> for developing and maintaining it.</strong></p>
+<h2 id="setup-spark-shell">Setup spark-shell</h2>
 
-<h2 id="installing-the-theme">Installing the theme</h2>
+<p>Hudi works with Spark-2.x versions. You can follow instructions <a href="https://spark.apache.org/downloads.html">here</a> for setting up spark. 
+From the extracted directory run spark-shell with Hudi as:</p>
 
-<p>If you’re running Jekyll v3.5+ and self-hosting you can quickly install the theme as a Ruby gem.</p>
-
-<p class="notice--info"><strong>ProTip:</strong> Be sure to remove <code class="language-plaintext highlighter-rouge">/docs</code> and <code class="language-plaintext highlighter-rouge">/test</code> if you forked Minimal Mistakes. These folders contain documentation and test pages for the theme and you probably don’t want them littering up your repo.</p>
-
-<p class="notice--warning"><strong>Note:</strong> The theme uses the <a href="https://github.com/benbalter/jekyll-include-cache">jekyll-include-cache</a> plugin which will need to be installed in your <code class="language-plaintext highlighter-rouge">Gemfile</code> and added to the <code class="language-plaintext highlighter-rouge">plugins</code> array of <code class="language-plaintext highlighter-rouge">_config.yml</code>. Otherwise you’ll throw <code class="language-plaintext highlighter-rouge">Unknown tag 'include_cached'</code> errors at build.</p>
-
-<h3 id="gem-based-method">Gem-based method</h3>
-
-<p>With Gem-based themes, directories such as the <code class="language-plaintext highlighter-rouge">assets</code>, <code class="language-plaintext highlighter-rouge">_layouts</code>, <code class="language-plaintext highlighter-rouge">_includes</code>, and <code class="language-plaintext highlighter-rouge">_sass</code> are stored in the theme’s gem, hidden from your immediate view. This allows for easier installation and updating as you don’t have to manage any of the theme files.</p>
-
-<p>To install as a Gem-based theme:</p>
-
-<ol>
-  <li>
-    <p>Add the following to your <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
-
-    <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"minimal-mistakes-jekyll"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Fetch and update bundled gems by running the following <a href="http://bundler.io/">Bundler</a> command:</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Set the <code class="language-plaintext highlighter-rouge">theme</code> in your project’s Jekyll <code class="language-plaintext highlighter-rouge">_config.yml</code> file:</p>
-
-    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">theme</span><span class="pi">:</span> <span class="s">minimal-mistakes-jekyll</span>
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<p>To update the theme run <code class="language-plaintext highlighter-rouge">bundle update</code>.</p>
-
-<h3 id="remote-theme-method">Remote theme method</h3>
-
-<p>Remote themes are similar to Gem-based themes, but do not require <code class="language-plaintext highlighter-rouge">Gemfile</code> changes or whitelisting making them ideal for sites hosted with GitHub Pages.</p>
-
-<p>To install as a remote theme:</p>
-
-<ol>
-  <li>
-    <p>Create/replace the contents of your <code class="language-plaintext highlighter-rouge">Gemfile</code> with the following:</p>
-
-    <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
-
-<span class="n">gem</span> <span class="s2">"github-pages"</span><span class="p">,</span> <span class="ss">group: :jekyll_plugins</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Add <code class="language-plaintext highlighter-rouge">jekyll-include-cache</code> to the <code class="language-plaintext highlighter-rouge">plugins</code> array of your <code class="language-plaintext highlighter-rouge">_config.yml</code>.</p>
-  </li>
-  <li>
-    <p>Fetch and update bundled gems by running the following <a href="http://bundler.io/">Bundler</a> command:</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Add <code class="language-plaintext highlighter-rouge">remote_theme: "mmistakes/minimal-mistakes@4.17.2"</code> to your <code class="language-plaintext highlighter-rouge">_config.yml</code> file. Remove any other <code class="language-plaintext highlighter-rouge">theme:</code> or <code class="language-plaintext highlighter-rouge">remote_theme:</code> entry.</p>
-  </li>
-</ol>
-
-<p>You may also optionally specify a branch, <a href="https://github.com/mmistakes/minimal-mistakes/tags">tag</a>, or commit to use by appending an @ and the Git ref (e.g., <code class="language-plaintext highlighter-rouge">mmistakes/minimal-mistakes@4.9.0</code> or <code class="language-plaintext highlighter-rouge">mmistakes/minimal-mistakes@bbf3cbc5fd64a3e1885f3f99eb90ba92af84063d</code>). This is useful when rolling back to older versions of the theme. If you don’t specify a Git ref, the latest on <code class="language-plaintext highlighter-rouge">master</code> will be used.</p>
-
-<p class="notice--info"><strong>Looking for an example?</strong> Fork the <a href="https://github.com/mmistakes/mm-github-pages-starter">Minimal Mistakes remote theme starter</a> for the quickest method of getting a GitHub Pages hosted site up and running. Replace sample content with your own and configure as needed.</p>
-
-<hr />
-
-<p class="notice--warning"><strong>Note:</strong> Your Jekyll site should be viewable immediately at <a href="http://USERNAME.github.io">http://USERNAME.github.io</a>. If it’s not, you can force a rebuild by <strong>Customizing Your Site</strong> (see below for more details).</p>
-
-<p>If you’re hosting several Jekyll based sites under the same GitHub username you will have to use Project Pages instead of User Pages. Essentially you rename the repo to something other than <strong>USERNAME.github.io</strong> and create a <code class="language-plaintext highlighter-rouge">gh-pages</code> branch off of <code class="language-plaintext highlighter-rouge">master</code>. For more details on how to set things up check <a href="https://help.github.com/articles/user-organization-and-project-pages/">GitHub’s documentation</a>.</p>
-
-<figure>
-  <img src="/assets/images/mm-gh-pages.gif" alt="creating a new branch on GitHub" />
-</figure>
-
-<p>You can also install the theme by copying all of the theme files<sup id="fnref:structure"><a href="#fn:structure" class="footnote">1</a></sup> into your project.</p>
-
-<p>To do so fork the <a href="https://github.com/mmistakes/minimal-mistakes/fork">Minimal Mistakes theme</a>, then rename the repo to <strong>USERNAME.github.io</strong> — replacing <strong>USERNAME</strong> with your GitHub username.</p>
-
-<figure>
-  <img src="/assets/images/mm-theme-fork-repo.png" alt="fork Minimal Mistakes" />
-</figure>
-
-<p class="notice--info"><strong>GitHub Pages Alternatives:</strong> Looking to host your site for free and install/update the theme painlessly? <a href="https://www.netlify.com/blog/2015/10/28/a-step-by-step-guide-jekyll-3.0-on-netlify/">Netlify</a>, <a href="https://about.gitlab.com/2016/04/07/gitlab-pages-setup/">GitLab Pages</a>, and <a href="https://jekyllrb.com/docs/continuous-integration/">Continuous Integration (CI) services</a> have you covered. In most cases all you need to do is connect your repository to them, create a simple configuration file, and install the theme following the <a href="#ruby-gem-method">Ruby Gem Method</a> above.</p>
-
-<h3 id="remove-the-unnecessary">Remove the Unnecessary</h3>
-
-<p>If you forked or downloaded the <code class="language-plaintext highlighter-rouge">minimal-mistakes-jekyll</code> repo you can safely remove the following folders and files:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.editorconfig</code></li>
-  <li><code class="language-plaintext highlighter-rouge">.gitattributes</code></li>
-  <li><code class="language-plaintext highlighter-rouge">.github</code></li>
-  <li><code class="language-plaintext highlighter-rouge">/docs</code></li>
-  <li><code class="language-plaintext highlighter-rouge">/test</code></li>
-  <li><code class="language-plaintext highlighter-rouge">CHANGELOG.md</code></li>
-  <li><code class="language-plaintext highlighter-rouge">minimal-mistakes-jekyll.gemspec</code></li>
-  <li><code class="language-plaintext highlighter-rouge">README.md</code></li>
-  <li><code class="language-plaintext highlighter-rouge">screenshot-layouts.png</code></li>
-  <li><code class="language-plaintext highlighter-rouge">screenshot.png</code></li>
-</ul>
-
-<p class="notice--warning"><strong>Note:</strong> If forking the theme be sure to update <code class="language-plaintext highlighter-rouge">Gemfile</code> as well. The one found at the root of the project is for building the theme’s Ruby gem and is missing dependencies. To properly setup a <a href="https://github.com/mmistakes/minimal-mistakes/blob/master/docs/Gemfile"><code class="language-plaintext highlighter-rouge">Gemfile</code></a> with the theme, consult the “<a href="https://mmistakes.github.io/minimal-mistakes/docs/installation/#install-dependencies">Install Dependencies</a>” section.</p>
-
-<h2 id="setup-your-site">Setup Your Site</h2>
-
-<p>Depending on the path you took installing Minimal Mistakes you’ll setup things a little differently.</p>
-
-<p class="notice--info"><strong>ProTip:</strong> The source code and content files for this site can be found in the <a href="https://github.com/mmistakes/minimal-mistakes/tree/master/docs"><code class="language-plaintext highlighter-rouge">/docs</code> folder</a> if you want to copy or learn from them.</p>
-
-<h3 id="starting-fresh">Starting Fresh</h3>
-
-<p>Starting with an empty folder and <code class="language-plaintext highlighter-rouge">Gemfile</code> you’ll need to copy or re-create this <a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_config.yml">default <code class="language-plaintext highlighter-rouge">_config.yml</code></a> file. For a full explanation of every setting be sure to read the <a href="/docs/configuration/"><strong>Configuration</strong></a> section.</p>
-
-<p>From <code class="language-plaintext highlighter-rouge">v4.5.0</code> onwards, Minimal Mistakes theme-gem comes bundled with the necessary data files and will automatically use them via the <a href="https://github.com/ashmaroli/jekyll-data"><code class="language-plaintext highlighter-rouge">jekyll-data</code></a> plugin. So you no longer need to maintain a copy of these data files at your project directory.</p>
-
-<p>You’ll need to create and edit these data files to customize them:</p>
-
-<ul>
-  <li><a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_data/ui-text.yml"><code class="language-plaintext highlighter-rouge">_data/ui-text.yml</code></a> - UI text <a href="/docs/ui-text/">documentation</a></li>
-  <li><a href="https://github.com/mmistakes/minimal-mistakes/blob/master/_data/navigation.yml"><code class="language-plaintext highlighter-rouge">_data/navigation.yml</code></a> - navigation <a href="/docs/navigation/">documentation</a></li>
-</ul>
-
-<h3 id="starting-from-jekyll-new">Starting from <code class="language-plaintext highlighter-rouge">jekyll new</code></h3>
-
-<p>Scaffolding out a site with the <code class="language-plaintext highlighter-rouge">jekyll new</code> command requires you to modify a few files that it creates.</p>
-
-<p>Edit <code class="language-plaintext highlighter-rouge">_config.yml</code>. Then:</p>
-
-<ul>
-  <li>Replace <code class="language-plaintext highlighter-rouge">&lt;site root&gt;/index.md</code> with a modified <a href="https://github.com/mmistakes/minimal-mistakes/blob/master/index.html">Minimal Mistakes <code class="language-plaintext highlighter-rouge">index.html</code></a>. Be sure to enable pagination if using the <a href="/docs/layouts/#home-page"><code class="language-plaintext highlighter-rouge">home</code> layout</a> by adding the necessary lines to <strong>_config.yml</strong>.</li>
-  <li>Change <code class="language-plaintext highlighter-rouge">layout: post</code> in <code class="language-plaintext highlighter-rouge">_posts/0000-00-00-welcome-to-jekyll.markdown</code> to <code class="language-plaintext highlighter-rouge">layout: single</code>.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">about.md</code>, or at the very least change <code class="language-plaintext highlighter-rouge">layout: page</code> to <code class="language-plaintext highlighter-rouge">layout: single</code> and remove references to <code class="language-plaintext highlighter-rouge">icon-github.html</code> (or <a href="https://github.com/jekyll/minima/tree/master/_includes">copy to your <code class="language-plaintext highlighter-rouge">_includes</code></a> if using it).</li>
-</ul>
-
-<h3 id="migrating-to-gem-version">Migrating to Gem Version</h3>
-
-<p>If you’re migrating a site already using Minimal Mistakes and haven’t customized any of the theme files things upgrading will be easier for you.</p>
-
-<p>Start by removing the following folders and any files within them:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">├── _includes
-├── _layouts
-├── _sass
-├── assets
-|  ├── css
-|  ├── fonts
-|  └── js
-</span></code></pre></div></div>
-
-<p>You won’t need these anymore as they’re bundled with the theme gem — unless you intend to <a href="http://jekyllrb.com/docs/themes/#overriding-theme-defaults">override them</a>.</p>
-
-<p class="notice--warning"><strong>Note:</strong> When clearing out the <code class="language-plaintext highlighter-rouge">assets</code> folder be sure to leave any files you’ve added and need. This includes images, CSS, or JavaScript that aren’t already <a href="https://github.com/mmistakes/minimal-mistakes/tree/master/assets">bundled in the theme</a>.</p>
-
-<p>From <code class="language-plaintext highlighter-rouge">v4.5.0</code> onwards, you don’t have to maintain a copy of the default data files viz. <code class="language-plaintext highlighter-rouge">_data/ui-text.yml</code> and <code class="language-plaintext highlighter-rouge">_data/navigation.yml</code> either.
-The default files are read-in automatically via the <a href="https://github.com/ashmaroli/jekyll-data"><code class="language-plaintext highlighter-rouge">jekyll-data</code></a> plugin.</p>
-
-<p>If you customized any of these files leave them alone, and only remove the untouched ones. If done correctly your modified versions should <a href="http://jekyllrb.com/docs/themes/#overriding-theme-defaults">override</a> the versions bundled with the theme and be used by Jekyll instead.</p>
-
-<h4 id="update-gemfile">Update Gemfile</h4>
-
-<p>Replace <code class="language-plaintext highlighter-rouge">gem "github-pages</code> or <code class="language-plaintext highlighter-rouge">gem "jekyll"</code> with <code class="language-plaintext highlighter-rouge">gem "jekyll", "~&gt; 3.5"</code>. You’ll need the latest version of Jekyll<sup id="fnref:update-jekyll"><a href="#fn:update-jekyll" class="footnote">2</a></sup> for Minimal Mistakes to work and load all of the theme’s assets properly, this line forces Bundler to do that.</p>
-
-<p>Add the Minimal Mistakes theme gem:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"minimal-mistakes-jekyll"</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bin</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">shell</span> <span class="o">--</span><span class="n">packages</span> <span class="nv">org</span><span class="o">.</span><span class="py">apache</span><span class="o">.</span><span class="py">hudi</span><span class="k">:</span><span class="kt">hudi-spark-bundle:</span><span class="err">0</span><span class="kt">.</span><span class="err">5</span><span class="kt">.</span><span class="err">0</span><span class="kt">-incubating</span> <span class="kt">\</span>
+    <span class="kt">--conf</span> <span class="kt">'spark.serializer</span><span class="o">=</span><span class="nv">org</span><span class="o">.</span><span class="py">apache</span><span class="o">.</span><span class="py">spark</span><span class="o">.</span><span class="py">serializer</span><span class="o">.</span><span class="py">KryoSerializer</span><span class="o">'</span>
 </code></pre></div></div>
 
-<p>When finished your <code class="language-plaintext highlighter-rouge">Gemfile</code> should look something like this:</p>
+<p>Setup table name, base path and a data generator to generate records for this guide.</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.hudi.QuickstartUtils._</span>
+<span class="k">import</span> <span class="nn">scala.collection.JavaConversions._</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.sql.SaveMode._</span>
+<span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceReadOptions._</span>
+<span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceWriteOptions._</span>
+<span class="k">import</span> <span class="nn">org.apache.hudi.config.HoodieWriteConfig._</span>
 
-<span class="n">gem</span> <span class="s2">"jekyll"</span><span class="p">,</span> <span class="s2">"~&gt; 3.5"</span>
-<span class="n">gem</span> <span class="s2">"minimal-mistakes-jekyll"</span>
+<span class="k">val</span> <span class="nv">tableName</span> <span class="k">=</span> <span class="s">"hudi_cow_table"</span>
+<span class="k">val</span> <span class="nv">basePath</span> <span class="k">=</span> <span class="s">"file:///tmp/hudi_cow_table"</span>
+<span class="k">val</span> <span class="nv">dataGen</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DataGenerator</span>
 </code></pre></div></div>
 
-<p>Then run <code class="language-plaintext highlighter-rouge">bundle update</code> and add <code class="language-plaintext highlighter-rouge">theme: minimal-mistakes-jekyll</code> to your <code class="language-plaintext highlighter-rouge">_config.yml</code>.</p>
+<p class="notice--info">The <a href="https://github.com/apache/incubator-hudi/blob/master/hudi-spark/src/main/java/org/apache/hudi/QuickstartUtils.java">DataGenerator</a> 
+can generate sample inserts and updates based on the the sample trip schema <a href="https://github.com/apache/incubator-hudi/blob/master/hudi-spark/src/main/java/org/apache/hudi/QuickstartUtils.java#L57">here</a></p>
 
-<p class="notice--danger"><strong>v4 Breaking Change:</strong> Paths for image headers, overlays, teasers, <a href="/docs/helpers/#gallery">galleries</a>, and <a href="/docs/helpers/#feature-row">feature rows</a> have changed and now require a full path. Instead of just <code class="language-plaintext highlighter-rouge">image: filename.jpg</code> you’ll need to use the full path eg: <code class="language-plaintext highlighter-rouge">image: /assets/images/filename.jpg</code>. The preferred location is now <code class="language-plaintext highlighter-rouge">/assets/images/</code> but can be placed elsewhere or externally hosted. This applies to image references in <code class="language-plaintext highlighter-rouge">_config.yml</code> and <code class="language-plaintext highlighter-rouge">author.yml</code> as well.</p>
+<h2 id="insert-data">Insert data</h2>
 
-<hr />
+<p>Generate some new trips, load them into a DataFrame and write the DataFrame into the Hudi dataset as below.</p>
 
-<p>That’s it! If all goes well running <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code> should spin-up your site.</p>
-<div class="footnotes">
-  <ol>
-    <li id="fn:structure">
-      <p>See <a href="/docs/structure/"><strong>Structure</strong> page</a> for a list of theme files and what they do. <a href="#fnref:structure" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:update-jekyll">
-      <p>You could also run <code class="language-plaintext highlighter-rouge">bundle update jekyll</code> to update Jekyll. <a href="#fnref:update-jekyll" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">inserts</span> <span class="k">=</span> <span class="nf">convertToStringList</span><span class="o">(</span><span class="nv">dataGen</span><span class="o">.</span><span class="py">generateInserts</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="n">inserts</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span>
+<span class="nv">df</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+    <span class="nf">options</span><span class="o">(</span><span class="n">getQuickstartWriteConfigs</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">PRECOMBINE_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"ts"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">RECORDKEY_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"uuid"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">PARTITIONPATH_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"partitionpath"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">TABLE_NAME</span><span class="o">,</span> <span class="n">tableName</span><span class="o">).</span>
+    <span class="nf">mode</span><span class="o">(</span><span class="nc">Overwrite</span><span class="o">).</span>
+    <span class="nf">save</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p class="notice--info"><code class="language-plaintext highlighter-rouge">mode(Overwrite)</code> overwrites and recreates the dataset if it already exists.
+You can check the data generated under <code class="language-plaintext highlighter-rouge">/tmp/hudi_cow_table/&lt;region&gt;/&lt;country&gt;/&lt;city&gt;/</code>. We provided a record key 
+(<code class="language-plaintext highlighter-rouge">uuid</code> in <a href="#sample-schema">schema</a>), partition field (<code class="language-plaintext highlighter-rouge">region/county/city</code>) and combine logic (<code class="language-plaintext highlighter-rouge">ts</code> in 
+<a href="#sample-schema">schema</a>) to ensure trip records are unique within each partition. For more info, refer to 
+<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=113709185#Frequentlyaskedquestions(FAQ)-HowdoImodelthedatastoredinHudi?">Modeling data stored in Hudi</a>
+and for info on ways to ingest data into Hudi, refer to <a href="https://hudi.apache.org/writing_data.html">Writing Hudi Datasets</a>.
+Here we are using the default write operation : <code class="language-plaintext highlighter-rouge">upsert</code>. If you have a workload without updates, you can also issue 
+<code class="language-plaintext highlighter-rouge">insert</code> or <code class="language-plaintext highlighter-rouge">bulk_insert</code> operations which could be faster. To know more, refer to <a href="https://hudi.apache.org/writing_data.html#write-operations">Write operations</a></p>
+
+<h2 id="query-data">Query data</h2>
+
+<p>Load the data files into a DataFrame.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">roViewDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span>
+    <span class="n">read</span><span class="o">.</span>
+    <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+    <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span> <span class="o">+</span> <span class="s">"/*/*/*/*"</span><span class="o">)</span>
+<span class="nv">roViewDF</span><span class="o">.</span><span class="py">createOrReplaceTempView</span><span class="o">(</span><span class="s">"hudi_ro_table"</span><span class="o">)</span>
+<span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select fare, begin_lon, begin_lat, ts from  hudi_ro_table where fare &gt; 20.0"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
+<span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select _hoodie_commit_time, _hoodie_record_key, _hoodie_partition_path, rider, driver, fare from  hudi_ro_table"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p class="notice--info">This query provides a read optimized view of the ingested data. Since our partition path (<code class="language-plaintext highlighter-rouge">region/country/city</code>) is 3 levels nested 
+from base path we ve used <code class="language-plaintext highlighter-rouge">load(basePath + "/*/*/*/*")</code>. 
+Refer to <a href="https://hudi.apache.org/concepts.html#storage-types--views">Storage Types and Views</a> for more info on all storage types and views supported.</p>
+
+<h2 id="update-data">Update data</h2>
+
+<p>This is similar to inserting new data. Generate updates to existing trips using the data generator, load into a DataFrame 
+and write DataFrame into the hudi dataset.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">updates</span> <span class="k">=</span> <span class="nf">convertToStringList</span><span class="o">(</span><span class="nv">dataGen</span><span class="o">.</span><span class="py">generateUpdates</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="n">updates</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+<span class="nv">df</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+    <span class="nf">options</span><span class="o">(</span><span class="n">getQuickstartWriteConfigs</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">PRECOMBINE_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"ts"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">RECORDKEY_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"uuid"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">PARTITIONPATH_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"partitionpath"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">TABLE_NAME</span><span class="o">,</span> <span class="n">tableName</span><span class="o">).</span>
+    <span class="nf">mode</span><span class="o">(</span><span class="nc">Append</span><span class="o">).</span>
+    <span class="nf">save</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p class="notice--info">Notice that the save mode is now <code class="language-plaintext highlighter-rouge">Append</code>. In general, always use append mode unless you are trying to create the dataset for the first time.
+<a href="#query">Querying</a> the data again will now show updated trips. Each write operation generates a new <a href="http://hudi.incubator.apache.org/concepts.html">commit</a> 
+denoted by the timestamp. Look for changes in <code class="language-plaintext highlighter-rouge">_hoodie_commit_time</code>, <code class="language-plaintext highlighter-rouge">rider</code>, <code class="language-plaintext highlighter-rouge">driver</code> fields for the same <code class="language-plaintext highlighter-rouge">_hoodie_record_key</code>s in previous commit.</p>
+
+<h2 id="incremental-query">Incremental query</h2>
+
+<p>Hudi also provides capability to obtain a stream of records that changed since given commit timestamp. 
+This can be achieved using Hudi’s incremental view and providing a begin time from which changes need to be streamed. 
+We do not need to specify endTime, if we want all changes after the given commit (as is the common case).</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// reload data
+</span><span class="n">spark</span><span class="o">.</span>
+    <span class="n">read</span><span class="o">.</span>
+    <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+    <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span> <span class="o">+</span> <span class="s">"/*/*/*/*"</span><span class="o">).</span>
+    <span class="nf">createOrReplaceTempView</span><span class="o">(</span><span class="s">"hudi_ro_table"</span><span class="o">)</span>
+
+<span class="k">val</span> <span class="nv">commits</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select distinct(_hoodie_commit_time) as commitTime from  hudi_ro_table order by commitTime"</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">k</span> <span class="k">=&gt;</span> <span class="nv">k</span><span class="o">.</span><span class="py">getString</span><span class="o">(</span><span class="mi">0</span><span class="o">)).</span><span class="py">take</span><span class="o">(</span><span class="mi">50</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">beginTime</span> <span class="k">=</span> <span class="nf">commits</span><span class="o">(</span><span class="nv">commits</span><span class="o">.</span><span class="py">length</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// commit time we are interested in
+</span>
+<span class="c1">// incrementally query data
+</span><span class="k">val</span> <span class="nv">incViewDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span>
+    <span class="n">read</span><span class="o">.</span>
+    <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">VIEW_TYPE_OPT_KEY</span><span class="o">,</span> <span class="nc">VIEW_TYPE_INCREMENTAL_OPT_VAL</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">BEGIN_INSTANTTIME_OPT_KEY</span><span class="o">,</span> <span class="n">beginTime</span><span class="o">).</span>
+    <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
+<span class="nv">incViewDF</span><span class="o">.</span><span class="py">registerTempTable</span><span class="o">(</span><span class="s">"hudi_incr_table"</span><span class="o">)</span>
+<span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select `_hoodie_commit_time`, fare, begin_lon, begin_lat, ts from  hudi_incr_table where fare &gt; 20.0"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p class="notice--info">This will give all changes that happened after the beginTime commit with the filter of fare &gt; 20.0. The unique thing about this
+feature is that it now lets you author streaming pipelines on batch data.</p>
+
+<h2 id="point-in-time-query">Point in time query</h2>
+
+<p>Lets look at how to query data as of a specific time. The specific time can be represented by pointing endTime to a 
+specific commit time and beginTime to “000” (denoting earliest possible commit time).</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">beginTime</span> <span class="k">=</span> <span class="s">"000"</span> <span class="c1">// Represents all commits &gt; this time.
+</span><span class="k">val</span> <span class="nv">endTime</span> <span class="k">=</span> <span class="nf">commits</span><span class="o">(</span><span class="nv">commits</span><span class="o">.</span><span class="py">length</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// commit time we are interested in
+</span>
+<span class="c1">//incrementally query data
+</span><span class="k">val</span> <span class="nv">incViewDF</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">VIEW_TYPE_OPT_KEY</span><span class="o">,</span> <span class="nc">VIEW_TYPE_INCREMENTAL_OPT_VAL</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">BEGIN_INSTANTTIME_OPT_KEY</span><span class="o">,</span> <span class="n">beginTime</span><span class="o">).</span>
+    <span class="nf">option</span><span class="o">(</span><span class="nc">END_INSTANTTIME_OPT_KEY</span><span class="o">,</span> <span class="n">endTime</span><span class="o">).</span>
+    <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
+<span class="nv">incViewDF</span><span class="o">.</span><span class="py">registerTempTable</span><span class="o">(</span><span class="s">"hudi_incr_table"</span><span class="o">)</span>
+<span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select `_hoodie_commit_time`, fare, begin_lon, begin_lat, ts from  hudi_incr_table where fare &gt; 20.0"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
+</code></pre></div></div>
+
+<h2 id="where-to-go-from-here">Where to go from here?</h2>
+
+<p>You can also do the quickstart by <a href="https://github.com/apache/incubator-hudi#building-apache-hudi-from-source">building hudi yourself</a>, 
+and using <code class="language-plaintext highlighter-rouge">--jars &lt;path to hudi_code&gt;/packaging/hudi-spark-bundle/target/hudi-spark-bundle-*.*.*-SNAPSHOT.jar</code> in the spark-shell command above
+instead of <code class="language-plaintext highlighter-rouge">--packages org.apache.hudi:hudi-spark-bundle:0.5.0-incubating</code></p>
+
+<p>Also, we used Spark here to show case the capabilities of Hudi. However, Hudi can support multiple storage types/views and 
+Hudi datasets can be queried from query engines like Hive, Spark, Presto and much more. We have put together a 
+<a href="https://www.youtube.com/watch?v=VhNgUsxdrD0">demo video</a> that show cases all of this on a docker based setup with all 
+dependent systems running locally. We recommend you replicate the same setup and run the demo yourself, by following 
+steps <a href="docker_demo.html">here</a> to get a taste for it. Also, if you are looking for ways to migrate your existing data 
+to Hudi, refer to <a href="migration_guide.html">migration guide</a>.</p>
 
         
       </section>
@@ -659,38 +513,30 @@ The default files are read-in automatically via the <a href="https://github.com/
         <!-- start custom footer snippets -->
 
 <!-- end custom footer snippets -->
-        <div class="page__footer-follow">
-  <ul class="social-icons">
-    
-      <li><strong>Follow:</strong></li>
-    
-
-    
-      
         
-          <li><a href="https://github.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
-        
-      
-        
-          <li><a href="https://instagram.com/mmistakes" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
-        
-      
-    
-
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
-  </ul>
+<div class="row">
+  <div class="col-lg-12 footer">
+    <p>
+      <a class="footer-link-img" href="https://apache.org">
+        <img width="250px" src="/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
+      </a>
+    </p>
+    <p>
+      Copyright &copy; <span id="copyright-year">2019</span> <a href="https://apache.org">The Apache Software Foundation</a>, Licensed under the Apache License, Version 2.0.
+      Apache and the Apache feather logo are trademarks of The Apache Software Foundation. <a href="/privacy">Privacy Policy</a>
+      <br>
+      Apache Hudi is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the <a href="http://incubator.apache.org/">Apache Incubator</a>.
+      Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have
+      stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a
+      reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.
+    </p>
+  </div>
 </div>
-
-<div class="page__footer-copyright">&copy; 2019 Michael Rose. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
-
       </footer>
     </div>
 
     
   <script src="/assets/js/main.min.js"></script>
-
-
-
 
 
 
