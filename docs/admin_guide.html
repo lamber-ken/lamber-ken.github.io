@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-17T12:01:15-05:00">
+  <meta property="article:published_time" content="2019-12-17T21:05:46-05:00">
 
 
 
@@ -404,7 +404,7 @@ are reviewed</p>
 <span class="nl">hoodie:</span><span class="n">trips</span><span class="o">-&gt;</span>
 </code></pre></div></div>
 
-<h4 id="inspecting-commits">Inspecting Commits</h4>
+<h3 id="inspecting-commits">Inspecting Commits</h3>
 
 <p>The task of upserting or inserting a batch of incoming records is known as a <strong>commit</strong> in Hudi. A commit provides basic atomicity guarantees such that only commited data is available for querying.
 Each commit has a monotonically increasing string/number called the <strong>commit number</strong>. Typically, this is the time at which we started the commit.</p>
@@ -427,7 +427,7 @@ Each commit has a monotonically increasing string/number called the <strong>comm
 <span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span>   <span class="mi">3</span> <span class="n">vinoth</span> <span class="n">supergroup</span>     <span class="mi">321984</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">05</span> <span class="mi">23</span><span class="o">:</span><span class="mi">18</span> <span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">uber</span><span class="o">/</span><span class="n">trips</span><span class="o">/.</span><span class="na">hoodie</span><span class="o">/</span><span class="mi">20161005225920</span><span class="o">.</span><span class="na">inflight</span>
 </code></pre></div></div>
 
-<h4 id="drilling-down-to-a-specific-commit">Drilling Down to a specific Commit</h4>
+<h3 id="drilling-down-to-a-specific-commit">Drilling Down to a specific Commit</h3>
 
 <p>To understand how the writes spread across specific partiions,</p>
 
@@ -449,7 +449,7 @@ Each commit has a monotonically increasing string/number called the <strong>comm
     <span class="o">....</span>
 </code></pre></div></div>
 
-<h4 id="filesystem-view">FileSystem View</h4>
+<h3 id="filesystem-view">FileSystem View</h3>
 
 <p>Hudi views each partition as a collection of file-groups with each file-group containing a list of file-slices in commit
 order (See Concepts). The below commands allow users to view the file-slices for a data-set.</p>
@@ -473,7 +473,7 @@ order (See Concepts). The below commands allow users to view the file-slices for
  <span class="nl">hoodie:</span><span class="n">stock_ticks_mor</span><span class="o">-&gt;</span>
 </code></pre></div></div>
 
-<h4 id="statistics">Statistics</h4>
+<h3 id="statistics">Statistics</h3>
 
 <p>Since Hudi directly manages file sizes for DFS dataset, it might be good to get an overall picture</p>
 
@@ -496,12 +496,12 @@ order (See Concepts). The below commands allow users to view the file-slices for
     <span class="o">....</span>
 </code></pre></div></div>
 
-<h4 id="archived-commits">Archived Commits</h4>
+<h3 id="archived-commits">Archived Commits</h3>
 
 <p>In order to limit the amount of growth of .commit files on DFS, Hudi archives older .commit files (with due respect to the cleaner policy) into a commits.archived file.
 This is a sequence file that contains a mapping from commitNumber =&gt; json with raw information about the commit (same that is nicely rolled up above).</p>
 
-<h4 id="compactions">Compactions</h4>
+<h3 id="compactions">Compactions</h3>
 
 <p>To get an idea of the lag between compaction and writer applications, use the below command to list down all
 pending compactions.</p>
@@ -525,7 +525,9 @@ pending compactions.</p>
 </code></pre></div></div>
 
 <p>To manually schedule or run a compaction, use the below command. This command uses spark launcher to perform compaction
-operations. NOTE : Make sure no other application is scheduling compaction for this dataset concurrently</p>
+operations.</p>
+
+<p class="notice--info"><strong>NOTE:</strong> Make sure no other application is scheduling compaction for this dataset concurrently</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">hoodie:</span><span class="n">trips</span><span class="o">-&gt;</span><span class="n">help</span> <span class="n">compaction</span> <span class="n">schedule</span>
 <span class="nl">Keyword:</span>                   <span class="n">compaction</span> <span class="n">schedule</span>
@@ -581,7 +583,7 @@ operations. NOTE : Make sure no other application is scheduling compaction for t
 <span class="o">*</span> <span class="n">compaction</span> <span class="n">run</span> <span class="o">-</span> <span class="nc">Run</span> <span class="nc">Compaction</span> <span class="k">for</span> <span class="n">given</span> <span class="n">instant</span> <span class="n">time</span>
 </code></pre></div></div>
 
-<h5 id="validate-compaction">Validate Compaction</h5>
+<h3 id="validate-compaction">Validate Compaction</h3>
 
 <p>Validating a compaction plan : Check if all the files necessary for compactions are present and are valid</p>
 
@@ -607,15 +609,13 @@ operations. NOTE : Make sure no other application is scheduling compaction for t
     <span class="o">|</span> <span class="mo">05320</span><span class="n">e98</span><span class="o">-</span><span class="mi">9</span><span class="n">a57</span><span class="o">-</span><span class="mi">4</span><span class="n">c38</span><span class="o">-</span><span class="n">b809</span><span class="o">-</span><span class="n">a6beaaeb36bd</span><span class="o">|</span> <span class="mi">20181005222445</span>   <span class="o">|</span> <span class="nl">hdfs:</span><span class="c1">//namenode:8020/user/hive/warehouse/stock_ticks_mor/2018/08/31/05320e98-9a57-4c38-b809-a6beaaeb36bd_0_20181005222445.parquet| 1              | false| All log files specified in compaction operation is not present. Missing ....    |</span>
 </code></pre></div></div>
 
-<h5 id="note">NOTE</h5>
-
-<p>The following commands must be executed without any other writer/ingestion application running.</p>
+<p class="notice--warning"><strong>NOTE:</strong> The following commands must be executed without any other writer/ingestion application running.</p>
 
 <p>Sometimes, it becomes necessary to remove a fileId from a compaction-plan inorder to speed-up or unblock compaction
 operation. Any new log-files that happened on this file after the compaction got scheduled will be safely renamed
 so that are preserved. Hudi provides the following CLI to support it</p>
 
-<h5 id="unscheduling-compaction">UnScheduling Compaction</h5>
+<h3 id="unscheduling-compaction">UnScheduling Compaction</h3>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">hoodie:</span><span class="n">trips</span><span class="o">-&gt;</span><span class="n">compaction</span> <span class="n">unscheduleFileId</span> <span class="o">--</span><span class="n">fileId</span> <span class="o">&lt;</span><span class="nc">FileUUID</span><span class="o">&gt;</span>
 <span class="o">....</span>
@@ -629,7 +629,7 @@ so that are preserved. Hudi provides the following CLI to support it</p>
 <span class="nc">No</span> <span class="nc">File</span> <span class="n">renames</span> <span class="n">needed</span> <span class="n">to</span> <span class="n">unschedule</span> <span class="n">pending</span> <span class="n">compaction</span><span class="o">.</span> <span class="nc">Operation</span> <span class="n">successful</span><span class="o">.</span>
 </code></pre></div></div>
 
-<h5 id="repair-compaction">Repair Compaction</h5>
+<h3 id="repair-compaction">Repair Compaction</h3>
 
 <p>The above compaction unscheduling operations could sometimes fail partially (e:g -&gt; DFS temporarily unavailable). With
 partial failures, the compaction operation could become inconsistent with the state of file-slices. When you run
@@ -672,14 +672,14 @@ consistent with the compaction plan</p>
   <li><strong>_hoodie_partition_path</strong> - Path from basePath that identifies the partition containing this record</li>
 </ul>
 
-<p>Note that as of now, Hudi assumes the application passes in the same deterministic partitionpath for a given recordKey. i.e the uniqueness of record key is only enforced within each partition</p>
+<p class="notice--info"><strong>NOTE:</strong> As of now, Hudi assumes the application passes in the same deterministic partitionpath for a given recordKey. i.e the uniqueness of record key is only enforced within each partition.</p>
 
-<h4 id="missing-records">Missing records</h4>
+<h3 id="missing-records">Missing records</h3>
 
 <p>Please check if there were any write errors using the admin commands above, during the window at which the record could have been written.
 If you do find errors, then the record was not actually written by Hudi, but handed back to the application to decide what to do with it.</p>
 
-<h4 id="duplicates">Duplicates</h4>
+<h3 id="duplicates">Duplicates</h3>
 
 <p>First of all, please confirm if you do indeed have duplicates <strong>AFTER</strong> ensuring the query is accessing the Hudi datasets <a href="sql_queries.html">properly</a> .</p>
 
@@ -689,7 +689,7 @@ If you do find errors, then the record was not actually written by Hudi, but han
   <li>if duplicates span multiple files within the same partitionpath, please engage with mailing list. This should not happen. You can use the <code class="language-plaintext highlighter-rouge">records deduplicate</code> command to fix your data.</li>
 </ul>
 
-<h4 id="spark-ui">Spark failures</h4>
+<h3 id="spark-ui">Spark failures</h3>
 
 <p>Typical upsert() DAG looks like below. Note that Hudi client also caches intermediate RDDs to intelligently profile workload and size files and spark parallelism.
 Also Spark UI shows sortByKey twice due to the probe job also being shown, nonetheless its just a single sort.</p>
