@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-18T22:27:54-05:00">
+  <meta property="article:published_time" content="2019-12-19T00:47:39-05:00">
 
 
 
@@ -127,7 +127,6 @@
             </li><li class="masthead__menu-item">
               <a href="/releases/" target="_self" >Releases</a>
             </li></ul>
-        
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
           <div class="navicon"></div>
@@ -143,7 +142,9 @@
       <div id="main" role="main">
   
   <div class="sidebar sticky">
+
   
+
   
     
       
@@ -151,6 +152,8 @@
       
       
     
+
+
     
       
 
@@ -336,16 +339,16 @@ with special configurations that indicates to query planning that only increment
 in its <a href="https://www.cloudera.com/documentation/enterprise/5-6-x/topics/cm_mc_hive_udf.html#concept_nc3_mms_lr">aux jars path</a>. This will ensure the input format 
 classes with its dependencies are available for query planning &amp; execution.</p>
 
-<h3 id="hive-ro-view">Read Optimized table</h3>
+<h3 id="read-optimized-table">Read Optimized table</h3>
 <p>In addition to setup above, for beeline cli access, the <code class="language-plaintext highlighter-rouge">hive.input.format</code> variable needs to be set to the  fully qualified path name of the 
 inputformat <code class="language-plaintext highlighter-rouge">org.apache.hudi.hadoop.HoodieParquetInputFormat</code>. For Tez, additionally the <code class="language-plaintext highlighter-rouge">hive.tez.input.format</code> needs to be set 
 to <code class="language-plaintext highlighter-rouge">org.apache.hadoop.hive.ql.io.HiveInputFormat</code></p>
 
-<h3 id="hive-rt-view">Real time table</h3>
+<h3 id="real-time-table">Real time table</h3>
 <p>In addition to installing the hive bundle jar on the HiveServer2, it needs to be put on the hadoop/hive installation across the cluster, so that
 queries can pick up the custom RecordReader as well.</p>
 
-<h3 id="hive-incr-pull">Incremental Pulling</h3>
+<h3 id="incremental-pulling">Incremental Pulling</h3>
 
 <p><code class="language-plaintext highlighter-rouge">HiveIncrementalPuller</code> allows incrementally extracting changes from large fact/dimension tables via HiveQL, combining the benefits of Hive (reliably process complex SQL queries) and 
 incremental primitives (speed up query by pulling tables incrementally instead of scanning fully). The tool uses Hive JDBC to run the hive query and saves its results in a temp table.
@@ -457,13 +460,13 @@ separated) and calls InputFormat.listStatus() only once with all those partition
 
 <p>In general, your spark job needs a dependency to <code class="language-plaintext highlighter-rouge">hudi-spark</code> or <code class="language-plaintext highlighter-rouge">hudi-spark-bundle-x.y.z.jar</code> needs to be on the class path of driver &amp; executors (hint: use <code class="language-plaintext highlighter-rouge">--jars</code> argument)</p>
 
-<h3 id="spark-ro-view">Read Optimized table</h3>
+<h3 id="read-optimized-table-1">Read Optimized table</h3>
 
 <p>To read RO table as a Hive table using SparkSQL, simply push a path filter into sparkContext as follows. 
 This method retains Spark built-in optimizations for reading Parquet files like vectorized reading on Hudi tables.</p>
 
-<pre><code class="language-Scala">spark.sparkContext.hadoopConfiguration.setClass("mapreduce.input.pathFilter.class", classOf[org.apache.hudi.hadoop.HoodieROTablePathFilter], classOf[org.apache.hadoop.fs.PathFilter]);
-</code></pre>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">hadoopConfiguration</span><span class="o">.</span><span class="py">setClass</span><span class="o">(</span><span class="s">"mapreduce.input.pathFilter.class"</span><span class="o">,</span> <span class="n">classOf</span><span class="o">[</span><span class="kt">org.apache.hudi.hadoop.HoodieROTablePathFilter</span><span class="o">],</span> <span class="n">classOf</span><span class="o">[</span><span class="kt">org.apache.hadoop.fs.PathFilter</span><span class="o">]);</span>
+</code></pre></div></div>
 
 <p>If you prefer to glob paths on DFS via the datasource, you can simply do something like below to get a Spark dataframe to work with.</p>
 
@@ -565,12 +568,7 @@ This requires the <code class="language-plaintext highlighter-rouge">hudi-presto
     </div>
 
     
-  <script src="/assets/js/main.min.js"></script>
-
-
-
-
-
+<script src="/assets/js/main.min.js"></script>
 
 
   </body>
