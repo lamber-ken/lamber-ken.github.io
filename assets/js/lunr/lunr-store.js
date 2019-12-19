@@ -1,8 +1,33 @@
 var store = [{
+        "title": "S3 Filesystem",
+        "excerpt":"In this page, we explain how to get your Hudi spark job to store into AWS S3. AWS configs There are two configurations required for Hudi-S3 compatibility: Adding AWS Credentials for Hudi Adding required Jars to classpath AWS Credentials Simplest way to use Hudi with S3, is to configure your...","categories": [],
+        "tags": [],
+        "url": "http://0.0.0.0:4000/docs/s3_hoodie",
+        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
+        "title": "GCS Filesystem",
+        "excerpt":"For Hudi storage on GCS, regional buckets provide an DFS API with strong consistency. GCS Configs There are two configurations required for Hudi GCS compatibility: Adding GCS Credentials for Hudi Adding required jars to classpath GCS Credentials Add the required configs in your core-site.xml from where Hudi can fetch them....","categories": [],
+        "tags": [],
+        "url": "http://0.0.0.0:4000/docs/gcs_hoodie",
+        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
+        "title": "Migration Guide",
+        "excerpt":"Hudi maintains metadata such as commit timeline and indexes to manage a dataset. The commit timelines helps to understand the actions happening on a dataset as well as the current state of a dataset. Indexes are used by Hudi to maintain a record key to file id mapping to efficiently...","categories": [],
+        "tags": [],
+        "url": "http://0.0.0.0:4000/docs/migration_guide",
+        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
+        "title": "Docker Demo",
+        "excerpt":"A Demo using docker containers Lets use a real world example to see how hudi works end to end. For this purpose, a self contained data infrastructure is brought up in a local docker cluster within your computer. The steps have been tested on a Mac laptop Prerequisites Docker Setup...","categories": [],
+        "tags": [],
+        "url": "http://0.0.0.0:4000/docs/docker_demo",
+        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
         "title": "Quick-Start Guide",
         "excerpt":"This guide provides a quick peek at Hudi’s capabilities using spark-shell. Using Spark datasources, we will walk through code snippets that allows you to insert and update a Hudi dataset of default storage type: Copy on Write. After each write operation we will also show how to read the data...","categories": [],
         "tags": [],
         "url": "http://0.0.0.0:4000/docs/quick-start-guide/",
+        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
+        "title": "Structure",
+        "excerpt":"Hudi (pronounced “Hoodie”) ingests &amp; manages storage of large analytical datasets over DFS (HDFS or cloud stores) and provides three logical views for query access. Read Optimized View - Provides excellent query performance on pure columnar storage, much like plain Parquet tables. Incremental View - Provides a change stream out...","categories": [],
+        "tags": [],
+        "url": "http://0.0.0.0:4000/docs/structure",
         "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
         "title": "Use Cases",
         "excerpt":"Near Real-Time Ingestion Ingesting data from external sources like (event logs, databases, external sources) into a Hadoop Data Lake is a well known problem. In most (if not all) Hadoop deployments, it is unfortunately solved in a piecemeal fashion, using a medley of ingestion tools, even though this data is...","categories": [],
@@ -49,30 +74,10 @@ var store = [{
         "tags": [],
         "url": "http://0.0.0.0:4000/docs/admin_guide",
         "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
-        "title": "S3 Filesystem",
-        "excerpt":"In this page, we explain how to get your Hudi spark job to store into AWS S3. AWS configs There are two configurations required for Hudi-S3 compatibility: Adding AWS Credentials for Hudi Adding required Jars to classpath AWS Credentials Simplest way to use Hudi with S3, is to configure your...","categories": [],
-        "tags": [],
-        "url": "http://0.0.0.0:4000/docs/s3_hoodie",
-        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
-        "title": "GCS Filesystem",
-        "excerpt":"For Hudi storage on GCS, regional buckets provide an DFS API with strong consistency. GCS Configs There are two configurations required for Hudi GCS compatibility: Adding GCS Credentials for Hudi Adding required jars to classpath GCS Credentials Add the required configs in your core-site.xml from where Hudi can fetch them....","categories": [],
-        "tags": [],
-        "url": "http://0.0.0.0:4000/docs/gcs_hoodie",
-        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
         "title": "Privacy Policy",
         "excerpt":"Information about your use of this website is collected using server access logs and a tracking cookie. The collected information consists of the following: The IP address from which you access the website; The type of browser and operating system you use to access our site; The date and time...","categories": [],
         "tags": [],
         "url": "http://0.0.0.0:4000/docs/privacy",
-        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
-        "title": "Migration Guide",
-        "excerpt":"Hudi maintains metadata such as commit timeline and indexes to manage a dataset. The commit timelines helps to understand the actions happening on a dataset as well as the current state of a dataset. Indexes are used by Hudi to maintain a record key to file id mapping to efficiently...","categories": [],
-        "tags": [],
-        "url": "http://0.0.0.0:4000/docs/migration_guide",
-        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
-        "title": "Docker Demo",
-        "excerpt":"A Demo using docker containers Lets use a real world example to see how hudi works end to end. For this purpose, a self contained data infrastructure is brought up in a local docker cluster within your computer. The steps have been tested on a Mac laptop Prerequisites Docker Setup...","categories": [],
-        "tags": [],
-        "url": "http://0.0.0.0:4000/docs/docker_demo",
         "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
         "title": "Connect with us at Strata San Jose March 2017",
         "excerpt":"We will be presenting Hudi &amp; general concepts around how incremental processing works at Uber. Catch our talk “Incremental Processing on Hadoop At Uber”   ","categories": [],
