@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-19T00:47:39-05:00">
+  <meta property="article:published_time" content="2019-12-19T21:17:37-05:00">
 
 
 
@@ -335,10 +335,10 @@ can be chosen/changed across each commit/deltacommit issued against the dataset.
 
 <h2 id="deltastreamer">DeltaStreamer</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">HoodieDeltaStreamer</code> utility (part of hudi-utilities-bundle) provides the way to ingest from different sources such as DFS or Kafka, with the following capabilities.</p>
+<p>The <code class="highlighter-rouge">HoodieDeltaStreamer</code> utility (part of hudi-utilities-bundle) provides the way to ingest from different sources such as DFS or Kafka, with the following capabilities.</p>
 
 <ul>
-  <li>Exactly once ingestion of new events from Kafka, <a href="https://sqoop.apache.org/docs/1.4.2/SqoopUserGuide.html#_incremental_imports">incremental imports</a> from Sqoop or output of <code class="language-plaintext highlighter-rouge">HiveIncrementalPuller</code> or files under a DFS folder</li>
+  <li>Exactly once ingestion of new events from Kafka, <a href="https://sqoop.apache.org/docs/1.4.2/SqoopUserGuide.html#_incremental_imports">incremental imports</a> from Sqoop or output of <code class="highlighter-rouge">HiveIncrementalPuller</code> or files under a DFS folder</li>
   <li>Support json, avro or a custom record types for the incoming data</li>
   <li>Manage checkpoints, rollback &amp; recovery</li>
   <li>Leverage Avro schemas from DFS or Confluent <a href="https://github.com/confluentinc/schema-registry">schema registry</a>.</li>
@@ -419,7 +419,7 @@ can be chosen/changed across each commit/deltacommit issued against the dataset.
 </code></pre></div></div>
 
 <p>The tool takes a hierarchically composed property file and has pluggable interfaces for extracting data, key generation and providing schema. Sample configs for ingesting from kafka and dfs are
-provided under <code class="language-plaintext highlighter-rouge">hudi-utilities/src/test/resources/delta-streamer-config</code>.</p>
+provided under <code class="highlighter-rouge">hudi-utilities/src/test/resources/delta-streamer-config</code>.</p>
 
 <p>For e.g: once you have Confluent Kafka, Schema registry up &amp; running, produce some test data using (<a href="https://docs.confluent.io/current/ksql/docs/tutorials/generate-custom-test-data.html">impressions.avro</a> provided by schema-registry repo)</p>
 
@@ -441,9 +441,9 @@ provided under <code class="language-plaintext highlighter-rouge">hudi-utilities
 
 <h2 id="datasource-writer">Datasource Writer</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">hudi-spark</code> module offers the DataSource API to write (and also read) any data frame into a Hudi dataset.
+<p>The <code class="highlighter-rouge">hudi-spark</code> module offers the DataSource API to write (and also read) any data frame into a Hudi dataset.
 Following is how we can upsert a dataframe, while specifying the field names that need to be used
-for <code class="language-plaintext highlighter-rouge">recordKey =&gt; _row_key</code>, <code class="language-plaintext highlighter-rouge">partitionPath =&gt; partition</code> and <code class="language-plaintext highlighter-rouge">precombineKey =&gt; timestamp</code></p>
+for <code class="highlighter-rouge">recordKey =&gt; _row_key</code>, <code class="highlighter-rouge">partitionPath =&gt; partition</code> and <code class="highlighter-rouge">precombineKey =&gt; timestamp</code></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputDF</span><span class="o">.</span><span class="na">write</span><span class="o">()</span>
        <span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">)</span>
@@ -459,7 +459,7 @@ for <code class="language-plaintext highlighter-rouge">recordKey =&gt; _row_key<
 <h2 id="syncing-to-hive">Syncing to Hive</h2>
 
 <p>Both tools above support syncing of the dataset’s latest schema to Hive metastore, such that queries can pick up new columns and partitions.
-In case, its preferable to run this from commandline or in an independent jvm, Hudi provides a <code class="language-plaintext highlighter-rouge">HiveSyncTool</code>, which can be invoked as below, 
+In case, its preferable to run this from commandline or in an independent jvm, Hudi provides a <code class="highlighter-rouge">HiveSyncTool</code>, which can be invoked as below, 
 once you have built the hudi-hive module.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span> <span class="n">hudi</span><span class="o">-</span><span class="n">hive</span>
@@ -493,7 +493,7 @@ once you have built the hudi-hive module.</p>
   <li><strong>Soft Deletes</strong> : With soft deletes, user wants to retain the key but just null out the values for all other fields. 
  This can be simply achieved by ensuring the appropriate fields are nullable in the dataset schema and simply upserting the dataset after setting these fields to null.</li>
   <li><strong>Hard Deletes</strong> : A stronger form of delete is to physically remove any trace of the record from the dataset. This can be achieved by issuing an upsert with a custom payload implementation
- via either DataSource or DeltaStreamer which always returns Optional.Empty as the combined value. Hudi ships with a built-in <code class="language-plaintext highlighter-rouge">org.apache.hudi.EmptyHoodieRecordPayload</code> class that does exactly this.</li>
+ via either DataSource or DeltaStreamer which always returns Optional.Empty as the combined value. Hudi ships with a built-in <code class="highlighter-rouge">org.apache.hudi.EmptyHoodieRecordPayload</code> class that does exactly this.</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">deleteDF</span> <span class="c1">// dataframe containing just records to be deleted</span>

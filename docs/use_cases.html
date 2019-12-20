@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-19T00:47:39-05:00">
+  <meta property="article:published_time" content="2019-12-19T21:17:37-05:00">
 
 
 
@@ -344,17 +344,17 @@ Also, Hudi has no external dependencies (like a dedicated HBase cluster, purely 
 
 <p>One fundamental ability Hadoop provides is to build a chain of datasets derived from each other via DAGs expressed as workflows.
 Workflows often depend on new data being output by multiple upstream workflows and traditionally, availability of new data is indicated by a new DFS Folder/Hive Partition.
-Let’s take a concrete example to illustrate this. An upstream workflow <code class="language-plaintext highlighter-rouge">U</code> can create a Hive partition for every hour, with data for that hour (event_time) at the end of each hour (processing_time), providing effective freshness of 1 hour.
-Then, a downstream workflow <code class="language-plaintext highlighter-rouge">D</code>, kicks off immediately after <code class="language-plaintext highlighter-rouge">U</code> finishes, and does its own processing for the next hour, increasing the effective latency to 2 hours.</p>
+Let’s take a concrete example to illustrate this. An upstream workflow <code class="highlighter-rouge">U</code> can create a Hive partition for every hour, with data for that hour (event_time) at the end of each hour (processing_time), providing effective freshness of 1 hour.
+Then, a downstream workflow <code class="highlighter-rouge">D</code>, kicks off immediately after <code class="highlighter-rouge">U</code> finishes, and does its own processing for the next hour, increasing the effective latency to 2 hours.</p>
 
-<p>The above paradigm simply ignores late arriving data i.e when <code class="language-plaintext highlighter-rouge">processing_time</code> and <code class="language-plaintext highlighter-rouge">event_time</code> drift apart.
+<p>The above paradigm simply ignores late arriving data i.e when <code class="highlighter-rouge">processing_time</code> and <code class="highlighter-rouge">event_time</code> drift apart.
 Unfortunately, in today’s post-mobile &amp; pre-IoT world, <strong>late data from intermittently connected mobile devices &amp; sensors are the norm, not an anomaly</strong>.
 In such cases, the only remedy to guarantee correctness is to <a href="https://falcon.apache.org/FalconDocumentation.html#Handling_late_input_data">reprocess the last few hours</a> worth of data,
 over and over again each hour, which can significantly hurt the efficiency across the entire ecosystem. For e.g; imagine reprocessing TBs worth of data every hour across hundreds of workflows.</p>
 
-<p>Hudi comes to the rescue again, by providing a way to consume new data (including late data) from an upsteam Hudi dataset <code class="language-plaintext highlighter-rouge">HU</code> at a record granularity (not folders/partitions),
-apply the processing logic, and efficiently update/reconcile late data with a downstream Hudi dataset <code class="language-plaintext highlighter-rouge">HD</code>. Here, <code class="language-plaintext highlighter-rouge">HU</code> and <code class="language-plaintext highlighter-rouge">HD</code> can be continuously scheduled at a much more frequent schedule
-like 15 mins, and providing an end-end latency of 30 mins at <code class="language-plaintext highlighter-rouge">HD</code>.</p>
+<p>Hudi comes to the rescue again, by providing a way to consume new data (including late data) from an upsteam Hudi dataset <code class="highlighter-rouge">HU</code> at a record granularity (not folders/partitions),
+apply the processing logic, and efficiently update/reconcile late data with a downstream Hudi dataset <code class="highlighter-rouge">HD</code>. Here, <code class="highlighter-rouge">HU</code> and <code class="highlighter-rouge">HD</code> can be continuously scheduled at a much more frequent schedule
+like 15 mins, and providing an end-end latency of 30 mins at <code class="highlighter-rouge">HD</code>.</p>
 
 <p>To achieve this, Hudi has embraced similar concepts from stream processing frameworks like <a href="https://spark.apache.org/docs/latest/streaming-programming-guide.html#join-operations">Spark Streaming</a> , Pub/Sub systems like <a href="http://kafka.apache.org/documentation/#theconsumer">Kafka</a>
 or database replication technologies like <a href="https://docs.oracle.com/cd/E11882_01/server.112/e16545/xstrm_cncpt.htm#XSTRM187">Oracle XStream</a>.
@@ -363,7 +363,7 @@ For the more curious, a more detailed explanation of the benefits of Incremental
 <h2 id="data-dispersal-from-dfs">Data Dispersal From DFS</h2>
 
 <p>A popular use-case for Hadoop, is to crunch data and then disperse it back to an online serving store, to be used by an application.
-For e.g, a Spark Pipeline can <a href="https://eng.uber.com/telematics/">determine hard braking events on Hadoop</a> and load them into a serving store like ElasticSearch, to be used by the Uber application to increase safe driving. Typical architectures for this employ a <code class="language-plaintext highlighter-rouge">queue</code> between Hadoop and serving store, to prevent overwhelming the target serving store.
+For e.g, a Spark Pipeline can <a href="https://eng.uber.com/telematics/">determine hard braking events on Hadoop</a> and load them into a serving store like ElasticSearch, to be used by the Uber application to increase safe driving. Typical architectures for this employ a <code class="highlighter-rouge">queue</code> between Hadoop and serving store, to prevent overwhelming the target serving store.
 A popular choice for this queue is Kafka and this model often results in <strong>redundant storage of same data on DFS (for offline analysis on computed results) and Kafka (for dispersal)</strong></p>
 
 <p>Once again Hudi can efficiently solve this problem, by having the Spark Pipeline upsert output from

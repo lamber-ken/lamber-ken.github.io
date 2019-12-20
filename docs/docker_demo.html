@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-19T00:47:39-05:00">
+  <meta property="article:published_time" content="2019-12-19T21:17:37-05:00">
 
 
 
@@ -324,7 +324,7 @@ data infrastructure is brought up in a local docker cluster within your computer
 
 <ul>
   <li>Docker Setup :  For Mac, Please follow the steps as defined in [https://docs.docker.com/v17.12/docker-for-mac/install/]. For running Spark-SQL queries, please ensure atleast 6 GB and 4 CPUs are allocated to Docker (See Docker -&gt; Preferences -&gt; Advanced). Otherwise, spark-SQL queries could be killed because of memory issues.</li>
-  <li>kafkacat : A command-line utility to publish/consume from kafka topics. Use <code class="language-plaintext highlighter-rouge">brew install kafkacat</code> to install kafkacat</li>
+  <li>kafkacat : A command-line utility to publish/consume from kafka topics. Use <code class="highlighter-rouge">brew install kafkacat</code> to install kafkacat</li>
   <li>/etc/hosts : The demo references many services running in container by the hostname. Add the following settings to /etc/hosts</li>
 </ul>
 
@@ -401,7 +401,7 @@ This should pull the docker images from docker hub and setup docker cluster.</p>
 
 <p>Stock Tracker data will be used to showcase both different Hudi Views and the effects of Compaction.</p>
 
-<p>Take a look at the directory <code class="language-plaintext highlighter-rouge">docker/demo/data</code>. There are 2 batches of stock data - each at 1 minute granularity.
+<p>Take a look at the directory <code class="highlighter-rouge">docker/demo/data</code>. There are 2 batches of stock data - each at 1 minute granularity.
 The first batch contains stocker tracker data for some stock symbols during the first hour of trading window
 (9:30 a.m to 10:30 a.m). The second batch contains tracker data for next 30 mins (10:30 - 11 a.m). Hudi will
 be used to ingest these batches to a dataset which will contain the latest stock tracker data at hour level granularity.
@@ -409,7 +409,7 @@ The batches are windowed intentionally so that the second batch contains updates
 
 <h3 id="step-1--publish-the-first-batch-to-kafka">Step 1 : Publish the first batch to Kafka</h3>
 
-<p>Upload the first batch to Kafka topic ‘stock ticks’ <code class="language-plaintext highlighter-rouge">cat docker/demo/data/batch_1.json | kafkacat -b kafkabroker -t stock_ticks -P</code></p>
+<p>Upload the first batch to Kafka topic ‘stock ticks’ <code class="highlighter-rouge">cat docker/demo/data/batch_1.json | kafkacat -b kafkabroker -t stock_ticks -P</code></p>
 
 <p>To check if the new topic shows up, use</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kafkacat</span> <span class="o">-</span><span class="n">b</span> <span class="n">kafkabroker</span> <span class="o">-</span><span class="no">L</span> <span class="o">-</span><span class="no">J</span> <span class="o">|</span> <span class="n">jq</span> <span class="o">.</span>
@@ -476,13 +476,13 @@ automatically initializes the datasets in the file-system if they do not exist y
 </code></pre></div></div>
 
 <p>You can use HDFS web-browser to look at the datasets
-<code class="language-plaintext highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_cow</code>.</p>
+<code class="highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_cow</code>.</p>
 
 <p>You can explore the new partition folder created in the dataset along with a “deltacommit”
 file under .hoodie which signals a successful commit.</p>
 
 <p>There will be a similar setup when you browse the MOR dataset
-<code class="language-plaintext highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_mor</code></p>
+<code class="highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_mor</code></p>
 
 <h3 id="step-3-sync-with-hive">Step 3: Sync with Hive</h3>
 
@@ -509,8 +509,8 @@ inorder to run Hive queries against those datasets.</p>
 <p>After executing the above command, you will notice</p>
 
 <ol>
-  <li>A hive table named <code class="language-plaintext highlighter-rouge">stock_ticks_cow</code> created which provides Read-Optimized view for the Copy On Write dataset.</li>
-  <li>Two new tables <code class="language-plaintext highlighter-rouge">stock_ticks_mor</code> and <code class="language-plaintext highlighter-rouge">stock_ticks_mor_rt</code> created for the Merge On Read dataset. The former
+  <li>A hive table named <code class="highlighter-rouge">stock_ticks_cow</code> created which provides Read-Optimized view for the Copy On Write dataset.</li>
+  <li>Two new tables <code class="highlighter-rouge">stock_ticks_mor</code> and <code class="highlighter-rouge">stock_ticks_mor_rt</code> created for the Merge On Read dataset. The former
 provides the ReadOptimized view for the Hudi dataset and the later provides the realtime-view for the dataset.</li>
 </ol>
 
@@ -826,10 +826,10 @@ partitions, there is no need to run hive-sync</p>
 </code></pre></div></div>
 
 <p>With Copy-On-Write table, the second ingestion by DeltaStreamer resulted in a new version of Parquet file getting created.
-See <code class="language-plaintext highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_cow/2018/08/31</code></p>
+See <code class="highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_cow/2018/08/31</code></p>
 
 <p>With Merge-On-Read table, the second ingestion merely appended the batch to an unmerged delta (log) file.
-Take a look at the HDFS filesystem to get an idea: <code class="language-plaintext highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_mor/2018/08/31</code></p>
+Take a look at the HDFS filesystem to get an idea: <code class="highlighter-rouge">http://namenode:50070/explorer.html#/user/hive/warehouse/stock_ticks_mor/2018/08/31</code></p>
 
 <h3 id="step-6a-run-hive-queries">Step 6(a): Run Hive Queries</h3>
 
@@ -1383,14 +1383,14 @@ and compose scripts are carefully implemented so that they serve dual-purpose</p
 <ol>
   <li>The docker images have inbuilt hudi jar files with environment variable pointing to those jars (HUDI_HADOOP_BUNDLE, …)</li>
   <li>For running integration-tests, we need the jars generated locally to be used for running services within docker. The
-docker-compose scripts (see <code class="language-plaintext highlighter-rouge">docker/compose/docker-compose_hadoop284_hive233_spark231.yml</code>) ensures local jars override
+docker-compose scripts (see <code class="highlighter-rouge">docker/compose/docker-compose_hadoop284_hive233_spark231.yml</code>) ensures local jars override
 inbuilt jars by mounting local HUDI workspace over the docker location</li>
 </ol>
 
 <p>This helps avoid maintaining separate docker images and avoids the costly step of building HUDI docker images locally.
 But if users want to test hudi from locations with lower network bandwidth, they can still build local images
 run the script
-<code class="language-plaintext highlighter-rouge">docker/build_local_docker_images.sh</code> to build local docker images before running <code class="language-plaintext highlighter-rouge">docker/setup_demo.sh</code></p>
+<code class="highlighter-rouge">docker/build_local_docker_images.sh</code> to build local docker images before running <code class="highlighter-rouge">docker/setup_demo.sh</code></p>
 
 <p>Here are the commands:</p>
 

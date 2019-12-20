@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-19T00:47:39-05:00">
+  <meta property="article:published_time" content="2019-12-19T21:17:37-05:00">
 
 
 
@@ -325,7 +325,7 @@
 
 <h2 id="admin-cli">Admin CLI</h2>
 
-<p>Once hudi has been built, the shell can be fired by via  <code class="language-plaintext highlighter-rouge">cd hudi-cli &amp;&amp; ./hudi-cli.sh</code>.
+<p>Once hudi has been built, the shell can be fired by via  <code class="highlighter-rouge">cd hudi-cli &amp;&amp; ./hudi-cli.sh</code>.
 A hudi dataset resides on DFS, in a location referred to as the <strong>basePath</strong> and we would need this location in order to connect to a Hudi dataset.
 Hudi library effectively manages this dataset internally, using .hoodie subfolder to track all metadata</p>
 
@@ -638,7 +638,7 @@ so that are preserved. Hudi provides the following CLI to support it</p>
 
 <p>The above compaction unscheduling operations could sometimes fail partially (e:g -&gt; DFS temporarily unavailable). With
 partial failures, the compaction operation could become inconsistent with the state of file-slices. When you run
-<code class="language-plaintext highlighter-rouge">compaction validate</code>, you can notice invalid compaction operations if there is one.  In these cases, the repair
+<code class="highlighter-rouge">compaction validate</code>, you can notice invalid compaction operations if there is one.  In these cases, the repair
 command comes to the rescue, it will rearrange the file-slices so that there is no loss and the file-slices are
 consistent with the compaction plan</p>
 
@@ -691,7 +691,7 @@ If you do find errors, then the record was not actually written by Hudi, but han
 <ul>
   <li>If confirmed, please use the metadata fields above, to identify the physical files &amp; partition files containing the records .</li>
   <li>If duplicates span files across partitionpath, then this means your application is generating different partitionPaths for same recordKey, Please fix your app</li>
-  <li>if duplicates span multiple files within the same partitionpath, please engage with mailing list. This should not happen. You can use the <code class="language-plaintext highlighter-rouge">records deduplicate</code> command to fix your data.</li>
+  <li>if duplicates span multiple files within the same partitionpath, please engage with mailing list. This should not happen. You can use the <code class="highlighter-rouge">records deduplicate</code> command to fix your data.</li>
 </ul>
 
 <h3 id="spark-ui">Spark failures</h3>
