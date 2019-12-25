@@ -207,6 +207,13 @@
       
 
       <section class="page__content" itemprop="text">
+        
+          <style>
+            .page {
+              padding-right: 0 !important;
+            }
+          </style>
+        
         <h2 id="pre-requisites">Pre-requisites</h2>
 
 <p>To contribute code, you need</p>
@@ -227,7 +234,7 @@ Software Foundation (ASF).</li>
 <p>To contribute, you would need to do the following</p>
 
 <ul>
-  <li>Fork the Hudi code on Github &amp; then clone your own fork locally. Once cloned, we recommend building as per instructions on <a href="quickstart.html">quickstart</a></li>
+  <li>Fork the Hudi code on Github &amp; then clone your own fork locally. Once cloned, we recommend building as per instructions on <a href="/docs/quick-start-guide">quickstart</a></li>
   <li>[Recommended] We have embraced the code style largely based on <a href="https://google.github.io/styleguide/javaguide.html">google format</a>. Please setup your IDE with style files from <a href="https://github.com/apache/incubator-hudi/tree/master/style">here</a>.
 These instructions have been tested on IntelliJ.</li>
   <li>[Recommended] Set up the <a href="https://plugins.jetbrains.com/plugin/7642-save-actions">Save Action Plugin</a> to auto format &amp; organize imports on save. The Maven Compilation life-cycle will fail if there are checkstyle violations.</li>
