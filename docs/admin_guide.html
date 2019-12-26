@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-12-26T10:49:56-05:00">
+  <meta property="article:published_time" content="2019-12-26T11:09:50-05:00">
 
 
 
@@ -314,11 +314,34 @@
 
       <section class="page__content" itemprop="text">
         
-          <style>
-            .page {
-              padding-right: 0 !important;
-            }
-          </style>
+        <aside class="sidebar__right sticky">
+          <nav class="toc">
+            <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Section ToC</h4></header>
+            <ul class="toc__menu">
+  <li><a href="#admin-cli">Admin CLI</a>
+    <ul>
+      <li><a href="#inspecting-commits">Inspecting Commits</a></li>
+      <li><a href="#drilling-down-to-a-specific-commit">Drilling Down to a specific Commit</a></li>
+      <li><a href="#filesystem-view">FileSystem View</a></li>
+      <li><a href="#statistics">Statistics</a></li>
+      <li><a href="#archived-commits">Archived Commits</a></li>
+      <li><a href="#compactions">Compactions</a></li>
+      <li><a href="#validate-compaction">Validate Compaction</a></li>
+      <li><a href="#unscheduling-compaction">UnScheduling Compaction</a></li>
+      <li><a href="#repair-compaction">Repair Compaction</a></li>
+    </ul>
+  </li>
+  <li><a href="#metrics">Metrics</a></li>
+  <li><a href="#troubleshooting">Troubleshooting Failures</a>
+    <ul>
+      <li><a href="#missing-records">Missing records</a></li>
+      <li><a href="#duplicates">Duplicates</a></li>
+      <li><a href="#spark-ui">Spark failures</a></li>
+    </ul>
+  </li>
+</ul>
+          </nav>
+        </aside>
         
         <p>Admins/ops can gain visibility into Hudi datasets/pipelines in the following ways</p>
 
