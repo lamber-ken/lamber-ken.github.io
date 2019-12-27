@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Structure - Apache Hudi</title>
-<meta name="description" content="Hudi (pronounced “Hoodie”) ingests &amp; manages storage of large analytical datasets over DFS (HDFS or cloud stores) and provides three logical views for query access.">
+<!-- begin _includes/seo.html --><title>S3 Filesystem - Apache Hudi</title>
+<meta name="description" content="In this page, we explain how to get your Hudi spark job to store into AWS S3.">
 
 
   <meta name="author" content="Quick Links">
@@ -19,26 +19,26 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Apache Hudi">
-<meta property="og:title" content="Structure">
-<meta property="og:url" content="http://0.0.0.0:4000/docs/structure">
+<meta property="og:title" content="S3 Filesystem">
+<meta property="og:url" content="http://0.0.0.0:4000/docs/s3_hoodie">
 
 
-  <meta property="og:description" content="Hudi (pronounced “Hoodie”) ingests &amp; manages storage of large analytical datasets over DFS (HDFS or cloud stores) and provides three logical views for query access.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-12-27T09:14:07-05:00">
+  <meta property="og:description" content="In this page, we explain how to get your Hudi spark job to store into AWS S3.">
 
 
 
 
 
 
-<link rel="canonical" href="http://0.0.0.0:4000/docs/structure">
+
+  <meta property="article:published_time" content="2019-12-27T09:00:55-05:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/docs/s3_hoodie">
 
 
 
@@ -112,7 +112,7 @@
         
         <a class="site-title" href="/">
           Apache Hudi
-          <span class="site-subtitle">0.5.1-SNAPSHOT(incubating)</span>
+          <span class="site-subtitle">0.5.0-incubating</span>
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/docs/quick-start-guide" target="_self" >Documentation</a>
@@ -178,7 +178,7 @@
             
 
             
-              <li><a href="/docs/quick-start-guide" class="">Quick Start</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/quick-start-guide" class="">Quick Start</a></li>
             
 
           
@@ -189,7 +189,7 @@
             
 
             
-              <li><a href="/docs/structure" class="active">Structure</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/structure" class="">Structure</a></li>
             
 
           
@@ -200,7 +200,7 @@
             
 
             
-              <li><a href="/docs/use_cases" class="">User Cases</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/use_cases" class="">User Cases</a></li>
             
 
           
@@ -211,7 +211,7 @@
             
 
             
-              <li><a href="/docs/powered_by" class="">Talks & Powered By</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/powered_by" class="">Talks & Powered By</a></li>
             
 
           
@@ -222,7 +222,7 @@
             
 
             
-              <li><a href="/docs/comparison" class="">Comparison</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/comparison" class="">Comparison</a></li>
             
 
           
@@ -245,7 +245,7 @@
             
 
             
-              <li><a href="/docs/concepts" class="">Concepts</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/concepts" class="">Concepts</a></li>
             
 
           
@@ -256,7 +256,7 @@
             
 
             
-              <li><a href="/docs/writing_data" class="">Writing Data</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/writing_data" class="">Writing Data</a></li>
             
 
           
@@ -267,7 +267,7 @@
             
 
             
-              <li><a href="/docs/querying_data" class="">Querying Data</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/querying_data" class="">Querying Data</a></li>
             
 
           
@@ -278,7 +278,7 @@
             
 
             
-              <li><a href="/docs/configurations" class="">Configuration</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/configurations" class="">Configuration</a></li>
             
 
           
@@ -289,7 +289,7 @@
             
 
             
-              <li><a href="/docs/performance" class="">Performance</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/performance" class="">Performance</a></li>
             
 
           
@@ -300,7 +300,7 @@
             
 
             
-              <li><a href="/docs/admin_guide" class="">Administering</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/admin_guide" class="">Administering</a></li>
             
 
           
@@ -323,7 +323,7 @@
             
 
             
-              <li><a href="/docs/docs-versions" class="">Docs Versions</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/docs-versions" class="">Docs Versions</a></li>
             
 
           
@@ -334,7 +334,7 @@
             
 
             
-              <li><a href="/docs/privacy" class="">Privacy Policy</a></li>
+              <li><a href="/versions/0.5.0-incubating/docs/privacy" class="">Privacy Policy</a></li>
             
 
           
@@ -354,7 +354,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Structure
+          <h1 id="page-title" class="page__title" itemprop="headline">S3 Filesystem
 </h1>
         </header>
       
@@ -367,21 +367,74 @@
             }
           </style>
         
-        <p>Hudi (pronounced “Hoodie”) ingests &amp; manages storage of large analytical datasets over DFS (<a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">HDFS</a> or cloud stores) and provides three logical views for query access.</p>
+        <p>In this page, we explain how to get your Hudi spark job to store into AWS S3.</p>
+
+<h2 id="aws-configs">AWS configs</h2>
+
+<p>There are two configurations required for Hudi-S3 compatibility:</p>
 
 <ul>
-  <li><strong>Read Optimized View</strong> - Provides excellent query performance on pure columnar storage, much like plain <a href="https://parquet.apache.org/">Parquet</a> tables.</li>
-  <li><strong>Incremental View</strong> - Provides a change stream out of the dataset to feed downstream jobs/ETLs.</li>
-  <li><strong>Near-Real time Table</strong> - Provides queries on real-time data, using a combination of columnar &amp; row based storage (e.g Parquet + <a href="http://avro.apache.org/docs/current/mr.html">Avro</a>)</li>
+  <li>Adding AWS Credentials for Hudi</li>
+  <li>Adding required Jars to classpath</li>
 </ul>
 
-<figure>
-    <img class="docimage" src="/assets/images/hudi_intro_1.png" alt="hudi_intro_1.png" />
-</figure>
+<h3 id="aws-credentials">AWS Credentials</h3>
 
-<p>By carefully managing how data is laid out in storage &amp; how it’s exposed to queries, Hudi is able to power a rich data ecosystem where external sources can be ingested in near real-time and made available for interactive SQL Engines like <a href="https://prestodb.io">Presto</a> &amp; <a href="https://spark.apache.org/sql/">Spark</a>, while at the same time capable of being consumed incrementally from processing/ETL frameworks like <a href="https://hive.apache.org/">Hive</a> &amp; <a href="https://spark.apache.org/docs/latest/">Spark</a> to build derived (Hudi) datasets.</p>
+<p>Simplest way to use Hudi with S3, is to configure your <code class="highlighter-rouge">SparkSession</code> or <code class="highlighter-rouge">SparkContext</code> with S3 credentials. Hudi will automatically pick this up and talk to S3.</p>
 
-<p>Hudi broadly consists of a self contained Spark library to build datasets and integrations with existing query engines for data access. See <a href="/docs/quick-start-guide">quickstart</a> for a demo.</p>
+<p>Alternatively, add the required configs in your core-site.xml from where Hudi can fetch them. Replace the <code class="highlighter-rouge">fs.defaultFS</code> with your S3 bucket name and Hudi should be able to read/write from the bucket.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;property&gt;</span>
+      <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;value&gt;</span>s3://ysharma<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/property&gt;</span>
+
+  <span class="nt">&lt;property&gt;</span>
+      <span class="nt">&lt;name&gt;</span>fs.s3.impl<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;value&gt;</span>org.apache.hadoop.fs.s3native.NativeS3FileSystem<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/property&gt;</span>
+
+  <span class="nt">&lt;property&gt;</span>
+      <span class="nt">&lt;name&gt;</span>fs.s3.awsAccessKeyId<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;value&gt;</span>AWS_KEY<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/property&gt;</span>
+
+  <span class="nt">&lt;property&gt;</span>
+       <span class="nt">&lt;name&gt;</span>fs.s3.awsSecretAccessKey<span class="nt">&lt;/name&gt;</span>
+       <span class="nt">&lt;value&gt;</span>AWS_SECRET<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/property&gt;</span>
+
+  <span class="nt">&lt;property&gt;</span>
+       <span class="nt">&lt;name&gt;</span>fs.s3n.awsAccessKeyId<span class="nt">&lt;/name&gt;</span>
+       <span class="nt">&lt;value&gt;</span>AWS_KEY<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/property&gt;</span>
+
+  <span class="nt">&lt;property&gt;</span>
+       <span class="nt">&lt;name&gt;</span>fs.s3n.awsSecretAccessKey<span class="nt">&lt;/name&gt;</span>
+       <span class="nt">&lt;value&gt;</span>AWS_SECRET<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;/property&gt;</span>
+</code></pre></div></div>
+
+<p>Utilities such as hudi-cli or deltastreamer tool, can pick up s3 creds via environmental variable prefixed with <code class="highlighter-rouge">HOODIE_ENV_</code>. For e.g below is a bash snippet to setup
+such variables and then have cli be able to work on datasets stored in s3</p>
+
+<pre><code class="language-Java">export HOODIE_ENV_fs_DOT_s3a_DOT_access_DOT_key=$accessKey
+export HOODIE_ENV_fs_DOT_s3a_DOT_secret_DOT_key=$secretKey
+export HOODIE_ENV_fs_DOT_s3_DOT_awsAccessKeyId=$accessKey
+export HOODIE_ENV_fs_DOT_s3_DOT_awsSecretAccessKey=$secretKey
+export HOODIE_ENV_fs_DOT_s3n_DOT_awsAccessKeyId=$accessKey
+export HOODIE_ENV_fs_DOT_s3n_DOT_awsSecretAccessKey=$secretKey
+export HOODIE_ENV_fs_DOT_s3n_DOT_impl=org.apache.hadoop.fs.s3a.S3AFileSystem
+</code></pre>
+
+<h3 id="aws-libs">AWS Libs</h3>
+
+<p>AWS hadoop libraries to add to our classpath</p>
+
+<ul>
+  <li>com.amazonaws:aws-java-sdk:1.10.34</li>
+  <li>org.apache.hadoop:hadoop-aws:2.7.3</li>
+</ul>
 
         
       </section>

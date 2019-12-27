@@ -79,6 +79,11 @@ var store = [{
         "tags": [],
         "url": "http://0.0.0.0:4000/docs/privacy",
         "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
+        "title": "Docs Versions",
+        "excerpt":"        latest        0.5.0-incubating     ","categories": [],
+        "tags": [],
+        "url": "http://0.0.0.0:4000/docs/docs-versions",
+        "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
         "title": "Connect with us at Strata San Jose March 2017",
         "excerpt":"We will be presenting Hudi &amp; general concepts around how incremental processing works at Uber. Catch our talk “Incremental Processing on Hadoop At Uber”   ","categories": [],
         "tags": [],
