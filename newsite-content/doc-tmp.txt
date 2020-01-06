@@ -1,6 +1,8 @@
 
 
 
+
+
 mkdir -p docs/assets
 mkdir -p docs/newsite-content
 rm -rf docs/assets/*
@@ -8,6 +10,11 @@ rm -rf docs/newsite-content/*
 
 \cp -rf docs-tmp/_site/assets/* docs/assets
 \cp -rf docs-tmp/_site/* docs/newsite-content
+
+cd docs
+bundle exec jekyll serve
+
+
 
 
 
