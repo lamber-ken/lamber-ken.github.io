@@ -341,6 +341,7 @@
   <li><a href="#update-data">Update data</a></li>
   <li><a href="#incremental-query">Incremental query</a></li>
   <li><a href="#point-in-time-query">Point in time query</a></li>
+  <li><a href="#deletes">Delete data</a></li>
   <li><a href="#where-to-go-from-here">Where to go from here?</a></li>
 </ul>
           </nav>
@@ -487,6 +488,38 @@ specific commit time and beginTime to “000” (denoting earliest possible comm
 <span class="nv">tripsPointInTimeDF</span><span class="o">.</span><span class="py">registerTempTable</span><span class="o">(</span><span class="s">"hudi_trips_point_in_time"</span><span class="o">)</span>
 <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select `_hoodie_commit_time`, fare, begin_lon, begin_lat, ts from  hudi_trips_point_in_time where fare &gt; 20.0"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
 </code></pre></div></div>
+
+<h2 id="deletes">Delete data</h2>
+<p>Delete records for the HoodieKeys passed in.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// fetch total records count
+spark.sql("select uuid, partitionPath from hudi_ro_table").count()
+// fetch two records to be deleted
+val ds = spark.sql("select uuid, partitionPath from hudi_ro_table").limit(2)
+
+// issue deletes
+val deletes = dataGen.generateDeletes(ds.collectAsList())
+val df = spark.read.json(spark.sparkContext.parallelize(deletes, 2));
+df.write.format("org.apache.hudi").
+options(getQuickstartWriteConfigs).
+option(OPERATION_OPT_KEY,"delete").
+option(PRECOMBINE_FIELD_OPT_KEY, "ts").
+option(RECORDKEY_FIELD_OPT_KEY, "uuid").
+option(PARTITIONPATH_FIELD_OPT_KEY, "partitionpath").
+option(TABLE_NAME, tableName).
+mode(Append).
+save(basePath);
+
+// run the same read query as above.
+val roAfterDeleteViewDF = spark.
+    read.
+    format("org.apache.hudi").
+    load(basePath + "/*/*/*/*")
+roAfterDeleteViewDF.registerTempTable("hudi_ro_table")
+// fetch should return (total - 2) records
+spark.sql("select uuid, partitionPath from hudi_ro_table").count()
+</code></pre></div></div>
+<p>Note: Only <code class="highlighter-rouge">Append</code> mode is supported for delete operation.</p>
 
 <h2 id="where-to-go-from-here">Where to go from here?</h2>
 

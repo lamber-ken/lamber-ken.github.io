@@ -305,7 +305,7 @@ var store = [{
         "url": "http://0.0.0.0:4000/cn/docs/deployment.html",
         "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
         "title": "Deployment Guide",
-        "excerpt":"This section provides all the help you need to deploy and operate Hudi tables at scale. Specifically, we will cover the following aspects. Deployment Model : How various Hudi components are deployed and managed. Upgrading Versions : Picking up new releases of Hudi, guidelines and general best-practices Migrating to Hudi...","categories": [],
+        "excerpt":"This section provides all the help you need to deploy and operate Hudi tables at scale. Specifically, we will cover the following aspects. Deployment Model : How various Hudi components are deployed and managed. Upgrading Versions : Picking up new releases of Hudi, guidelines and general best-practices. Migrating to Hudi...","categories": [],
         "tags": [],
         "url": "http://0.0.0.0:4000/docs/deployment.html",
         "teaser":"http://0.0.0.0:4000/assets/images/500x300.png"},{
