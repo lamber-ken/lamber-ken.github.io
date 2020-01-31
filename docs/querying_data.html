@@ -344,8 +344,8 @@
   </li>
   <li><a href="#spark">Spark</a>
     <ul>
-      <li><a href="#read-optimized-querying">Read optimized querying</a></li>
-      <li><a href="#spark-snapshot-querying">Snapshot querying</a></li>
+      <li><a href="#read-optimized-query-1">Read optimized query</a></li>
+      <li><a href="#spark-snapshot-query">Snapshot query</a></li>
       <li><a href="#spark-incr-pull">Incremental pulling</a></li>
     </ul>
   </li>
@@ -363,13 +363,13 @@ and <a href="/docs/configurations.html#TABLE_TYPE_OPT_KEY">table type</a> passed
 
 <p>If <code class="highlighter-rouge">table name = hudi_trips</code> and <code class="highlighter-rouge">table type = COPY_ON_WRITE</code>, then we get:</p>
 <ul>
-  <li><code class="highlighter-rouge">hudi_trips</code> supports snapshot querying and incremental querying of the table backed by <code class="highlighter-rouge">HoodieParquetInputFormat</code>, exposing purely columnar data.</li>
+  <li><code class="highlighter-rouge">hudi_trips</code> supports snapshot query and incremental query on the table backed by <code class="highlighter-rouge">HoodieParquetInputFormat</code>, exposing purely columnar data.</li>
 </ul>
 
 <p>If <code class="highlighter-rouge">table name = hudi_trips</code> and <code class="highlighter-rouge">table type = MERGE_ON_READ</code>, then we get:</p>
 <ul>
-  <li><code class="highlighter-rouge">hudi_trips_rt</code> supports snapshot querying and incremental querying (providing near-real time data) of the table  backed by <code class="highlighter-rouge">HoodieParquetRealtimeInputFormat</code>, exposing merged view of base and log data.</li>
-  <li><code class="highlighter-rouge">hudi_trips_ro</code> supports read optimized querying of the table backed by <code class="highlighter-rouge">HoodieParquetInputFormat</code>, exposing purely columnar data.</li>
+  <li><code class="highlighter-rouge">hudi_trips_rt</code> supports snapshot query and incremental query (providing near-real time data) on the table  backed by <code class="highlighter-rouge">HoodieParquetRealtimeInputFormat</code>, exposing merged view of base and log data.</li>
+  <li><code class="highlighter-rouge">hudi_trips_ro</code> supports read optimized query on the table backed by <code class="highlighter-rouge">HoodieParquetInputFormat</code>, exposing purely columnar data.</li>
 </ul>
 
 <p>As discussed in the concepts section, the one key primitive needed for <a href="https://www.oreilly.com/ideas/ubers-case-for-incremental-processing-on-hadoop">incrementally processing</a>,
@@ -503,12 +503,12 @@ separated) and calls InputFormat.listStatus() only once with all those partition
 
 <ul>
   <li><strong>Hudi DataSource</strong> : Supports Read Optimized, Incremental Pulls similar to how standard datasources (e.g: <code class="highlighter-rouge">spark.read.parquet</code>) work.</li>
-  <li><strong>Read as Hive tables</strong> : Supports all three query types, including the snapshot querying, relying on the custom Hudi input formats again like Hive.</li>
+  <li><strong>Read as Hive tables</strong> : Supports all three query types, including the snapshot queries, relying on the custom Hudi input formats again like Hive.</li>
 </ul>
 
-<p>In general, your spark job needs a dependency to <code class="highlighter-rouge">hudi-spark</code> or <code class="highlighter-rouge">hudi-spark-bundle-x.y.z.jar</code> needs to be on the class path of driver &amp; executors (hint: use <code class="highlighter-rouge">--jars</code> argument)</p>
+<p>In general, your spark job needs a dependency to <code class="highlighter-rouge">hudi-spark</code> or <code class="highlighter-rouge">hudi-spark-bundle_2.*-x.y.z.jar</code> needs to be on the class path of driver &amp; executors (hint: use <code class="highlighter-rouge">--jars</code> argument)</p>
 
-<h3 id="read-optimized-querying">Read optimized querying</h3>
+<h3 id="read-optimized-query-1">Read optimized query</h3>
 
 <p>Pushing a path filter into sparkContext as follows allows for read optimized querying of a Hudi hive table using SparkSQL. 
 This method retains Spark built-in optimizations for reading Parquet files like vectorized reading on Hudi tables.</p>
@@ -523,11 +523,11 @@ This method retains Spark built-in optimizations for reading Parquet files like 
 <span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">"/glob/path/pattern"</span><span class="o">);</span>
 </code></pre></div></div>
 
-<h3 id="spark-snapshot-querying">Snapshot querying</h3>
-<p>Currently, near-real time data can only be queried as a Hive table in Spark using snapshot querying mode. In order to do this, set <code class="highlighter-rouge">spark.sql.hive.convertMetastoreParquet=false</code>, forcing Spark to fallback 
+<h3 id="spark-snapshot-query">Snapshot query</h3>
+<p>Currently, near-real time data can only be queried as a Hive table in Spark using snapshot query mode. In order to do this, set <code class="highlighter-rouge">spark.sql.hive.convertMetastoreParquet=false</code>, forcing Spark to fallback 
 to using the Hive Serde to read the data (planning/executions is still Spark).</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">shell</span> <span class="o">--</span><span class="n">jars</span> <span class="n">hudi</span><span class="o">-</span><span class="n">spark</span><span class="o">-</span><span class="n">bundle</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="na">y</span><span class="o">.</span><span class="na">z</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span> <span class="o">--</span><span class="n">driver</span><span class="o">-</span><span class="kd">class</span><span class="err">-</span><span class="nc">path</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hive</span><span class="o">/</span><span class="n">conf</span>  <span class="o">--</span><span class="n">packages</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">spark</span><span class="o">:</span><span class="n">spark</span><span class="o">-</span><span class="n">avro_2</span><span class="o">.</span><span class="mi">11</span><span class="o">:</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">4</span> <span class="o">--</span><span class="n">conf</span> <span class="n">spark</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">convertMetastoreParquet</span><span class="o">=</span><span class="kc">false</span> <span class="o">--</span><span class="n">num</span><span class="o">-</span><span class="n">executors</span> <span class="mi">10</span> <span class="o">--</span><span class="n">driver</span><span class="o">-</span><span class="n">memory</span> <span class="mi">7</span><span class="n">g</span> <span class="o">--</span><span class="n">executor</span><span class="o">-</span><span class="n">memory</span> <span class="mi">2</span><span class="n">g</span>  <span class="o">--</span><span class="n">master</span> <span class="n">yarn</span><span class="o">-</span><span class="n">client</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">shell</span> <span class="o">--</span><span class="n">jars</span> <span class="n">hudi</span><span class="o">-</span><span class="n">spark</span><span class="o">-</span><span class="n">bundle_2</span><span class="o">.</span><span class="mi">11</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="na">y</span><span class="o">.</span><span class="na">z</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span> <span class="o">--</span><span class="n">driver</span><span class="o">-</span><span class="kd">class</span><span class="err">-</span><span class="nc">path</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hive</span><span class="o">/</span><span class="n">conf</span>  <span class="o">--</span><span class="n">packages</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">spark</span><span class="o">:</span><span class="n">spark</span><span class="o">-</span><span class="n">avro_2</span><span class="o">.</span><span class="mi">11</span><span class="o">:</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">4</span> <span class="o">--</span><span class="n">conf</span> <span class="n">spark</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">convertMetastoreParquet</span><span class="o">=</span><span class="kc">false</span> <span class="o">--</span><span class="n">num</span><span class="o">-</span><span class="n">executors</span> <span class="mi">10</span> <span class="o">--</span><span class="n">driver</span><span class="o">-</span><span class="n">memory</span> <span class="mi">7</span><span class="n">g</span> <span class="o">--</span><span class="n">executor</span><span class="o">-</span><span class="n">memory</span> <span class="mi">2</span><span class="n">g</span>  <span class="o">--</span><span class="n">master</span> <span class="n">yarn</span><span class="o">-</span><span class="n">client</span>
 
 <span class="n">scala</span><span class="o">&gt;</span> <span class="n">sqlContext</span><span class="o">.</span><span class="na">sql</span><span class="o">(</span><span class="s">"select count(*) from hudi_trips_rt where datestr = '2016-10-02'"</span><span class="o">).</span><span class="na">show</span><span class="o">()</span>
 <span class="n">scala</span><span class="o">&gt;</span> <span class="n">sqlContext</span><span class="o">.</span><span class="na">sql</span><span class="o">(</span><span class="s">"select count(*) from hudi_trips_rt where datestr = '2016-10-02'"</span><span class="o">).</span><span class="na">show</span><span class="o">()</span>
@@ -575,7 +575,7 @@ A sample incremental pull, that will obtain all records written since <code clas
 
 <h2 id="presto">Presto</h2>
 
-<p>Presto is a popular query engine, providing interactive query performance. Presto currently supports only read optimized querying on Hudi tables. 
+<p>Presto is a popular query engine, providing interactive query performance. Presto currently supports only read optimized queries on Hudi tables. 
 This requires the <code class="highlighter-rouge">hudi-presto-bundle</code> jar to be placed into <code class="highlighter-rouge">&lt;presto_install&gt;/plugin/hive-hadoop2/</code>, across the installation.</p>
 
       </section>
