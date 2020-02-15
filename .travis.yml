@@ -38,7 +38,7 @@ after_script:
   - \cp -rf _site/* .
   - git add -A
   - git commit -am "Travis CI build asf-site"
-  - git push origin asf-site:master
+  - git push origin asf-site:master --force
 
 branches:
   only:
