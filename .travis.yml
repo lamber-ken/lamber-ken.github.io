@@ -28,7 +28,7 @@ script:
   - bundle exec jekyll build _config.yml --source . --destination _site
   - popd
 
-after_script:
+after_success:
 #  - \cp -rf ${DOCS_ROOT}/_site/* content
 #  - git add -A
 #  - git commit -am "Travis CI build asf-site"
