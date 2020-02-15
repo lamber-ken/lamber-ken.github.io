@@ -33,7 +33,9 @@ after_script:
 #  - git add -A
 #  - git commit -am "Travis CI build asf-site"
 #  - git push origin asf-site
-  - \cp -rf ${DOCS_ROOT}/_site/* .
+  - mv ${DOCS_ROOT}/_site .
+  - rm -rf ${DOCS_ROOT}
+  - \cp -rf _site/* .
   - git add -A
   - git commit -am "Travis CI build asf-site"
   - git push origin asf-site:master
