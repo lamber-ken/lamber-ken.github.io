@@ -36,7 +36,7 @@ after_script:
   - \cp -rf ${DOCS_ROOT}/_site/* .
   - git add -A
   - git commit -am "Travis CI build asf-site"
-  - git push origin master
+  - git push origin asf-site:master
 
 branches:
   only:
