@@ -1,7 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab6b20ee-497e-4e60-9ee7-9060cc2fe99a" name="Default Changelist" comment="" />
+    <list default="true" id="ab6b20ee-497e-4e60-9ee7-9060cc2fe99a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/asf.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/font-awesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/asf_logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/async_compac_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/async_compac_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/async_compac_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/async_compac_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi-lake.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_commit_duration.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_cow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_intro_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_intro_big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_log_format_v2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_mor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_query_perf_hive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_query_perf_presto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_query_perf_spark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_site_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_timeline.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_upsert_dag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_upsert_perf1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/hudi_upsert_perf2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/logo-big-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/logo-big-bak.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/logo-big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/alibaba.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/aws.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/bmw.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/emis.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/kyligence.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/lingyue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/qq.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/shunfeng.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/tathastu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/tongcheng.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/uber.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/yield.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/powers/yotpo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/roadmap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/workflowarrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/lunr/lunr-en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/lunr/lunr-gr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/lunr/lunr-store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/lunr/lunr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/lunr/lunr.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/main.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_docs.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/activity.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/community.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/contributing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-admin_guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-comparison.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-concepts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-configurations.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-docker_demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-docs-versions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-gcs_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-migration_guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-powered_by.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-querying_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-quick-start-guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-s3_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-use_cases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/0.5.0-writing_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/comparison.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/concepts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/configurations.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/deployment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/docker_demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/docs-versions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/gcs_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/migration_guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/powered_by.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/querying_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/quick-start-guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/s3_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/use_cases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/docs/writing_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cn/releases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/community.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contributing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-admin_guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-comparison.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-concepts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-configurations.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-docker_demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-docs-versions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-gcs_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-migration_guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-powered_by.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-querying_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-quick-start-guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-s3_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-structure.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-use_cases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/0.5.0-writing_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/comparison.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/concepts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/configurations.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deployment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docker_demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs-versions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/gcs_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/migration_guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/performance.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/powered_by.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/privacy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/querying_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/quick-start-guide.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/s3_hoodie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/structure.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/use_cases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/writing_data.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/releases.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/roadmap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strata.html" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,5 +194,11 @@
       <updated>1578210036089</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="498" y="282" width="683" height="486" key="find.popup" timestamp="1581764026859">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="498" y="282" width="683" height="486" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1581764026859" />
   </component>
 </project>
