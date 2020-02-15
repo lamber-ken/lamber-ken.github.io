@@ -7,12 +7,12 @@ git:
 
 env:
   global:
-    - DOCS_ROOT="`pwd`/hdocs/docs"
     - GIT_USER="CI BOT"
     - GIT_EMAIL="cibot@test.com"
     - GIT_REPO="lamber-ken"
     - GIT_PROJECT="lamber-ken.github.io"
     - GIT_BRANCH="asf-site"
+    - DOCS_ROOT="`pwd`/${GIT_PROJECT}/docs"
 
 before_install:
   - git config --global user.name ${GIT_USER}
