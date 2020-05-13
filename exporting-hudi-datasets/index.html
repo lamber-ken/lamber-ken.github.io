@@ -195,27 +195,27 @@
 
 <p>Similar to the existing  <code class="highlighter-rouge">HoodieSnapshotCopier</code>, the Exporter scans the source dataset and then makes a copy of it to the target output path.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spark-submit \
-  --jars "packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar" \
-  --deploy-mode "client" \
-  --class "org.apache.hudi.utilities.HoodieSnapshotExporter" \
-      packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar \
-  --source-base-path "/tmp/" \
-  --target-output-path "/tmp/exported/hudi/" \
-  --output-format "hudi"
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    spark-submit <span class="se">\</span>
+      <span class="nt">--jars</span> <span class="s2">"packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar"</span> <span class="se">\</span>
+      <span class="nt">--deploy-mode</span> <span class="s2">"client"</span> <span class="se">\</span>
+      <span class="nt">--class</span> <span class="s2">"org.apache.hudi.utilities.HoodieSnapshotExporter"</span> <span class="se">\</span>
+          packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar <span class="se">\</span>
+      <span class="nt">--source-base-path</span> <span class="s2">"/tmp/"</span> <span class="se">\</span>
+      <span class="nt">--target-output-path</span> <span class="s2">"/tmp/exported/hudi/"</span> <span class="se">\</span>
+      <span class="nt">--output-format</span> <span class="s2">"hudi"</span>
 </code></pre></div></div>
 
 <h3 id="export-to-json-or-parquet-dataset">Export to json or parquet dataset</h3>
 <p>The Exporter can also convert the source dataset into other formats. Currently only “json” and “parquet” are supported.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spark-submit \
-  --jars "packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar" \
-  --deploy-mode "client" \
-  --class "org.apache.hudi.utilities.HoodieSnapshotExporter" \
-      packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar \
-  --source-base-path "/tmp/" \
-  --target-output-path "/tmp/exported/json/" \
-  --output-format "json"  # or "parquet"
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    spark-submit <span class="se">\</span>
+      <span class="nt">--jars</span> <span class="s2">"packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar"</span> <span class="se">\</span>
+      <span class="nt">--deploy-mode</span> <span class="s2">"client"</span> <span class="se">\</span>
+      <span class="nt">--class</span> <span class="s2">"org.apache.hudi.utilities.HoodieSnapshotExporter"</span> <span class="se">\</span>
+          packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar <span class="se">\</span>
+      <span class="nt">--source-base-path</span> <span class="s2">"/tmp/"</span> <span class="se">\</span>
+      <span class="nt">--target-output-path</span> <span class="s2">"/tmp/exported/json/"</span> <span class="se">\</span>
+      <span class="nt">--output-format</span> <span class="s2">"json"</span>  <span class="c"># or "parquet"</span>
 </code></pre></div></div>
 
 <h3 id="re-partitioning">Re-partitioning</h3>
@@ -226,20 +226,21 @@
 
 <p>This parameter uses an existing non-metadata field as the output partitions. All  <code class="highlighter-rouge">_hoodie_*</code>  metadata field will be stripped during export.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spark-submit \
-  --jars "packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar" \
-  --deploy-mode "client" \
-  --class "org.apache.hudi.utilities.HoodieSnapshotExporter" \
-      packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar \  
-  --source-base-path "/tmp/" \
-  --target-output-path "/tmp/exported/json/" \
-  --output-format "json" \
-  --output-partition-field "symbol"  # assume the source dataset contains a field `symbol`
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    spark-submit <span class="se">\</span>
+      <span class="nt">--jars</span> <span class="s2">"packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar"</span> <span class="se">\</span>
+      <span class="nt">--deploy-mode</span> <span class="s2">"client"</span> <span class="se">\</span>
+      <span class="nt">--class</span> <span class="s2">"org.apache.hudi.utilities.HoodieSnapshotExporter"</span> <span class="se">\</span>
+          packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar <span class="se">\ </span> 
+      <span class="nt">--source-base-path</span> <span class="s2">"/tmp/"</span> <span class="se">\</span>
+      <span class="nt">--target-output-path</span> <span class="s2">"/tmp/exported/json/"</span> <span class="se">\</span>
+      <span class="nt">--output-format</span> <span class="s2">"json"</span> <span class="se">\</span>
+      <span class="nt">--output-partition-field</span> <span class="s2">"symbol"</span>  <span class="c"># assume the source dataset contains a field `symbol`</span>
 </code></pre></div></div>
 
 <p>The output directory will look like this</p>
 
-<p><code class="highlighter-rouge">_SUCCESS symbol=AMRS symbol=AYX symbol=CDMO symbol=CRC symbol=DRNA ...</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sb">`</span>_SUCCESS <span class="nv">symbol</span><span class="o">=</span>AMRS <span class="nv">symbol</span><span class="o">=</span>AYX <span class="nv">symbol</span><span class="o">=</span>CDMO <span class="nv">symbol</span><span class="o">=</span>CRC <span class="nv">symbol</span><span class="o">=</span>DRNA ...<span class="sb">`</span>
+</code></pre></div></div>
 
 <h4 id="--output-partitioner"><code class="highlighter-rouge">--output-partitioner</code></h4>
 
@@ -249,31 +250,35 @@
 
 <p><strong>MyPartitioner.java</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">foo</span><span class="p">.</span><span class="n">bar</span><span class="p">;</span>
-<span class="k">public</span> <span class="n">class</span> <span class="n">MyPartitioner</span> <span class="n">implements</span> <span class="n">HoodieSnapshotExporter</span><span class="p">.</span><span class="n">Partitioner</span> <span class="p">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">foo</span><span class="o">.</span><span class="na">bar</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPartitioner</span> <span class="kd">implements</span> <span class="nc">HoodieSnapshotExporter</span><span class="o">.</span><span class="na">Partitioner</span> <span class="o">{</span>
  
-  <span class="n">private</span> <span class="n">static</span> <span class="n">final</span> <span class="k">String</span> <span class="n">PARTITION_NAME</span> <span class="p">=</span> <span class="s2">"date"</span><span class="p">;</span>
- 
-  <span class="p">@</span><span class="n">Override</span>
-  <span class="k">public</span> <span class="n">DataFrameWriter</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">&gt;</span> <span class="n">partition</span><span class="p">(</span><span class="n">Dataset</span><span class="p">&lt;</span><span class="n">Row</span><span class="p">&gt;</span> <span class="n">source</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">//</span> <span class="n">use</span> <span class="n">the</span> <span class="n">current</span> <span class="n">hoodie</span> <span class="n">partition</span> <span class="n">path</span> <span class="k">as</span> <span class="n">the</span> <span class="n">output</span> <span class="n">partition</span>
-    <span class="n">return</span> <span class="n">source</span>
-        <span class="p">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="n">HoodieRecord</span><span class="p">.</span><span class="n">PARTITION_PATH_METADATA_FIELD</span><span class="p">,</span> <span class="n">PARTITION_NAME</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">repartition</span><span class="p">(</span><span class="n">new</span> <span class="n">Column</span><span class="p">(</span><span class="n">PARTITION_NAME</span><span class="p">))</span>
-        <span class="p">.</span><span class="nb">write</span><span class="p">()</span>
-        <span class="p">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="n">PARTITION_NAME</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span> <span class="n">After</span> <span class="n">putting</span> <span class="n">this</span> <span class="n">class</span> <span class="k">in</span> <span class="p">`</span><span class="n">my</span><span class="p">-</span><span class="n">custom</span><span class="p">.</span><span class="n">jar</span><span class="p">`,</span> <span class="n">which</span> <span class="n">is</span> <span class="k">then</span> <span class="n">placed</span> <span class="n">on</span> <span class="n">the</span> <span class="n">job</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">the</span> <span class="n">submit</span> <span class="nf">command</span> <span class="n">will</span> <span class="n">look</span> <span class="n">like</span> <span class="n">this</span><span class="p">:</span>
+      <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">PARTITION_NAME</span> <span class="o">=</span> <span class="s">"date"</span><span class="o">;</span>
+     
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="nc">DataFrameWriter</span><span class="o">&lt;</span><span class="nc">Row</span><span class="o">&gt;</span> <span class="nf">partition</span><span class="o">(</span><span class="nc">Dataset</span><span class="o">&lt;</span><span class="nc">Row</span><span class="o">&gt;</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// use the current hoodie partition path as the output partition</span>
+        <span class="k">return</span> <span class="n">source</span>
+            <span class="o">.</span><span class="na">withColumnRenamed</span><span class="o">(</span><span class="nc">HoodieRecord</span><span class="o">.</span><span class="na">PARTITION_PATH_METADATA_FIELD</span><span class="o">,</span> <span class="no">PARTITION_NAME</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">repartition</span><span class="o">(</span><span class="k">new</span> <span class="nc">Column</span><span class="o">(</span><span class="no">PARTITION_NAME</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">write</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">partitionBy</span><span class="o">(</span><span class="no">PARTITION_NAME</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
 
-<span class="n">spark</span><span class="p">-</span><span class="n">submit</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">jars</span> <span class="s2">"packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar,my-custom.jar"</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">deploy</span><span class="p">-</span><span class="n">mode</span> <span class="s2">"client"</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">class</span> <span class="s2">"org.apache.hudi.utilities.HoodieSnapshotExporter"</span> <span class="p">\</span>
-      <span class="n">packaging</span><span class="p">/</span><span class="n">hudi</span><span class="p">-</span><span class="n">utilities</span><span class="p">-</span><span class="n">bundle</span><span class="p">/</span><span class="n">target</span><span class="p">/</span><span class="n">hudi</span><span class="p">-</span><span class="n">utilities</span><span class="p">-</span><span class="n">bundle_2</span><span class="m">.11</span><span class="p">-</span><span class="m">0.6.0</span><span class="p">-</span><span class="n">SNAPSHOT</span><span class="p">.</span><span class="n">jar</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">source</span><span class="p">-</span><span class="n">base</span><span class="p">-</span><span class="n">path</span> <span class="s2">"/tmp/"</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">target</span><span class="p">-</span><span class="n">output</span><span class="p">-</span><span class="n">path</span> <span class="s2">"/tmp/exported/json/"</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">output</span><span class="p">-</span><span class="n">format</span> <span class="s2">"json"</span> <span class="p">\</span>
-  <span class="p">--</span><span class="n">output</span><span class="p">-</span><span class="n">partitioner</span> <span class="s2">"com.foo.bar.MyPartitioner"</span>
+<p>After putting this class in <code class="highlighter-rouge">my-custom.jar</code>, which is then placed on the job classpath, the submit command will look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    spark-submit <span class="se">\</span>
+      <span class="nt">--jars</span> <span class="s2">"packaging/hudi-spark-bundle/target/hudi-spark-bundle_2.11-0.6.0-SNAPSHOT.jar,my-custom.jar"</span> <span class="se">\</span>
+      <span class="nt">--deploy-mode</span> <span class="s2">"client"</span> <span class="se">\</span>
+      <span class="nt">--class</span> <span class="s2">"org.apache.hudi.utilities.HoodieSnapshotExporter"</span> <span class="se">\</span>
+          packaging/hudi-utilities-bundle/target/hudi-utilities-bundle_2.11-0.6.0-SNAPSHOT.jar <span class="se">\</span>
+      <span class="nt">--source-base-path</span> <span class="s2">"/tmp/"</span> <span class="se">\</span>
+      <span class="nt">--target-output-path</span> <span class="s2">"/tmp/exported/json/"</span> <span class="se">\</span>
+      <span class="nt">--output-format</span> <span class="s2">"json"</span> <span class="se">\</span>
+      <span class="nt">--output-partitioner</span> <span class="s2">"com.foo.bar.MyPartitioner"</span>
+
 </code></pre></div></div>
 
 

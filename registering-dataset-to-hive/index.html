@@ -195,74 +195,74 @@
 
 <p>Add in the <em>packaging/hoodie-hive-bundle/target/hoodie-hive-bundle-0.4.6-SNAPSHOT.jar,</em> so that Hive can read the Hudi dataset and answer the query.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hive&gt; set hive.input.format=org.apache.hadoop.hive.ql.io.HiveInputFormat;
-hive&gt; set hive.stats.autogather=false;
-hive&gt; add jar file:///path/to/hoodie-hive-bundle-0.4.6-SNAPSHOT.jar;
-Added [file:///path/to/hoodie-hive-bundle-0.4.6-SNAPSHOT.jar] to class path
-Added resources: [file:///path/to/hoodie-hive-bundle-0.4.6-SNAPSHOT.jar]
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">hive</span><span class="o">&gt;</span> <span class="n">set</span> <span class="n">hive</span><span class="o">.</span><span class="na">input</span><span class="o">.</span><span class="na">format</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">ql</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">HiveInputFormat</span><span class="o">;</span>
+    <span class="n">hive</span><span class="o">&gt;</span> <span class="n">set</span> <span class="n">hive</span><span class="o">.</span><span class="na">stats</span><span class="o">.</span><span class="na">autogather</span><span class="o">=</span><span class="kc">false</span><span class="o">;</span>
+    <span class="n">hive</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">jar</span> <span class="nl">file:</span><span class="c1">///path/to/hoodie-hive-bundle-0.5.2-SNAPSHOT.jar;</span>
+    <span class="nc">Added</span> <span class="o">[</span><span class="nl">file:</span><span class="c1">///path/to/hoodie-hive-bundle-0.5.2-SNAPSHOT.jar] to class path</span>
+    <span class="nc">Added</span> <span class="nl">resources:</span> <span class="o">[</span><span class="nl">file:</span><span class="c1">///path/to/hoodie-hive-bundle-0.5.2-SNAPSHOT.jar]</span>
 </code></pre></div></div>
 
-<p>Then, you need to create a <em>ReadOptimized</em> Hive table as below (only type supported as of now)and register the sample partitions</p>
+<p>Then, you need to create a <em>ReadOptimized</em> Hive table as below and register the sample partitions</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop table hoodie_test;
-CREATE EXTERNAL TABLE hoodie_test(`_row_key` string,
-`_hoodie_commit_time` string,
-`_hoodie_commit_seqno` string,
-rider string,
-driver string,
-begin_lat double,
-begin_lon double,
-end_lat double,
-end_lon double,
-fare double)
-PARTITIONED BY (`datestr` string)
-ROW FORMAT SERDE
-'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
-STORED AS INPUTFORMAT
-'com.uber.hoodie.hadoop.HoodieInputFormat'
-OUTPUTFORMAT
-'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
-LOCATION
-'hdfs:///tmp/hoodie/sample-table';
- 
-ALTER TABLE `hoodie_test` ADD IF NOT EXISTS PARTITION (datestr='2016-03-15') LOCATION 'hdfs:///tmp/hoodie/sample-table/2016/03/15';
-ALTER TABLE `hoodie_test` ADD IF NOT EXISTS PARTITION (datestr='2015-03-16') LOCATION 'hdfs:///tmp/hoodie/sample-table/2015/03/16';
-ALTER TABLE `hoodie_test` ADD IF NOT EXISTS PARTITION (datestr='2015-03-17') LOCATION 'hdfs:///tmp/hoodie/sample-table/2015/03/17';
- 
-set mapreduce.framework.name=yarn;
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">drop</span> <span class="n">table</span> <span class="n">hoodie_test</span><span class="o">;</span>
+    <span class="no">CREATE</span> <span class="no">EXTERNAL</span> <span class="no">TABLE</span> <span class="nf">hoodie_test</span><span class="o">(</span><span class="err">`</span><span class="n">_row_key</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_hoodie_commit_time</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_hoodie_commit_seqno</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">rider</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">driver</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">begin_lat</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">begin_lon</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">end_lat</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">end_lon</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">fare</span> <span class="kt">double</span><span class="o">)</span>
+    <span class="no">PARTITIONED</span> <span class="nf">BY</span> <span class="o">(</span><span class="err">`</span><span class="n">datestr</span><span class="err">`</span> <span class="n">string</span><span class="o">)</span>
+    <span class="no">ROW</span> <span class="no">FORMAT</span> <span class="no">SERDE</span>
+    <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">ql</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">parquet</span><span class="o">.</span><span class="na">serde</span><span class="o">.</span><span class="na">ParquetHiveSerDe</span><span class="err">'</span>
+    <span class="no">STORED</span> <span class="no">AS</span> <span class="no">INPUTFORMAT</span>
+    <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">uber</span><span class="o">.</span><span class="na">hoodie</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">HoodieInputFormat</span><span class="err">'</span>
+    <span class="no">OUTPUTFORMAT</span>
+    <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">ql</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">parquet</span><span class="o">.</span><span class="na">MapredParquetOutputFormat</span><span class="err">'</span>
+    <span class="no">LOCATION</span>
+    <span class="err">'</span><span class="nl">hdfs:</span><span class="c1">///tmp/hoodie/sample-table';</span>
+     
+    <span class="no">ALTER</span> <span class="no">TABLE</span> <span class="err">`</span><span class="n">hoodie_test</span><span class="err">`</span> <span class="no">ADD</span> <span class="no">IF</span> <span class="no">NOT</span> <span class="no">EXISTS</span> <span class="nf">PARTITION</span> <span class="o">(</span><span class="n">datestr</span><span class="o">=</span><span class="err">'</span><span class="mi">2016</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">15</span><span class="err">'</span><span class="o">)</span> <span class="no">LOCATION</span> <span class="err">'</span><span class="nl">hdfs:</span><span class="c1">///tmp/hoodie/sample-table/2016/03/15';</span>
+    <span class="no">ALTER</span> <span class="no">TABLE</span> <span class="err">`</span><span class="n">hoodie_test</span><span class="err">`</span> <span class="no">ADD</span> <span class="no">IF</span> <span class="no">NOT</span> <span class="no">EXISTS</span> <span class="nf">PARTITION</span> <span class="o">(</span><span class="n">datestr</span><span class="o">=</span><span class="err">'</span><span class="mi">2015</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">16</span><span class="err">'</span><span class="o">)</span> <span class="no">LOCATION</span> <span class="err">'</span><span class="nl">hdfs:</span><span class="c1">///tmp/hoodie/sample-table/2015/03/16';</span>
+    <span class="no">ALTER</span> <span class="no">TABLE</span> <span class="err">`</span><span class="n">hoodie_test</span><span class="err">`</span> <span class="no">ADD</span> <span class="no">IF</span> <span class="no">NOT</span> <span class="no">EXISTS</span> <span class="nf">PARTITION</span> <span class="o">(</span><span class="n">datestr</span><span class="o">=</span><span class="err">'</span><span class="mi">2015</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">17</span><span class="err">'</span><span class="o">)</span> <span class="no">LOCATION</span> <span class="err">'</span><span class="nl">hdfs:</span><span class="c1">///tmp/hoodie/sample-table/2015/03/17';</span>
+     
+    <span class="n">set</span> <span class="n">mapreduce</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">yarn</span><span class="o">;</span>
 </code></pre></div></div>
 
 <p>And you can add a <em>Realtime</em> Hive table, as below</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DROP TABLE hoodie_rt;
-CREATE EXTERNAL TABLE hoodie_rt(
-`_hoodie_commit_time` string,
-`_hoodie_commit_seqno` string,
-`_hoodie_record_key` string,
-`_hoodie_partition_path` string,
-`_hoodie_file_name` string,
-timestamp double,
-`_row_key` string,
-rider string,
-driver string,
-begin_lat double,
-begin_lon double,
-end_lat double,
-end_lon double,
-fare double)
-PARTITIONED BY (`datestr` string)
-ROW FORMAT SERDE
-'com.uber.hoodie.hadoop.realtime.HoodieParquetSerde'
-STORED AS INPUTFORMAT
-'com.uber.hoodie.hadoop.realtime.HoodieRealtimeInputFormat'
-OUTPUTFORMAT
-'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
-LOCATION
-'file:///tmp/hoodie/sample-table';
- 
-ALTER TABLE `hoodie_rt` ADD IF NOT EXISTS PARTITION (datestr='2016-03-15') LOCATION 'file:///tmp/hoodie/sample-table/2016/03/15';
-ALTER TABLE `hoodie_rt` ADD IF NOT EXISTS PARTITION (datestr='2015-03-16') LOCATION 'file:///tmp/hoodie/sample-table/2015/03/16';
-ALTER TABLE `hoodie_rt` ADD IF NOT EXISTS PARTITION (datestr='2015-03-17') LOCATION 'file:///tmp/hoodie/sample-table/2015/03/17';
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="no">DROP</span> <span class="no">TABLE</span> <span class="n">hoodie_rt</span><span class="o">;</span>
+    <span class="no">CREATE</span> <span class="no">EXTERNAL</span> <span class="no">TABLE</span> <span class="nf">hoodie_rt</span><span class="o">(</span>
+    <span class="err">`</span><span class="n">_hoodie_commit_time</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_hoodie_commit_seqno</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_hoodie_record_key</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_hoodie_partition_path</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_hoodie_file_name</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">timestamp</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="err">`</span><span class="n">_row_key</span><span class="err">`</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">rider</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">driver</span> <span class="n">string</span><span class="o">,</span>
+    <span class="n">begin_lat</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">begin_lon</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">end_lat</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">end_lon</span> <span class="kt">double</span><span class="o">,</span>
+    <span class="n">fare</span> <span class="kt">double</span><span class="o">)</span>
+    <span class="no">PARTITIONED</span> <span class="nf">BY</span> <span class="o">(</span><span class="err">`</span><span class="n">datestr</span><span class="err">`</span> <span class="n">string</span><span class="o">)</span>
+    <span class="no">ROW</span> <span class="no">FORMAT</span> <span class="no">SERDE</span>
+    <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">uber</span><span class="o">.</span><span class="na">hoodie</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">realtime</span><span class="o">.</span><span class="na">HoodieParquetSerde</span><span class="err">'</span>
+    <span class="no">STORED</span> <span class="no">AS</span> <span class="no">INPUTFORMAT</span>
+    <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">uber</span><span class="o">.</span><span class="na">hoodie</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">realtime</span><span class="o">.</span><span class="na">HoodieRealtimeInputFormat</span><span class="err">'</span>
+    <span class="no">OUTPUTFORMAT</span>
+    <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">ql</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">parquet</span><span class="o">.</span><span class="na">MapredParquetOutputFormat</span><span class="err">'</span>
+    <span class="no">LOCATION</span>
+    <span class="err">'</span><span class="nl">file:</span><span class="c1">///tmp/hoodie/sample-table';</span>
+     
+    <span class="no">ALTER</span> <span class="no">TABLE</span> <span class="err">`</span><span class="n">hoodie_rt</span><span class="err">`</span> <span class="no">ADD</span> <span class="no">IF</span> <span class="no">NOT</span> <span class="no">EXISTS</span> <span class="nf">PARTITION</span> <span class="o">(</span><span class="n">datestr</span><span class="o">=</span><span class="err">'</span><span class="mi">2016</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">15</span><span class="err">'</span><span class="o">)</span> <span class="no">LOCATION</span> <span class="err">'</span><span class="nl">file:</span><span class="c1">///tmp/hoodie/sample-table/2016/03/15';</span>
+    <span class="no">ALTER</span> <span class="no">TABLE</span> <span class="err">`</span><span class="n">hoodie_rt</span><span class="err">`</span> <span class="no">ADD</span> <span class="no">IF</span> <span class="no">NOT</span> <span class="no">EXISTS</span> <span class="nf">PARTITION</span> <span class="o">(</span><span class="n">datestr</span><span class="o">=</span><span class="err">'</span><span class="mi">2015</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">16</span><span class="err">'</span><span class="o">)</span> <span class="no">LOCATION</span> <span class="err">'</span><span class="nl">file:</span><span class="c1">///tmp/hoodie/sample-table/2015/03/16';</span>
+    <span class="no">ALTER</span> <span class="no">TABLE</span> <span class="err">`</span><span class="n">hoodie_rt</span><span class="err">`</span> <span class="no">ADD</span> <span class="no">IF</span> <span class="no">NOT</span> <span class="no">EXISTS</span> <span class="nf">PARTITION</span> <span class="o">(</span><span class="n">datestr</span><span class="o">=</span><span class="err">'</span><span class="mi">2015</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">17</span><span class="err">'</span><span class="o">)</span> <span class="no">LOCATION</span> <span class="err">'</span><span class="nl">file:</span><span class="c1">///tmp/hoodie/sample-table/2015/03/17';</span>
 </code></pre></div></div>
 
 

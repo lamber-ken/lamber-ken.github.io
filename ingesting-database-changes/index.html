@@ -195,34 +195,34 @@
 
 <p><strong>Step 1</strong>: Extract new changes to users table in MySQL, as avro data files on DFS</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Command to extract incrementals using sqoop
-bin/sqoop import \
-  -Dmapreduce.job.user.classpath.first=true \
-  --connect jdbc:mysql://localhost/users \
-  --username root \
-  --password ******* \
-  --table users \
-  --as-avrodatafile \
-  --target-dir \ 
-s3:///tmp/sqoop/import-1/users
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // Command to extract incrementals using sqoop
+    bin/sqoop import <span class="se">\</span>
+      <span class="nt">-Dmapreduce</span>.job.user.classpath.first<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+      <span class="nt">--connect</span> jdbc:mysql://localhost/users <span class="se">\</span>
+      <span class="nt">--username</span> root <span class="se">\</span>
+      <span class="nt">--password</span> <span class="k">*******</span> <span class="se">\</span>
+      <span class="nt">--table</span> <span class="nb">users</span> <span class="se">\</span>
+      <span class="nt">--as-avrodatafile</span> <span class="se">\</span>
+      <span class="nt">--target-dir</span> <span class="se">\ </span>
+    s3:///tmp/sqoop/import-1/users
 </code></pre></div></div>
 
 <p><strong>Step 2</strong>: Use your fav datasource to read extracted data and directly “upsert” the users table on DFS/Hive</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Spark Datasource
-Import org.apache.hudi.DataSourceWriteOptions._
-// Use Spark datasource to read avro
-Dataset&lt;Row&gt; inputDataset spark.read.avro(‘s3://tmp/sqoop/import-1/users/*’);
- 
-// save it as a Hudi dataset
-inputDataset.write.format(“org.apache.hudi”)
-  .option(HoodieWriteConfig.TABLE_NAME, “hoodie.users”)
-  .option(RECORDKEY_FIELD_OPT_KEY(), "userID")
-  .option(PARTITIONPATH_FIELD_OPT_KEY(),"country")
-  .option(PRECOMBINE_FIELD_OPT_KEY(), "last_mod")
-  .option(OPERATION_OPT_KEY(), UPSERT_OPERATION_OPT_VAL())
-  .mode(SaveMode.Append);
-  .save(“/path/on/dfs”)
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Spark Datasource
+</span>    <span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceWriteOptions._</span>
+    <span class="c1">// Use Spark datasource to read avro
+</span>    <span class="k">val</span> <span class="nv">inputDataset</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">avro</span><span class="o">(</span><span class="s">"s3://tmp/sqoop/import-1/users/*"</span><span class="o">);</span>
+     
+    <span class="c1">// save it as a Hudi dataset
+</span>    <span class="nv">inputDataset</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi”)
+      .option(HoodieWriteConfig.TABLE_NAME, "</span><span class="nv">hoodie</span><span class="o">.</span><span class="py">users</span><span class="s">")
+      .option(RECORDKEY_FIELD_OPT_KEY(), "</span><span class="n">userID</span><span class="s">")
+      .option(PARTITIONPATH_FIELD_OPT_KEY(),"</span><span class="n">country</span><span class="s">")
+      .option(PRECOMBINE_FIELD_OPT_KEY(), "</span><span class="n">last_mod</span><span class="s">")
+      .option(OPERATION_OPT_KEY(), UPSERT_OPERATION_OPT_VAL())
+      .mode(SaveMode.Append);
+      .save("</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">on</span><span class="o">/</span><span class="n">dfs</span><span class="err">"</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>Alternatively, you can also use the Hudi <a href="https://hudi.apache.org/writing_data.html#deltastreamer">DeltaStreamer</a> tool with the DFSSource.</p>

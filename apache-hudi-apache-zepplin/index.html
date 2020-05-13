@@ -239,13 +239,13 @@
   <li><strong>Method 2</strong>: Edit <code class="highlighter-rouge">zeppelin / conf / interpreter.json</code> and add**</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"spark.sql.hive.convertMetastoreParquet": {
-          "name": "spark.sql.hive.convertMetastoreParquet",
-          "value": false,
-          "type": "checkbox"
-        },
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"spark.sql.hive.convertMetastoreParquet"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spark.sql.hive.convertMetastoreParquet"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span><span class="w">
+        </span><span class="p">}</span><span class="err">,</span><span class="w">
 
-</code></pre></div></div>
+</span></code></pre></div></div>
 <h2 id="4-hudi-incremental-view">4. Hudi incremental view</h2>
 
 <p>For Hudi incremental view, currently only supports pulling by writing Spark code. Considering that Zeppelin has the ability to execute code and shell commands directly on the notebook, later consider packaging these notebooks to query Hudi incremental views in a way that supports SQL.</p>
