@@ -197,9 +197,9 @@
 
 <p>If you have embedded  <em>HoodieWriteClient</em> , then deletion is as simple as passing in a  _JavaRDD<HoodieKey>_ to the delete api.</HoodieKey></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Fetch list of HoodieKeys from elsewhere that needs to be deleted</span>
-    <span class="c1">// convert to JavaRDD if required. JavaRDD&lt;HoodieKey&gt; toBeDeletedKeys</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">WriteStatus</span><span class="o">&gt;</span> <span class="n">statuses</span> <span class="o">=</span> <span class="n">writeClient</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">toBeDeletedKeys</span><span class="o">,</span> <span class="n">commitTime</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fetch list of HoodieKeys from elsewhere that needs to be deleted</span>
+<span class="c1">// convert to JavaRDD if required. JavaRDD&lt;HoodieKey&gt; toBeDeletedKeys</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">WriteStatus</span><span class="o">&gt;</span> <span class="n">statuses</span> <span class="o">=</span> <span class="n">writeClient</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">toBeDeletedKeys</span><span class="o">,</span> <span class="n">commitTime</span><span class="o">);</span>
 </code></pre></div></div>
 
 <h3 id="deletion-with-datasource">Deletion with Datasource</h3>
@@ -208,79 +208,78 @@
 
 <p><strong>Step 1</strong> : Launch spark shell</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bin/spark-shell <span class="nt">--packages</span> org.apache.hudi:hudi-spark-bundle:0.5.1-incubating <span class="se">\</span>
-        <span class="nt">--conf</span> <span class="s1">'spark.serializer=org.apache.spark.serializer.KryoSerializer'</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/spark-shell <span class="nt">--packages</span> org.apache.hudi:hudi-spark-bundle:0.5.1-incubating <span class="se">\</span>
+  <span class="nt">--conf</span> <span class="s1">'spark.serializer=org.apache.spark.serializer.KryoSerializer'</span>
 </code></pre></div></div>
 <p><strong>Step 2</strong> : Import as required and set up table name, etc for sample dataset</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="nn">org.apache.hudi.QuickstartUtils._</span>
-    <span class="k">import</span> <span class="nn">scala.collection.JavaConversions._</span>
-    <span class="k">import</span> <span class="nn">org.apache.spark.sql.SaveMode._</span>
-    <span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceReadOptions._</span>
-    <span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceWriteOptions._</span>
-    <span class="k">import</span> <span class="nn">org.apache.hudi.config.HoodieWriteConfig._</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.apache.hudi.QuickstartUtils._</span>
+<span class="k">import</span> <span class="nn">scala.collection.JavaConversions._</span>
+<span class="k">import</span> <span class="nn">org.apache.spark.sql.SaveMode._</span>
+<span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceReadOptions._</span>
+<span class="k">import</span> <span class="nn">org.apache.hudi.DataSourceWriteOptions._</span>
+<span class="k">import</span> <span class="nn">org.apache.hudi.config.HoodieWriteConfig._</span>
      
-    <span class="k">val</span> <span class="nv">tableName</span> <span class="k">=</span> <span class="s">"hudi_cow_table"</span>
-    <span class="k">val</span> <span class="nv">basePath</span> <span class="k">=</span> <span class="s">"file:///tmp/hudi_cow_table"</span>
-    <span class="k">val</span> <span class="nv">dataGen</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DataGenerator</span>
+<span class="k">val</span> <span class="nv">tableName</span> <span class="k">=</span> <span class="s">"hudi_cow_table"</span>
+<span class="k">val</span> <span class="nv">basePath</span> <span class="k">=</span> <span class="s">"file:///tmp/hudi_cow_table"</span>
+<span class="k">val</span> <span class="nv">dataGen</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DataGenerator</span>
 </code></pre></div></div>
 
 <p><strong>Step 3</strong> : Insert data. Generate some new trips, load them into a DataFrame and write the DataFrame into the Hudi dataset as below.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">val</span> <span class="nv">inserts</span> <span class="k">=</span> <span class="nf">convertToStringList</span><span class="o">(</span><span class="nv">dataGen</span><span class="o">.</span><span class="py">generateInserts</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
-    <span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="n">inserts</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span>
-    <span class="nv">df</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
-        <span class="nf">options</span><span class="o">(</span><span class="n">getQuickstartWriteConfigs</span><span class="o">).</span>
-        <span class="nf">option</span><span class="o">(</span><span class="nc">PRECOMBINE_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"ts"</span><span class="o">).</span>
-        <span class="nf">option</span><span class="o">(</span><span class="nc">RECORDKEY_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"uuid"</span><span class="o">).</span>
-        <span class="nf">option</span><span class="o">(</span><span class="nc">PARTITIONPATH_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"partitionpath"</span><span class="o">).</span>
-        <span class="nf">option</span><span class="o">(</span><span class="nc">TABLE_NAME</span><span class="o">,</span> <span class="n">tableName</span><span class="o">).</span>
-        <span class="nf">mode</span><span class="o">(</span><span class="nc">Overwrite</span><span class="o">).</span>
-        <span class="nf">save</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">inserts</span> <span class="k">=</span> <span class="nf">convertToStringList</span><span class="o">(</span><span class="nv">dataGen</span><span class="o">.</span><span class="py">generateInserts</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="n">inserts</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span>
+<span class="nv">df</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+  <span class="nf">options</span><span class="o">(</span><span class="n">getQuickstartWriteConfigs</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">PRECOMBINE_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"ts"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">RECORDKEY_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"uuid"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">PARTITIONPATH_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"partitionpath"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">TABLE_NAME</span><span class="o">,</span> <span class="n">tableName</span><span class="o">).</span>
+  <span class="nf">mode</span><span class="o">(</span><span class="nc">Overwrite</span><span class="o">).</span>
+  <span class="nf">save</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p><strong>Step 4</strong> : Query data. Load the data files into a DataFrame.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">val</span> <span class="nv">roViewDF</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span>
-        <span class="n">read</span><span class="o">.</span>
-        <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
-        <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span> <span class="o">+</span> <span class="s">"/*/*/*/*"</span><span class="o">)</span>
-    <span class="nv">roViewDF</span><span class="o">.</span><span class="py">createOrReplaceTempView</span><span class="o">(</span><span class="s">"hudi_ro_table"</span><span class="o">)</span>
-    <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select count(*) from hudi_ro_table"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span> <span class="c1">// should return 10 (number of records inserted above)
-</span>    <span class="k">val</span> <span class="nv">riderValue</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select distinct rider from hudi_ro_table"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
-    <span class="c1">// copy the value displayed to be used in next step
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">roViewDF</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span>
+  <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+  <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span> <span class="o">+</span> <span class="s">"/*/*/*/*"</span><span class="o">)</span>
+<span class="nv">roViewDF</span><span class="o">.</span><span class="py">createOrReplaceTempView</span><span class="o">(</span><span class="s">"hudi_ro_table"</span><span class="o">)</span>
+<span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select count(*) from hudi_ro_table"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span> <span class="c1">// should return 10 (number of records inserted above)
+</span><span class="k">val</span> <span class="nv">riderValue</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select distinct rider from hudi_ro_table"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span>
+<span class="c1">// copy the value displayed to be used in next step
 </span></code></pre></div></div>
 
 <p><strong>Step 5</strong> : Fetch records that needs to be deleted, with the above rider value. This example is just to illustrate how to delete. In real world, use a select query using spark sql to fetch records that needs to be deleted and from the result we could invoke deletes as given below. Example rider value used is “rider-213”.</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select uuid, partitionPath from hudi_ro_table where rider = 'rider-213'"</span><span class="o">)</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select uuid, partitionPath from hudi_ro_table where rider = 'rider-213'"</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>// Replace the above query with any other query that will fetch records to be deleted.</p>
 
 <p><strong>Step 6</strong> : Issue deletes</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">val</span> <span class="nv">deletes</span> <span class="k">=</span> <span class="nv">dataGen</span><span class="o">.</span><span class="py">generateDeletes</span><span class="o">(</span><span class="nv">df</span><span class="o">.</span><span class="py">collectAsList</span><span class="o">())</span>
-    <span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="n">deletes</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
-    <span class="nv">df</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
-    <span class="nf">options</span><span class="o">(</span><span class="n">getQuickstartWriteConfigs</span><span class="o">).</span>
-    <span class="nf">option</span><span class="o">(</span><span class="nc">OPERATION_OPT_KEY</span><span class="o">,</span><span class="s">"delete"</span><span class="o">).</span>
-    <span class="nf">option</span><span class="o">(</span><span class="nc">PRECOMBINE_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"ts"</span><span class="o">).</span>
-    <span class="nf">option</span><span class="o">(</span><span class="nc">RECORDKEY_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"uuid"</span><span class="o">).</span>
-    <span class="nf">option</span><span class="o">(</span><span class="nc">PARTITIONPATH_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"partitionpath"</span><span class="o">).</span>
-    <span class="nf">option</span><span class="o">(</span><span class="nc">TABLE_NAME</span><span class="o">,</span> <span class="n">tableName</span><span class="o">).</span>
-    <span class="nf">mode</span><span class="o">(</span><span class="nc">Append</span><span class="o">).</span>
-    <span class="nf">save</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">deletes</span> <span class="k">=</span> <span class="nv">dataGen</span><span class="o">.</span><span class="py">generateDeletes</span><span class="o">(</span><span class="nv">df</span><span class="o">.</span><span class="py">collectAsList</span><span class="o">())</span>
+<span class="k">val</span> <span class="nv">df</span> <span class="k">=</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">json</span><span class="o">(</span><span class="nv">spark</span><span class="o">.</span><span class="py">sparkContext</span><span class="o">.</span><span class="py">parallelize</span><span class="o">(</span><span class="n">deletes</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+<span class="nv">df</span><span class="o">.</span><span class="py">write</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+  <span class="nf">options</span><span class="o">(</span><span class="n">getQuickstartWriteConfigs</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">OPERATION_OPT_KEY</span><span class="o">,</span><span class="s">"delete"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">PRECOMBINE_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"ts"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">RECORDKEY_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"uuid"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">PARTITIONPATH_FIELD_OPT_KEY</span><span class="o">,</span> <span class="s">"partitionpath"</span><span class="o">).</span>
+  <span class="nf">option</span><span class="o">(</span><span class="nc">TABLE_NAME</span><span class="o">,</span> <span class="n">tableName</span><span class="o">).</span>
+  <span class="nf">mode</span><span class="o">(</span><span class="nc">Append</span><span class="o">).</span>
+  <span class="nf">save</span><span class="o">(</span><span class="n">basePath</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p><strong>Step 7</strong> : Reload the table and verify that the records are deleted</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">val</span> <span class="nv">roViewDFAfterDelete</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span>
-        <span class="n">read</span><span class="o">.</span>
-        <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
-        <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span> <span class="o">+</span> <span class="s">"/*/*/*/*"</span><span class="o">)</span>
-    <span class="nv">roViewDFAfterDelete</span><span class="o">.</span><span class="py">createOrReplaceTempView</span><span class="o">(</span><span class="s">"hudi_ro_table"</span><span class="o">)</span>
-    <span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select uuid, partitionPath from hudi_ro_table where rider = 'rider-213'"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span> <span class="c1">// should not return any rows
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">roViewDFAfterDelete</span> <span class="k">=</span> <span class="n">spark</span><span class="o">.</span>
+  <span class="n">read</span><span class="o">.</span>
+  <span class="nf">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span>
+  <span class="nf">load</span><span class="o">(</span><span class="n">basePath</span> <span class="o">+</span> <span class="s">"/*/*/*/*"</span><span class="o">)</span>
+<span class="nv">roViewDFAfterDelete</span><span class="o">.</span><span class="py">createOrReplaceTempView</span><span class="o">(</span><span class="s">"hudi_ro_table"</span><span class="o">)</span>
+<span class="nv">spark</span><span class="o">.</span><span class="py">sql</span><span class="o">(</span><span class="s">"select uuid, partitionPath from hudi_ro_table where rider = 'rider-213'"</span><span class="o">).</span><span class="py">show</span><span class="o">()</span> <span class="c1">// should not return any rows
 </span></code></pre></div></div>
 
 <h2 id="deletion-with-hoodiedeltastreamer">Deletion with HoodieDeltaStreamer</h2>
@@ -296,69 +295,69 @@
 
 <p>Lets say the original schema is:</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"record"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"example_tbl"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"fields"</span><span class="p">:[{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="w">
-      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ts"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partitionPath"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rank"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"record"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"example_tbl"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fields"</span><span class="p">:[{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ts"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partitionPath"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rank"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>To leverage deletion capabilities of <code class="highlighter-rouge">DeltaStreamer</code>, you have to change the schema as below.</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"record"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"example_tbl"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"fields"</span><span class="p">:[{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="w">
-      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ts"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partitionPath"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rank"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w">
-      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"_hoodie_is_deleted"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"default"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"record"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"example_tbl"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fields"</span><span class="p">:[{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ts"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partitionPath"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rank"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"_hoodie_is_deleted"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"default"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Example incoming record for upsert</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"uuid"</span><span class="p">:</span><span class="s2">"69cdb048-c93e-4532-adf9-f61ce6afe605"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1034</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"partitionpath"</span><span class="p">:</span><span class="s2">"americas/brazil/sao_paulo"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"_hoodie_is_deleted"</span><span class="p">:</span><span class="kc">false</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"uuid"</span><span class="p">:</span><span class="s2">"69cdb048-c93e-4532-adf9-f61ce6afe605"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1034</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"partitionpath"</span><span class="p">:</span><span class="s2">"americas/brazil/sao_paulo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_hoodie_is_deleted"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Example incoming record that needs to be deleted</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19tdb048-c93e-4532-adf9-f61ce6afe10"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1045</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"partitionpath"</span><span class="p">:</span><span class="s2">"americas/brazil/sao_paulo"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"_hoodie_is_deleted"</span><span class="p">:</span><span class="kc">true</span><span class="w">
-   </span><span class="p">}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19tdb048-c93e-4532-adf9-f61ce6afe10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1045</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"partitionpath"</span><span class="p">:</span><span class="s2">"americas/brazil/sao_paulo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_hoodie_is_deleted"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>These are one time changes. Once these are in, then the DeltaStreamer pipeline will handle both upserts and deletions within every batch. Each batch could contain a mix of upserts and deletes and no additional step or changes are required after this. Note that this is to perform hard deletion instead of soft deletion.</p>

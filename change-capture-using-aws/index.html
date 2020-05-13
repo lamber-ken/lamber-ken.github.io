@@ -207,20 +207,20 @@
 
 <p>Let’s now illustrate how one can accomplish this using a simple <em>orders</em> table, stored in MySQL (these instructions should broadly apply to other database engines like Postgres, or Aurora as well, though SQL/Syntax may change)</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="no">CREATE</span> <span class="no">DATABASE</span> <span class="n">hudi_dms</span><span class="o">;</span>
-    <span class="no">USE</span> <span class="n">hudi_dms</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">CREATE</span> <span class="no">DATABASE</span> <span class="n">hudi_dms</span><span class="o">;</span>
+<span class="no">USE</span> <span class="n">hudi_dms</span><span class="o">;</span>
      
-    <span class="no">CREATE</span> <span class="no">TABLE</span> <span class="nf">orders</span><span class="o">(</span>
-       <span class="n">order_id</span> <span class="no">INTEGER</span><span class="o">,</span>
-       <span class="n">order_qty</span> <span class="no">INTEGER</span><span class="o">,</span>
-       <span class="n">customer_name</span> <span class="nf">VARCHAR</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span>
-       <span class="n">updated_at</span> <span class="no">TIMESTAMP</span> <span class="no">DEFAULT</span> <span class="nf">NOW</span><span class="o">()</span> <span class="no">ON</span> <span class="no">UPDATE</span> <span class="nf">NOW</span><span class="o">(),</span>
-       <span class="n">created_at</span> <span class="no">TIMESTAMP</span> <span class="no">DEFAULT</span> <span class="nf">NOW</span><span class="o">(),</span>
-       <span class="no">CONSTRAINT</span> <span class="n">orders_pk</span> <span class="no">PRIMARY</span> <span class="nf">KEY</span><span class="o">(</span><span class="n">order_id</span><span class="o">)</span>
-    <span class="o">);</span>
-     
-    <span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="err">'</span><span class="n">victor</span><span class="err">'</span><span class="o">);</span>
-    <span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="err">'</span><span class="n">peter</span><span class="err">'</span><span class="o">);</span>
+<span class="no">CREATE</span> <span class="no">TABLE</span> <span class="nf">orders</span><span class="o">(</span>
+   <span class="n">order_id</span> <span class="no">INTEGER</span><span class="o">,</span>
+   <span class="n">order_qty</span> <span class="no">INTEGER</span><span class="o">,</span>
+   <span class="n">customer_name</span> <span class="nf">VARCHAR</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span>
+   <span class="n">updated_at</span> <span class="no">TIMESTAMP</span> <span class="no">DEFAULT</span> <span class="nf">NOW</span><span class="o">()</span> <span class="no">ON</span> <span class="no">UPDATE</span> <span class="nf">NOW</span><span class="o">(),</span>
+   <span class="n">created_at</span> <span class="no">TIMESTAMP</span> <span class="no">DEFAULT</span> <span class="nf">NOW</span><span class="o">(),</span>
+   <span class="no">CONSTRAINT</span> <span class="n">orders_pk</span> <span class="no">PRIMARY</span> <span class="nf">KEY</span><span class="o">(</span><span class="n">order_id</span><span class="o">)</span>
+<span class="o">);</span>
+ 
+<span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="err">'</span><span class="n">victor</span><span class="err">'</span><span class="o">);</span>
+<span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="err">'</span><span class="n">peter</span><span class="err">'</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>In the table, <em>order_id</em> is the primary key which will be enforced on the Hudi table as well. Since a batch of change records can contain changes to the same primary key, we also include <em>updated_at</em> and <em>created_at</em> fields, which are kept upto date as writes happen to the table.</p>
@@ -251,14 +251,14 @@
 
 <p>Simply reading the raw initial load file, shoud give the same values as the upstream table</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">scala</span><span class="o">&gt;</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">parquet</span><span class="o">(</span><span class="s">"s3://hudi-dms-demo/orders/hudi_dms/orders/*"</span><span class="o">).</span><span class="py">sort</span><span class="o">(</span><span class="s">"updated_at"</span><span class="o">).</span><span class="py">show</span>
-     
-    <span class="o">+--------+---------+-------------+-------------------+-------------------+</span>
-    <span class="o">|</span><span class="n">order_id</span><span class="o">|</span><span class="n">order_qty</span><span class="o">|</span><span class="n">customer_name</span><span class="o">|</span>         <span class="n">updated_at</span><span class="o">|</span>         <span class="n">created_at</span><span class="o">|</span>
-    <span class="o">+--------+---------+-------------+-------------------+-------------------+</span>
-    <span class="o">|</span>       <span class="mi">2</span><span class="o">|</span>       <span class="mi">10</span><span class="o">|</span>        <span class="n">peter</span><span class="o">|</span><span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">20</span> <span class="mi">20</span><span class="k">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span>
-    <span class="kt">|</span>       <span class="err">1</span><span class="kt">|</span>       <span class="err">10</span><span class="kt">|</span>       <span class="kt">victor|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span>
-    <span class="kt">+--------+---------+-------------+-------------------+-------------------+</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">parquet</span><span class="o">(</span><span class="s">"s3://hudi-dms-demo/orders/hudi_dms/orders/*"</span><span class="o">).</span><span class="py">sort</span><span class="o">(</span><span class="s">"updated_at"</span><span class="o">).</span><span class="py">show</span>
+ 
+<span class="o">+--------+---------+-------------+-------------------+-------------------+</span>
+<span class="o">|</span><span class="n">order_id</span><span class="o">|</span><span class="n">order_qty</span><span class="o">|</span><span class="n">customer_name</span><span class="o">|</span>         <span class="n">updated_at</span><span class="o">|</span>         <span class="n">created_at</span><span class="o">|</span>
+<span class="o">+--------+---------+-------------+-------------------+-------------------+</span>
+<span class="o">|</span>       <span class="mi">2</span><span class="o">|</span>       <span class="mi">10</span><span class="o">|</span>        <span class="n">peter</span><span class="o">|</span><span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">20</span> <span class="mi">20</span><span class="k">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span>
+<span class="kt">|</span>       <span class="err">1</span><span class="kt">|</span>       <span class="err">10</span><span class="kt">|</span>       <span class="kt">victor|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span>
+<span class="kt">+--------+---------+-------------+-------------------+-------------------+</span>
 
 </code></pre></div></div>
 
@@ -268,17 +268,17 @@
 
 <p>With an initial load already on S3, we then run the following command (deltastreamer command, here on) to ingest the full load first and create a Hudi dataset on S3.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    spark-submit <span class="nt">--class</span> org.apache.hudi.utilities.deltastreamer.HoodieDeltaStreamer  <span class="se">\</span>
-      <span class="nt">--packages</span> org.apache.spark:spark-avro_2.11:2.4.4 <span class="se">\</span>
-      <span class="nt">--master</span> yarn <span class="nt">--deploy-mode</span> client <span class="se">\</span>
-      hudi-utilities-bundle_2.11-0.5.1-SNAPSHOT.jar <span class="se">\</span>
-      <span class="nt">--table-type</span> COPY_ON_WRITE <span class="se">\</span>
-      <span class="nt">--source-ordering-field</span> updated_at <span class="se">\</span>
-      <span class="nt">--source-class</span> org.apache.hudi.utilities.sources.ParquetDFSSource <span class="se">\</span>
-      <span class="nt">--target-base-path</span> s3://hudi-dms-demo/hudi_orders <span class="nt">--target-table</span> hudi_orders <span class="se">\</span>
-      <span class="nt">--transformer-class</span> org.apache.hudi.utilities.transform.AWSDmsTransformer <span class="se">\</span>
-      <span class="nt">--payload-class</span> org.apache.hudi.payload.AWSDmsAvroPayload <span class="se">\</span>
-      <span class="nt">--hoodie-conf</span> hoodie.datasource.write.recordkey.field<span class="o">=</span>order_id,hoodie.datasource.write.partitionpath.field<span class="o">=</span>customer_name,hoodie.deltastreamer.source.dfs.root<span class="o">=</span>s3://hudi-dms-demo/orders/hudi_dms/orders
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>spark-submit <span class="nt">--class</span> org.apache.hudi.utilities.deltastreamer.HoodieDeltaStreamer  <span class="se">\</span>
+  <span class="nt">--packages</span> org.apache.spark:spark-avro_2.11:2.4.4 <span class="se">\</span>
+  <span class="nt">--master</span> yarn <span class="nt">--deploy-mode</span> client <span class="se">\</span>
+  hudi-utilities-bundle_2.11-0.5.1-SNAPSHOT.jar <span class="se">\</span>
+  <span class="nt">--table-type</span> COPY_ON_WRITE <span class="se">\</span>
+  <span class="nt">--source-ordering-field</span> updated_at <span class="se">\</span>
+  <span class="nt">--source-class</span> org.apache.hudi.utilities.sources.ParquetDFSSource <span class="se">\</span>
+  <span class="nt">--target-base-path</span> s3://hudi-dms-demo/hudi_orders <span class="nt">--target-table</span> hudi_orders <span class="se">\</span>
+  <span class="nt">--transformer-class</span> org.apache.hudi.utilities.transform.AWSDmsTransformer <span class="se">\</span>
+  <span class="nt">--payload-class</span> org.apache.hudi.payload.AWSDmsAvroPayload <span class="se">\</span>
+  <span class="nt">--hoodie-conf</span> hoodie.datasource.write.recordkey.field<span class="o">=</span>order_id,hoodie.datasource.write.partitionpath.field<span class="o">=</span>customer_name,hoodie.deltastreamer.source.dfs.root<span class="o">=</span>s3://hudi-dms-demo/orders/hudi_dms/orders
 </code></pre></div></div>
 
 <p>A few things are going on here</p>
@@ -294,53 +294,53 @@
 
 <p>Once the command is run, the Hudi table should be created and have same records as the upstream table (with all the _hoodie fields as well).</p>
 
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">scala</span><span class="o">&gt;</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span><span class="py">load</span><span class="o">(</span><span class="s">"s3://hudi-dms-demo/hudi_orders/*/*.parquet"</span><span class="o">).</span><span class="py">show</span>
-    <span class="o">+-------------------+--------------------+------------------+----------------------+--------------------+--------+---------+-------------+-------------------+-------------------+---+</span>
-    <span class="o">|</span><span class="nc">_hoodie_commit_time</span><span class="o">|</span><span class="nc">_hoodie_commit_seqno</span><span class="o">|</span><span class="nc">_hoodie_record_key</span><span class="o">|</span><span class="nc">_hoodie_partition_path</span><span class="o">|</span>   <span class="nc">_hoodie_file_name</span><span class="o">|</span><span class="n">order_id</span><span class="o">|</span><span class="n">order_qty</span><span class="o">|</span><span class="n">customer_name</span><span class="o">|</span>         <span class="n">updated_at</span><span class="o">|</span>         <span class="n">created_at</span><span class="o">|</span> <span class="nc">Op</span><span class="o">|</span>
-    <span class="o">+-------------------+--------------------+------------------+----------------------+--------------------+--------+---------+-------------+-------------------+-------------------+---+</span>
-    <span class="o">|</span>     <span class="mi">20200120205028</span><span class="o">|</span>  <span class="mi">20200120205028</span><span class="n">_0_1</span><span class="o">|</span>                 <span class="mi">2</span><span class="o">|</span>                 <span class="n">peter</span><span class="o">|</span><span class="n">af9a2525</span><span class="o">-</span><span class="n">a486</span><span class="o">-</span><span class="mi">40</span><span class="n">e</span><span class="o">...|</span>       <span class="mi">2</span><span class="o">|</span>       <span class="mi">10</span><span class="o">|</span>        <span class="n">peter</span><span class="o">|</span><span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">20</span> <span class="mi">20</span><span class="k">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span>   <span class="kt">|</span>
-    <span class="kt">|</span>     <span class="err">20200120205028</span><span class="kt">|</span>  <span class="err">20200120205028</span><span class="k">_</span><span class="err">1</span><span class="k">_</span><span class="err">1</span><span class="kt">|</span>                 <span class="err">1</span><span class="kt">|</span>                <span class="kt">victor|</span><span class="err">8</span><span class="kt">e431ece-d51c-</span><span class="err">4</span><span class="kt">c7...|</span>       <span class="err">1</span><span class="kt">|</span>       <span class="err">10</span><span class="kt">|</span>       <span class="kt">victor|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span>   <span class="kt">|</span>
-    <span class="kt">+-------------------+--------------------+------------------+----------------------+--------------------+--------+---------+-------------+-------------------+-------------------+---+</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">spark</span><span class="o">.</span><span class="py">read</span><span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">).</span><span class="py">load</span><span class="o">(</span><span class="s">"s3://hudi-dms-demo/hudi_orders/*/*.parquet"</span><span class="o">).</span><span class="py">show</span>
+<span class="o">+-------------------+--------------------+------------------+----------------------+--------------------+--------+---------+-------------+-------------------+-------------------+---+</span>
+<span class="o">|</span><span class="nc">_hoodie_commit_time</span><span class="o">|</span><span class="nc">_hoodie_commit_seqno</span><span class="o">|</span><span class="nc">_hoodie_record_key</span><span class="o">|</span><span class="nc">_hoodie_partition_path</span><span class="o">|</span>   <span class="nc">_hoodie_file_name</span><span class="o">|</span><span class="n">order_id</span><span class="o">|</span><span class="n">order_qty</span><span class="o">|</span><span class="n">customer_name</span><span class="o">|</span>         <span class="n">updated_at</span><span class="o">|</span>         <span class="n">created_at</span><span class="o">|</span> <span class="nc">Op</span><span class="o">|</span>
+<span class="o">+-------------------+--------------------+------------------+----------------------+--------------------+--------+---------+-------------+-------------------+-------------------+---+</span>
+<span class="o">|</span>     <span class="mi">20200120205028</span><span class="o">|</span>  <span class="mi">20200120205028</span><span class="n">_0_1</span><span class="o">|</span>                 <span class="mi">2</span><span class="o">|</span>                 <span class="n">peter</span><span class="o">|</span><span class="n">af9a2525</span><span class="o">-</span><span class="n">a486</span><span class="o">-</span><span class="mi">40</span><span class="n">e</span><span class="o">...|</span>       <span class="mi">2</span><span class="o">|</span>       <span class="mi">10</span><span class="o">|</span>        <span class="n">peter</span><span class="o">|</span><span class="mi">2020</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">20</span> <span class="mi">20</span><span class="k">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">22</span><span class="kt">|</span>   <span class="kt">|</span>
+<span class="kt">|</span>     <span class="err">20200120205028</span><span class="kt">|</span>  <span class="err">20200120205028</span><span class="k">_</span><span class="err">1</span><span class="k">_</span><span class="err">1</span><span class="kt">|</span>                 <span class="err">1</span><span class="kt">|</span>                <span class="kt">victor|</span><span class="err">8</span><span class="kt">e431ece-d51c-</span><span class="err">4</span><span class="kt">c7...|</span>       <span class="err">1</span><span class="kt">|</span>       <span class="err">10</span><span class="kt">|</span>       <span class="kt">victor|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span><span class="err">2020</span><span class="kt">-</span><span class="err">01</span><span class="kt">-</span><span class="err">20</span> <span class="err">20</span><span class="kt">:</span><span class="err">12</span><span class="kt">:</span><span class="err">31</span><span class="kt">|</span>   <span class="kt">|</span>
+<span class="kt">+-------------------+--------------------+------------------+----------------------+--------------------+--------+---------+-------------+-------------------+-------------------+---+</span>
 </code></pre></div></div>
 
 <p>Now, let’s do an insert and an update</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="err">'</span><span class="n">sandy</span><span class="err">'</span><span class="o">);</span>
-    <span class="no">UPDATE</span> <span class="n">orders</span> <span class="n">set</span> <span class="n">order_qty</span> <span class="o">=</span> <span class="mi">20</span> <span class="n">where</span> <span class="n">order_id</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="err">'</span><span class="n">sandy</span><span class="err">'</span><span class="o">);</span>
+<span class="no">UPDATE</span> <span class="n">orders</span> <span class="n">set</span> <span class="n">order_qty</span> <span class="o">=</span> <span class="mi">20</span> <span class="n">where</span> <span class="n">order_id</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 </code></pre></div></div>
 
 <p>This will add a new parquet file to the DMS output folder and when the deltastreamer command is run again, it will go ahead and apply these to the Hudi table.</p>
 
 <p>So, querying the Hudi table now would yield 3 rows and the <em>hoodie_commit_time</em> accurately reflects when these writes happened. You can notice that order_qty for order_id=2, is updated from 10 to 20!</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    +-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
-    |_hoodie_commit_time|_hoodie_commit_seqno|_hoodie_record_key|_hoodie_partition_path|   _hoodie_file_name| Op|order_id|order_qty|customer_name|         updated_at|         created_at|
-    +-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
-    |     20200120211526|  20200120211526_0_1|                 2|                 peter|af9a2525-a486-40e...|  U|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
-    |     20200120211526|  20200120211526_1_1|                 3|                 sandy|566eb34a-e2c5-44b...|  I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
-    |     20200120205028|  20200120205028_1_1|                 1|                victor|8e431ece-d51c-4c7...|   |       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
-    +-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
+|_hoodie_commit_time|_hoodie_commit_seqno|_hoodie_record_key|_hoodie_partition_path|   _hoodie_file_name| Op|order_id|order_qty|customer_name|         updated_at|         created_at|
++-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
+|     20200120211526|  20200120211526_0_1|                 2|                 peter|af9a2525-a486-40e...|  U|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
+|     20200120211526|  20200120211526_1_1|                 3|                 sandy|566eb34a-e2c5-44b...|  I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
+|     20200120205028|  20200120205028_1_1|                 1|                victor|8e431ece-d51c-4c7...|   |       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
++-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
 </code></pre></div></div>
 
 <p>A nice debugging aid would be read all of the DMS output now and sort it by update_at, which should give us a sequence of changes that happened on the upstream table. As we can see, the Hudi table above is a compacted snapshot of this raw change log.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    +----+--------+---------+-------------+-------------------+-------------------+
-    |  Op|order_id|order_qty|customer_name|         updated_at|         created_at|
-    +----+--------+---------+-------------+-------------------+-------------------+
-    |null|       2|       10|        peter|2020-01-20 20:12:22|2020-01-20 20:12:22|
-    |null|       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
-    |   I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
-    |   U|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
-    +----+--------+---------+-------------+-------------------+-------------------+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+----+--------+---------+-------------+-------------------+-------------------+
+|  Op|order_id|order_qty|customer_name|         updated_at|         created_at|
++----+--------+---------+-------------+-------------------+-------------------+
+|null|       2|       10|        peter|2020-01-20 20:12:22|2020-01-20 20:12:22|
+|null|       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
+|   I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
+|   U|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
++----+--------+---------+-------------+-------------------+-------------------+
 </code></pre></div></div>
 
 <p>Initial load with no <em>Op</em> field value , followed by an insert and an update.</p>
 
 <p>Now, lets do deletes an inserts</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="no">DELETE</span> <span class="no">FROM</span> <span class="n">orders</span> <span class="no">WHERE</span> <span class="n">order_id</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-    <span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="err">'</span><span class="n">barry</span><span class="err">'</span><span class="o">);</span>
-    <span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="err">'</span><span class="n">nathan</span><span class="err">'</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">DELETE</span> <span class="no">FROM</span> <span class="n">orders</span> <span class="no">WHERE</span> <span class="n">order_id</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="err">'</span><span class="n">barry</span><span class="err">'</span><span class="o">);</span>
+<span class="no">INSERT</span> <span class="no">INTO</span> <span class="nf">orders</span><span class="o">(</span><span class="n">order_id</span><span class="o">,</span> <span class="n">order_qty</span><span class="o">,</span> <span class="n">customer_name</span><span class="o">)</span> <span class="no">VALUES</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="err">'</span><span class="n">nathan</span><span class="err">'</span><span class="o">);</span>
 </code></pre></div></div>
 
 <p>This should result in more files on S3, written by DMS , which the DeltaStreamer command will continue to process incrementally (i.e only the newly written files are read each time)</p>
@@ -349,29 +349,29 @@
 
 <p>Running the deltastreamer command again, would result in the follow state for the Hudi table. You can notice the two new records and that the <em>order_id=2</em> is now gone</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    +-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
-    |_hoodie_commit_time|_hoodie_commit_seqno|_hoodie_record_key|_hoodie_partition_path|   _hoodie_file_name| Op|order_id|order_qty|customer_name|         updated_at|         created_at|
-    +-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
-    |     20200120212522|  20200120212522_1_1|                 5|                nathan|3da94b20-c70b-457...|  I|       5|       50|       nathan|2020-01-20 21:23:00|2020-01-20 21:23:00|
-    |     20200120212522|  20200120212522_2_1|                 4|                 barry|8cc46715-8f0f-48a...|  I|       4|       40|        barry|2020-01-20 21:22:49|2020-01-20 21:22:49|
-    |     20200120211526|  20200120211526_1_1|                 3|                 sandy|566eb34a-e2c5-44b...|  I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
-    |     20200120205028|  20200120205028_1_1|                 1|                victor|8e431ece-d51c-4c7...|   |       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
-    +-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
+|_hoodie_commit_time|_hoodie_commit_seqno|_hoodie_record_key|_hoodie_partition_path|   _hoodie_file_name| Op|order_id|order_qty|customer_name|         updated_at|         created_at|
++-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
+|     20200120212522|  20200120212522_1_1|                 5|                nathan|3da94b20-c70b-457...|  I|       5|       50|       nathan|2020-01-20 21:23:00|2020-01-20 21:23:00|
+|     20200120212522|  20200120212522_2_1|                 4|                 barry|8cc46715-8f0f-48a...|  I|       4|       40|        barry|2020-01-20 21:22:49|2020-01-20 21:22:49|
+|     20200120211526|  20200120211526_1_1|                 3|                 sandy|566eb34a-e2c5-44b...|  I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
+|     20200120205028|  20200120205028_1_1|                 1|                victor|8e431ece-d51c-4c7...|   |       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
++-------------------+--------------------+------------------+----------------------+--------------------+---+--------+---------+-------------+-------------------+-------------------+
 </code></pre></div></div>
 
 <p>Our little informal change log query yields the following.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    +----+--------+---------+-------------+-------------------+-------------------+
-    |  Op|order_id|order_qty|customer_name|         updated_at|         created_at|
-    +----+--------+---------+-------------+-------------------+-------------------+
-    |null|       2|       10|        peter|2020-01-20 20:12:22|2020-01-20 20:12:22|
-    |null|       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
-    |   I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
-    |   U|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
-    |   D|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
-    |   I|       4|       40|        barry|2020-01-20 21:22:49|2020-01-20 21:22:49|
-    |   I|       5|       50|       nathan|2020-01-20 21:23:00|2020-01-20 21:23:00|
-    +----+--------+---------+-------------+-------------------+-------------------+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+----+--------+---------+-------------+-------------------+-------------------+
+|  Op|order_id|order_qty|customer_name|         updated_at|         created_at|
++----+--------+---------+-------------+-------------------+-------------------+
+|null|       2|       10|        peter|2020-01-20 20:12:22|2020-01-20 20:12:22|
+|null|       1|       10|       victor|2020-01-20 20:12:31|2020-01-20 20:12:31|
+|   I|       3|       30|        sandy|2020-01-20 21:11:24|2020-01-20 21:11:24|
+|   U|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
+|   D|       2|       20|        peter|2020-01-20 21:11:47|2020-01-20 20:12:22|
+|   I|       4|       40|        barry|2020-01-20 21:22:49|2020-01-20 21:22:49|
+|   I|       5|       50|       nathan|2020-01-20 21:23:00|2020-01-20 21:23:00|
++----+--------+---------+-------------+-------------------+-------------------+
 </code></pre></div></div>
 
 <p>Note that the delete and update have the same <em>updated_at,</em> value. thus it can very well order differently here.. In short this way of looking at the changelog has its caveats. For a true changelog of the Hudi table itself, you can issue an <a href="http://hudi.apache.org/docs/querying_data.html">incremental query</a>.</p>
