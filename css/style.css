@@ -7485,7 +7485,7 @@ footer.footer {
 .toc {
   overflow-y: scroll;
   bottom: 0;
-  top: 50px;
+  top: 5rem;
   position: sticky;
   max-width: 20rem;
   padding: 0 0 5% 0; }
@@ -7540,7 +7540,7 @@ h2.bk-subtitle {
   .bk-docs-container .bk-main-content {
     min-height: 70vh; }
   .bk-docs-container .container {
-    top: 50px;
+    top: 5rem;
     position: sticky; }
 
 .bk-community-container {
@@ -7549,8 +7549,7 @@ h2.bk-subtitle {
 aside.sidebar {
   width: 15rem;
   overflow-y: scroll;
-  bottom: 0;
-  padding: 0 0 5% 0; }
+  bottom: 0; }
   aside.sidebar p + ul.sidebar-items {
     margin-top: 0.2rem; }
   aside.sidebar ul.sidebar-items {
