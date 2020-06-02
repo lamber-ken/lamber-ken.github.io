@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jekyll/jekyll:3.8
+    image: hudi_docs/latest
     ports:
       - '4000:4000'
     volumes:

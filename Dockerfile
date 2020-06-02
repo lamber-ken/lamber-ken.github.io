@@ -7,13 +7,13 @@ RUN chmod a+w Gemfile.lock
 
 
 ## pick up speed in china
-RUN gem sources -l \
- && gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/ \
- && gem sources -u \
- && bundle config mirror.https://rubygems.org https://gems.ruby-china.com \
- && bundle config --delete 'mirror.https://rubygems.org/' \
- && sed -i "s/rubygems.org/gems.ruby-china.com/" Gemfile \
- && sed -i "s/rubygems.org/gems.ruby-china.com/" Gemfile.lock
+#RUN gem sources -l \
+# && gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/ \
+# && gem sources -u \
+# && bundle config mirror.https://rubygems.org https://gems.ruby-china.com \
+# && bundle config --delete 'mirror.https://rubygems.org/' \
+# && sed -i "s/rubygems.org/gems.ruby-china.com/" Gemfile \
+# && sed -i "s/rubygems.org/gems.ruby-china.com/" Gemfile.lock
 
 
 RUN bundle install \

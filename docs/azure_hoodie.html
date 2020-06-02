@@ -3,23 +3,23 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>S3 Filesystem - Apache Hudi</title>
-<meta name="description" content="In this page, we explain how to get your Hudi spark job to store into AWS S3.">
+<!-- begin _includes/seo.html --><title>Azure Filesystem - Apache Hudi</title>
+<meta name="description" content="In this page, we explain how to use Hudi on Microsoft Azure.">
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="">
-<meta property="og:title" content="S3 Filesystem">
-<meta property="og:url" content="https://hudi.apache.org/docs/0.5.2-s3_hoodie.html">
+<meta property="og:title" content="Azure Filesystem">
+<meta property="og:url" content="https://hudi.apache.org/docs/azure_hoodie.html">
 
 
-  <meta property="og:description" content="In this page, we explain how to get your Hudi spark job to store into AWS S3.">
+  <meta property="og:description" content="In this page, we explain how to use Hudi on Microsoft Azure.">
 
 
 
 
 
-  <meta property="article:modified_time" content="2019-12-30T14:59:57-05:00">
+  <meta property="article:modified_time" content="2020-05-25T19:00:57-04:00">
 
 
 
@@ -147,7 +147,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-quick-start-guide.html" class="">Quick Start</a></li>
+              <li><a href="/hudi-staging-site/docs/quick-start-guide.html" class="">Quick Start</a></li>
             
 
           
@@ -158,7 +158,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-use_cases.html" class="">Use Cases</a></li>
+              <li><a href="/hudi-staging-site/docs/use_cases.html" class="">Use Cases</a></li>
             
 
           
@@ -169,7 +169,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-powered_by.html" class="">Talks & Powered By</a></li>
+              <li><a href="/hudi-staging-site/docs/powered_by.html" class="">Talks & Powered By</a></li>
             
 
           
@@ -180,7 +180,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-comparison.html" class="">Comparison</a></li>
+              <li><a href="/hudi-staging-site/docs/comparison.html" class="">Comparison</a></li>
             
 
           
@@ -191,7 +191,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-docker_demo.html" class="">Docker Demo</a></li>
+              <li><a href="/hudi-staging-site/docs/docker_demo.html" class="">Docker Demo</a></li>
             
 
           
@@ -214,7 +214,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-concepts.html" class="">Concepts</a></li>
+              <li><a href="/hudi-staging-site/docs/concepts.html" class="">Concepts</a></li>
             
 
           
@@ -225,7 +225,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-writing_data.html" class="">Writing Data</a></li>
+              <li><a href="/hudi-staging-site/docs/writing_data.html" class="">Writing Data</a></li>
             
 
           
@@ -236,7 +236,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-querying_data.html" class="">Querying Data</a></li>
+              <li><a href="/hudi-staging-site/docs/querying_data.html" class="">Querying Data</a></li>
             
 
           
@@ -247,7 +247,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-configurations.html" class="">Configuration</a></li>
+              <li><a href="/hudi-staging-site/docs/configurations.html" class="">Configuration</a></li>
             
 
           
@@ -258,7 +258,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-performance.html" class="">Performance</a></li>
+              <li><a href="/hudi-staging-site/docs/performance.html" class="">Performance</a></li>
             
 
           
@@ -269,7 +269,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-deployment.html" class="">Deployment</a></li>
+              <li><a href="/hudi-staging-site/docs/deployment.html" class="">Deployment</a></li>
             
 
           
@@ -292,7 +292,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-docs-versions.html" class="">Docs Versions</a></li>
+              <li><a href="/hudi-staging-site/docs/docs-versions.html" class="">Docs Versions</a></li>
             
 
           
@@ -303,7 +303,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/0.5.2-privacy.html" class="">Privacy Policy</a></li>
+              <li><a href="/hudi-staging-site/docs/privacy.html" class="">Privacy Policy</a></li>
             
 
           
@@ -326,7 +326,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">S3 Filesystem
+          <h1 id="page-title" class="page__title" itemprop="headline">Azure Filesystem
 </h1>
           <!-- Output author details if some exist. -->
           
@@ -341,80 +341,54 @@
             }
           </style>
         
-        <p>In this page, we explain how to get your Hudi spark job to store into AWS S3.</p>
+        <p>In this page, we explain how to use Hudi on Microsoft Azure.</p>
 
-<h2 id="aws-configs">AWS configs</h2>
+<h2 id="disclaimer">Disclaimer</h2>
 
-<p>There are two configurations required for Hudi-S3 compatibility:</p>
+<p>This page is maintained by the Hudi community.
+If the information is inaccurate or you have additional information to add.
+Please feel free to create a JIRA ticket. Contribution is highly appreciated.</p>
+
+<h2 id="supported-storage-system">Supported Storage System</h2>
+
+<p>There are two storage systems support Hudi .</p>
 
 <ul>
-  <li>Adding AWS Credentials for Hudi</li>
-  <li>Adding required Jars to classpath</li>
+  <li>Azure Blob Storage</li>
+  <li>Azure Data Lake Gen 2</li>
 </ul>
 
-<h3 id="aws-credentials">AWS Credentials</h3>
+<h2 id="verified-combination-of-spark-and-storage-system">Verified Combination of Spark and storage system</h2>
 
-<p>Simplest way to use Hudi with S3, is to configure your <code class="highlighter-rouge">SparkSession</code> or <code class="highlighter-rouge">SparkContext</code> with S3 credentials. Hudi will automatically pick this up and talk to S3.</p>
+<h4 id="hdinsight-spark24-on-azure-data-lake-storage-gen-2">HDInsight Spark2.4 on Azure Data Lake Storage Gen 2</h4>
+<p>This combination works out of the box. No extra config needed.</p>
 
-<p>Alternatively, add the required configs in your core-site.xml from where Hudi can fetch them. Replace the <code class="highlighter-rouge">fs.defaultFS</code> with your S3 bucket name and Hudi should be able to read/write from the bucket.</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>s3://ysharma<span class="nt">&lt;/value&gt;</span>
-  <span class="nt">&lt;/property&gt;</span>
-
-  <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.s3.impl<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>org.apache.hadoop.fs.s3native.NativeS3FileSystem<span class="nt">&lt;/value&gt;</span>
-  <span class="nt">&lt;/property&gt;</span>
-
-  <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.s3.awsAccessKeyId<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>AWS_KEY<span class="nt">&lt;/value&gt;</span>
-  <span class="nt">&lt;/property&gt;</span>
-
-  <span class="nt">&lt;property&gt;</span>
-       <span class="nt">&lt;name&gt;</span>fs.s3.awsSecretAccessKey<span class="nt">&lt;/name&gt;</span>
-       <span class="nt">&lt;value&gt;</span>AWS_SECRET<span class="nt">&lt;/value&gt;</span>
-  <span class="nt">&lt;/property&gt;</span>
-
-  <span class="nt">&lt;property&gt;</span>
-       <span class="nt">&lt;name&gt;</span>fs.s3n.awsAccessKeyId<span class="nt">&lt;/name&gt;</span>
-       <span class="nt">&lt;value&gt;</span>AWS_KEY<span class="nt">&lt;/value&gt;</span>
-  <span class="nt">&lt;/property&gt;</span>
-
-  <span class="nt">&lt;property&gt;</span>
-       <span class="nt">&lt;name&gt;</span>fs.s3n.awsSecretAccessKey<span class="nt">&lt;/name&gt;</span>
-       <span class="nt">&lt;value&gt;</span>AWS_SECRET<span class="nt">&lt;/value&gt;</span>
-  <span class="nt">&lt;/property&gt;</span>
-</code></pre></div></div>
-
-<p>Utilities such as hudi-cli or deltastreamer tool, can pick up s3 creds via environmental variable prefixed with <code class="highlighter-rouge">HOODIE_ENV_</code>. For e.g below is a bash snippet to setup
-such variables and then have cli be able to work on datasets stored in s3</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3a_DOT_access_DOT_key</span><span class="o">=</span><span class="n">$accessKey</span>
-<span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3a_DOT_secret_DOT_key</span><span class="o">=</span><span class="n">$secretKey</span>
-<span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3_DOT_awsAccessKeyId</span><span class="o">=</span><span class="n">$accessKey</span>
-<span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3_DOT_awsSecretAccessKey</span><span class="o">=</span><span class="n">$secretKey</span>
-<span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3n_DOT_awsAccessKeyId</span><span class="o">=</span><span class="n">$accessKey</span>
-<span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3n_DOT_awsSecretAccessKey</span><span class="o">=</span><span class="n">$secretKey</span>
-<span class="n">export</span> <span class="n">HOODIE_ENV_fs_DOT_s3n_DOT_impl</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">hadoop</span><span class="o">.</span><span class="na">fs</span><span class="o">.</span><span class="na">s3a</span><span class="o">.</span><span class="na">S3AFileSystem</span>
-</code></pre></div></div>
-
-<h3 id="aws-libs">AWS Libs</h3>
-
-<p>AWS hadoop libraries to add to our classpath</p>
-
+<h4 id="databricks-spark24-on-azure-data-lake-storage-gen-2">Databricks Spark2.4 on Azure Data Lake Storage Gen 2</h4>
 <ul>
-  <li>com.amazonaws:aws-java-sdk:1.10.34</li>
-  <li>org.apache.hadoop:hadoop-aws:2.7.3</li>
-</ul>
-
-<p>AWS glue data libraries are needed if AWS glue data is used</p>
-
-<ul>
-  <li>com.amazonaws.glue:aws-glue-datacatalog-hive2-client:1.11.0</li>
-  <li>com.amazonaws:aws-java-sdk-glue:1.11.475</li>
+  <li>
+    <p>Import Hudi jar to databricks workspace</p>
+  </li>
+  <li>Mount the file system to dbutils.
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">dbutils</span><span class="o">.</span><span class="py">fs</span><span class="o">.</span><span class="py">mount</span><span class="o">(</span>
+  <span class="n">source</span> <span class="k">=</span> <span class="s">"abfss://xxx@xxx.dfs.core.windows.net"</span><span class="o">,</span>
+  <span class="n">mountPoint</span> <span class="k">=</span> <span class="s">"/mountpoint"</span><span class="o">,</span>
+  <span class="n">extraConfigs</span> <span class="k">=</span> <span class="n">configs</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>When writing Hudi dataset, use abfss URL
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">inputDF</span><span class="o">.</span><span class="py">write</span>
+  <span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">options</span><span class="o">(</span><span class="n">opts</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">mode</span><span class="o">(</span><span class="nv">SaveMode</span><span class="o">.</span><span class="py">Append</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">save</span><span class="o">(</span><span class="s">"abfss://&lt;&lt;storage-account&gt;&gt;.dfs.core.windows.net/hudi-tables/customer"</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>When reading Hudi dataset, use the mounting point
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">spark</span><span class="o">.</span><span class="py">read</span>
+  <span class="o">.</span><span class="py">format</span><span class="o">(</span><span class="s">"org.apache.hudi"</span><span class="o">)</span>
+  <span class="o">.</span><span class="py">load</span><span class="o">(</span><span class="s">"/mountpoint/hudi-tables/customer"</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
       </section>
