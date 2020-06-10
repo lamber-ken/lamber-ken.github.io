@@ -30,7 +30,7 @@
 <!-- end _includes/seo.html -->
 
 
-<!--<link href="/hudi-staging-site/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">-->
+<!--<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">-->
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/hudi-staging-site/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 
 <!--[if IE]>
   <style>
@@ -59,8 +59,12 @@
 
 
 
-<link rel="icon" type="image/x-icon" href="/hudi-staging-site/assets/images/favicon.ico">
-<link rel="stylesheet" href="/hudi-staging-site/assets/css/font-awesome.min.css">
+<link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+<script src="/assets/js/jquery.min.js"></script>
+
+    
+<script src="/assets/js/main.min.js"></script>
 
   </head>
 
@@ -74,24 +78,24 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/hudi-staging-site/">
+          <a class="site-logo" href="/">
               <div style="width: 150px; height: 40px">
               </div>
           </a>
         
-        <a class="site-title" href="/hudi-staging-site/">
+        <a class="site-title" href="/">
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/docs/quick-start-guide.html" target="_self" >Documentation</a>
+              <a href="/docs/quick-start-guide.html" target="_self" >Documentation</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/community.html" target="_self" >Community</a>
+              <a href="/community.html" target="_self" >Community</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/blog.html" target="_self" >Blog</a>
+              <a href="/blog.html" target="_self" >Blog</a>
             </li><li class="masthead__menu-item">
               <a href="https://cwiki.apache.org/confluence/display/HUDI/FAQ" target="_blank" >FAQ</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/releases.html" target="_self" >Releases</a>
+              <a href="/releases.html" target="_self" >Releases</a>
             </li></ul>
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -147,7 +151,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/quick-start-guide.html" class="">Quick Start</a></li>
+              <li><a href="/docs/quick-start-guide.html" class="">Quick Start</a></li>
             
 
           
@@ -158,7 +162,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/use_cases.html" class="">Use Cases</a></li>
+              <li><a href="/docs/use_cases.html" class="">Use Cases</a></li>
             
 
           
@@ -169,7 +173,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/powered_by.html" class="">Talks & Powered By</a></li>
+              <li><a href="/docs/powered_by.html" class="">Talks & Powered By</a></li>
             
 
           
@@ -180,7 +184,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/comparison.html" class="">Comparison</a></li>
+              <li><a href="/docs/comparison.html" class="">Comparison</a></li>
             
 
           
@@ -191,7 +195,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/docker_demo.html" class="">Docker Demo</a></li>
+              <li><a href="/docs/docker_demo.html" class="">Docker Demo</a></li>
             
 
           
@@ -214,7 +218,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/concepts.html" class="">Concepts</a></li>
+              <li><a href="/docs/concepts.html" class="">Concepts</a></li>
             
 
           
@@ -225,7 +229,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/writing_data.html" class="">Writing Data</a></li>
+              <li><a href="/docs/writing_data.html" class="">Writing Data</a></li>
             
 
           
@@ -236,7 +240,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/querying_data.html" class="">Querying Data</a></li>
+              <li><a href="/docs/querying_data.html" class="">Querying Data</a></li>
             
 
           
@@ -247,7 +251,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/configurations.html" class="active">Configuration</a></li>
+              <li><a href="/docs/configurations.html" class="active">Configuration</a></li>
             
 
           
@@ -258,7 +262,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/performance.html" class="">Performance</a></li>
+              <li><a href="/docs/performance.html" class="">Performance</a></li>
             
 
           
@@ -269,7 +273,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/deployment.html" class="">Deployment</a></li>
+              <li><a href="/docs/deployment.html" class="">Deployment</a></li>
             
 
           
@@ -292,7 +296,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/docs-versions.html" class="">Docs Versions</a></li>
+              <li><a href="/docs/docs-versions.html" class="">Docs Versions</a></li>
             
 
           
@@ -303,7 +307,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/privacy.html" class="">Privacy Policy</a></li>
+              <li><a href="/docs/privacy.html" class="">Privacy Policy</a></li>
             
 
           
@@ -381,10 +385,6 @@ to cloud stores.</p>
 Configurations required for S3 and Hudi co-operability.</li>
   <li><a href="/docs/gcs_hoodie">Google Cloud Storage</a> <br />
 Configurations required for GCS and Hudi co-operability.</li>
-  <li><a href="/docs/oss_hoodie.html">Alibaba Cloud OSS</a> <br />
-Configurations required for OSS and Hudi co-operability.</li>
-  <li><a href="/docs/azure_hoodie.html">Microsoft Azure</a> <br />
-Configurations required for Azure and Hudi co-operability.</li>
 </ul>
 
 <h2 id="spark-datasource">Spark Datasource Configs</h2>
@@ -752,16 +752,15 @@ HoodieWriteConfig can be built using a builder pattern as below.</p>
 <span style="color:grey">This needs to be same as class used during insert/upserts. Just like writing, compaction also uses the record payload class to merge records in the log against each other, merge again with the base file and produce the final record to be written after compaction.</span></p>
 
 <h3 id="metrics-configs">Metrics configs</h3>
-
 <p>Enables reporting on Hudi metrics.
 <a href="#withMetricsConfig">withMetricsConfig</a> (HoodieMetricsConfig) <br />
-<span style="color:grey">Hudi publishes metrics on every commit, clean, rollback etc. The following sections list the supported reporters.</span></p>
+<span style="color:grey">Hudi publishes metrics on every commit, clean, rollback etc.The following sections list the supported reporters.</span></p>
 
 <h4 id="graphite">GRAPHITE</h4>
 
-<h5 id="on">on(metricsOn = false)</h5>
+<h5 id="on">on(metricsOn = true)</h5>
 <p><code class="highlighter-rouge">hoodie.metrics.on</code> <br />
-<span style="color:grey">Turn on/off metrics reporting. off by default.</span></p>
+<span style="color:grey">Turn sending metrics on/off. on by default.</span></p>
 
 <h5 id="withReporterType">withReporterType(reporterType = GRAPHITE)</h5>
 <p>Property: <code class="highlighter-rouge">hoodie.metrics.reporter.type</code> <br />
@@ -781,9 +780,9 @@ HoodieWriteConfig can be built using a builder pattern as below.</p>
 
 <h4 id="jmx">JMX</h4>
 
-<h5 id="on">on(metricsOn = false)</h5>
+<h5 id="on">on(metricsOn = true)</h5>
 <p><code class="highlighter-rouge">hoodie.metrics.on</code> <br />
-<span style="color:grey">Turn on/off metrics reporting. off by default.</span></p>
+<span style="color:grey">Turn sending metrics on/off. on by default.</span></p>
 
 <h5 id="withReporterType">withReporterType(reporterType = JMX)</h5>
 <p>Property: <code class="highlighter-rouge">hoodie.metrics.reporter.type</code> <br />
@@ -797,51 +796,9 @@ HoodieWriteConfig can be built using a builder pattern as below.</p>
 <p>Property: <code class="highlighter-rouge">hoodie.metrics.jmx.port</code> <br />
 <span style="color:grey">Jmx port to connect to</span></p>
 
-<h4 id="datadog">DATADOG</h4>
-
-<h5 id="on">on(metricsOn = false)</h5>
-<p><code class="highlighter-rouge">hoodie.metrics.on</code> <br />
-<span style="color:grey">Turn on/off metrics reporting. off by default.</span></p>
-
-<h5 id="withReporterType">withReporterType(reporterType = DATADOG)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.reporter.type</code> <br />
-<span style="color:grey">Type of metrics reporter.</span></p>
-
-<h5 id="withDatadogReportPeriodSeconds">withDatadogReportPeriodSeconds(period = 30)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.report.period.seconds</code> <br />
-<span style="color:grey">Datadog report period in seconds. Default to 30.</span></p>
-
-<h5 id="withDatadogApiSite">withDatadogApiSite(apiSite)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.api.site</code> <br />
-<span style="color:grey">Datadog API site: EU or US</span></p>
-
-<h5 id="withDatadogApiKey">withDatadogApiKey(apiKey)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.api.key</code> <br />
-<span style="color:grey">Datadog API key</span></p>
-
-<h5 id="withDatadogApiKeySkipValidation">withDatadogApiKeySkipValidation(skip = false)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.api.key.skip.validation</code> <br />
-<span style="color:grey">Before sending metrics via Datadog API, whether to skip validating Datadog API key or not. Default to false.</span></p>
-
-<h5 id="withDatadogApiKeySupplier">withDatadogApiKeySupplier(apiKeySupplier)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.api.key.supplier</code> <br />
-<span style="color:grey">Datadog API key supplier to supply the API key at runtime. This will take effect if <code class="highlighter-rouge">hoodie.metrics.datadog.api.key</code> is not set.</span></p>
-
-<h5 id="withDatadogApiTimeoutSeconds">withDatadogApiTimeoutSeconds(timeout = 3)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.metric.prefix</code> <br />
-<span style="color:grey">Datadog API timeout in seconds. Default to 3.</span></p>
-
-<h5 id="withDatadogPrefix">withDatadogPrefix(prefix)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.metric.prefix</code> <br />
-<span style="color:grey">Datadog metric prefix to be prepended to each metric name with a dot as delimiter. For example, if it is set to <code class="highlighter-rouge">foo</code>, <code class="highlighter-rouge">foo.</code> will be prepended.</span></p>
-
-<h5 id="withDatadogHost">withDatadogHost(host)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.metric.host</code> <br />
-<span style="color:grey">Datadog metric host to be sent along with metrics data.</span></p>
-
-<h5 id="withDatadogTags">withDatadogTags(tags)</h5>
-<p>Property: <code class="highlighter-rouge">hoodie.metrics.datadog.metric.tags</code> <br />
-<span style="color:grey">Datadog metric tags (comma-delimited) to be sent along with metrics data.</span></p>
+<h5 id="usePrefix">usePrefix(prefix = “”)</h5>
+<p>Property: <code class="highlighter-rouge">hoodie.metrics.jmx.metric.prefix</code> <br />
+<span style="color:grey">Standard prefix applied to all metrics. This helps to add datacenter, environment information for e.g</span></p>
 
 <h3 id="memory-configs">Memory configs</h3>
 <p>Controls memory usage for compaction and merges, performed internally by Hudi
@@ -885,7 +842,7 @@ HoodieWriteConfig can be built using a builder pattern as below.</p>
         <tr>
           <td>
             <a class="footer-link-img" href="https://apache.org">
-              <img width="250px" src="/hudi-staging-site/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
+              <img width="250px" src="/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
             </a>
           </td>
           <td>
@@ -907,9 +864,6 @@ HoodieWriteConfig can be built using a builder pattern as below.</p>
 </div>
       </footer>
     </div>
-
-    
-<script src="/hudi-staging-site/assets/js/main.min.js"></script>
 
 
   </body>

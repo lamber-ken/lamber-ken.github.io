@@ -28,7 +28,7 @@
 <!-- end _includes/seo.html -->
 
 
-<!--<link href="/hudi-staging-site/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">-->
+<!--<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">-->
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/hudi-staging-site/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 
 <!--[if IE]>
   <style>
@@ -57,8 +57,12 @@
 
 
 
-<link rel="icon" type="image/x-icon" href="/hudi-staging-site/assets/images/favicon.ico">
-<link rel="stylesheet" href="/hudi-staging-site/assets/css/font-awesome.min.css">
+<link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+<script src="/assets/js/jquery.min.js"></script>
+
+    
+<script src="/assets/js/main.min.js"></script>
 
   </head>
 
@@ -72,24 +76,24 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/hudi-staging-site/">
+          <a class="site-logo" href="/">
               <div style="width: 150px; height: 40px">
               </div>
           </a>
         
-        <a class="site-title" href="/hudi-staging-site/">
+        <a class="site-title" href="/">
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/docs/quick-start-guide.html" target="_self" >Documentation</a>
+              <a href="/docs/quick-start-guide.html" target="_self" >Documentation</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/community.html" target="_self" >Community</a>
+              <a href="/community.html" target="_self" >Community</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/blog.html" target="_self" >Blog</a>
+              <a href="/blog.html" target="_self" >Blog</a>
             </li><li class="masthead__menu-item">
               <a href="https://cwiki.apache.org/confluence/display/HUDI/FAQ" target="_blank" >FAQ</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/releases.html" target="_self" >Releases</a>
+              <a href="/releases.html" target="_self" >Releases</a>
             </li></ul>
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -187,31 +191,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/monitoring-hudi-metrics-with-datadog/" rel="permalink">Monitor Hudi metrics with Datadog
-</a>
-      
-    </h2>
-    <!-- Look the author details up from the site config. -->
-    
-    <!-- Output author details if some exist. -->
-    <div class="archive__item-meta"><a href="https://cwiki.apache.org/confluence/display/~rxu">Raymond Xu</a> posted on <time datetime="2020-05-28">May 28, 2020</time></div>
- 
-    <p class="archive__item-excerpt" itemprop="description">Introducing the feature of reporting Hudi metrics via Datadog HTTP API
-</p>
-  </article>
-</div>
-
-        
-        
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/hudi-staging-site/blog/apache-hudi-apache-zepplin/" rel="permalink">Apache Hudi Support on Apache Zeppelin
+        <a href="/blog/apache-hudi-apache-zepplin/" rel="permalink">Apache Hudi Support on Apache Zeppelin
 </a>
       
     </h2>
@@ -235,7 +215,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/exporting-hudi-datasets/" rel="permalink">Export Hudi datasets as a copy or as different formats
+        <a href="/blog/exporting-hudi-datasets/" rel="permalink">Export Hudi datasets as a copy or as different formats
 </a>
       
     </h2>
@@ -259,7 +239,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/change-capture-using-aws/" rel="permalink">Change Capture Using AWS Database Migration Service and Hudi
+        <a href="/blog/change-capture-using-aws/" rel="permalink">Change Capture Using AWS Database Migration Service and Hudi
 </a>
       
     </h2>
@@ -283,7 +263,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/delete-support-in-hudi/" rel="permalink">Delete support in Hudi
+        <a href="/blog/delete-support-in-hudi/" rel="permalink">Delete support in Hudi
 </a>
       
     </h2>
@@ -314,7 +294,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/ingesting-database-changes/" rel="permalink">Ingesting Database changes via Sqoop/Hudi
+        <a href="/blog/ingesting-database-changes/" rel="permalink">Ingesting Database changes via Sqoop/Hudi
 </a>
       
     </h2>
@@ -338,7 +318,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/registering-dataset-to-hive/" rel="permalink">Registering sample dataset to Hive via beeline
+        <a href="/blog/registering-dataset-to-hive/" rel="permalink">Registering sample dataset to Hive via beeline
 </a>
       
     </h2>
@@ -362,7 +342,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/batch-vs-incremental/" rel="permalink">Big Batch vs Incremental Processing
+        <a href="/blog/batch-vs-incremental/" rel="permalink">Big Batch vs Incremental Processing
 </a>
       
     </h2>
@@ -386,7 +366,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/asf-incubation/" rel="permalink">Hudi entered Apache Incubator
+        <a href="/blog/asf-incubation/" rel="permalink">Hudi entered Apache Incubator
 </a>
       
     </h2>
@@ -417,7 +397,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/hudi-staging-site/blog/strata-talk-2017/" rel="permalink">Connect with us at Strata San Jose March 2017
+        <a href="/blog/strata-talk-2017/" rel="permalink">Connect with us at Strata San Jose March 2017
 </a>
       
     </h2>
@@ -455,7 +435,7 @@ Catch our talk “Incremental Processing on Hadoop At Uber”
         <tr>
           <td>
             <a class="footer-link-img" href="https://apache.org">
-              <img width="250px" src="/hudi-staging-site/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
+              <img width="250px" src="/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
             </a>
           </td>
           <td>
@@ -477,9 +457,6 @@ Catch our talk “Incremental Processing on Hadoop At Uber”
 </div>
       </footer>
     </div>
-
-    
-<script src="/hudi-staging-site/assets/js/main.min.js"></script>
 
 
   </body>

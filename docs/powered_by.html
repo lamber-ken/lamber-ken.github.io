@@ -30,7 +30,7 @@
 <!-- end _includes/seo.html -->
 
 
-<!--<link href="/hudi-staging-site/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">-->
+<!--<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">-->
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/hudi-staging-site/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 
 <!--[if IE]>
   <style>
@@ -59,8 +59,12 @@
 
 
 
-<link rel="icon" type="image/x-icon" href="/hudi-staging-site/assets/images/favicon.ico">
-<link rel="stylesheet" href="/hudi-staging-site/assets/css/font-awesome.min.css">
+<link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+<script src="/assets/js/jquery.min.js"></script>
+
+    
+<script src="/assets/js/main.min.js"></script>
 
   </head>
 
@@ -74,24 +78,24 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-          <a class="site-logo" href="/hudi-staging-site/">
+          <a class="site-logo" href="/">
               <div style="width: 150px; height: 40px">
               </div>
           </a>
         
-        <a class="site-title" href="/hudi-staging-site/">
+        <a class="site-title" href="/">
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/docs/quick-start-guide.html" target="_self" >Documentation</a>
+              <a href="/docs/quick-start-guide.html" target="_self" >Documentation</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/community.html" target="_self" >Community</a>
+              <a href="/community.html" target="_self" >Community</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/blog.html" target="_self" >Blog</a>
+              <a href="/blog.html" target="_self" >Blog</a>
             </li><li class="masthead__menu-item">
               <a href="https://cwiki.apache.org/confluence/display/HUDI/FAQ" target="_blank" >FAQ</a>
             </li><li class="masthead__menu-item">
-              <a href="/hudi-staging-site/releases.html" target="_self" >Releases</a>
+              <a href="/releases.html" target="_self" >Releases</a>
             </li></ul>
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -147,7 +151,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/quick-start-guide.html" class="">Quick Start</a></li>
+              <li><a href="/docs/quick-start-guide.html" class="">Quick Start</a></li>
             
 
           
@@ -158,7 +162,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/use_cases.html" class="">Use Cases</a></li>
+              <li><a href="/docs/use_cases.html" class="">Use Cases</a></li>
             
 
           
@@ -169,7 +173,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/powered_by.html" class="active">Talks & Powered By</a></li>
+              <li><a href="/docs/powered_by.html" class="active">Talks & Powered By</a></li>
             
 
           
@@ -180,7 +184,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/comparison.html" class="">Comparison</a></li>
+              <li><a href="/docs/comparison.html" class="">Comparison</a></li>
             
 
           
@@ -191,7 +195,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/docker_demo.html" class="">Docker Demo</a></li>
+              <li><a href="/docs/docker_demo.html" class="">Docker Demo</a></li>
             
 
           
@@ -214,7 +218,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/concepts.html" class="">Concepts</a></li>
+              <li><a href="/docs/concepts.html" class="">Concepts</a></li>
             
 
           
@@ -225,7 +229,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/writing_data.html" class="">Writing Data</a></li>
+              <li><a href="/docs/writing_data.html" class="">Writing Data</a></li>
             
 
           
@@ -236,7 +240,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/querying_data.html" class="">Querying Data</a></li>
+              <li><a href="/docs/querying_data.html" class="">Querying Data</a></li>
             
 
           
@@ -247,7 +251,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/configurations.html" class="">Configuration</a></li>
+              <li><a href="/docs/configurations.html" class="">Configuration</a></li>
             
 
           
@@ -258,7 +262,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/performance.html" class="">Performance</a></li>
+              <li><a href="/docs/performance.html" class="">Performance</a></li>
             
 
           
@@ -269,7 +273,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/deployment.html" class="">Deployment</a></li>
+              <li><a href="/docs/deployment.html" class="">Deployment</a></li>
             
 
           
@@ -292,7 +296,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/docs-versions.html" class="">Docs Versions</a></li>
+              <li><a href="/docs/docs-versions.html" class="">Docs Versions</a></li>
             
 
           
@@ -303,7 +307,7 @@
             
 
             
-              <li><a href="/hudi-staging-site/docs/privacy.html" class="">Privacy Policy</a></li>
+              <li><a href="/docs/privacy.html" class="">Privacy Policy</a></li>
             
 
           
@@ -355,21 +359,9 @@ offering, providing means for AWS users to perform record-level updates/deletes 
 
 <p><a href="https://www.emishealth.com/">EMIS Health</a> is the largest provider of Primary Care IT software in the UK with datasets including more than 500Bn healthcare records. HUDI is used to manage their analytics dataset in production and keeping them up-to-date with their upstream source. Presto is being used to query the data written in HUDI format.</p>
 
-<h3 id="kyligence">Kyligence</h3>
-
-<p><a href="https://kyligence.io/zh/">Kyligence</a> is the leading Big Data analytics platform company. We’ve built end to end solutions for various Global Fortune 500 companies in US and China. We adopted Apache Hudi in our Cloud solution on AWS in 2019. With the help of Hudi, we are able to process upserts and deletes easily and we use incremental views to build efficient data pipelines in AWS. The Hudi datasets can also be integrated to Kyligence Cloud directly for high concurrent OLAP access.</p>
-
-<h3 id="lingyue-digital-corporation">Lingyue-digital Corporation</h3>
-
-<p><a href="https://www.lingyue-digital.com/">Lingyue-digital Corporation</a> belongs to BMW Group. Apache Hudi is used to perform ingest MySQL and PostgreSQL change data capture. We build up upsert scenarios on Hadoop and spark.</p>
-
 <h3 id="logical-clocks">Logical Clocks</h3>
 
 <p><a href="https://www.logicalclocks.com/blog/introducing-the-hopsworks-1-x-series">Hopsworks 1.x series</a> supports Apache Hudi feature groups, to enable upserts and time travel.</p>
-
-<h3 id="sf-express">SF-Express</h3>
-
-<p><a href="https://www.sf-express.com/cn/sc/">SF-Express</a> is the leading logistics service provider in China. HUDI is used to build a real-time data warehouse, providing real-time computing solutions with higher efficiency and lower cost for our business.</p>
 
 <h3 id="tathastuai">Tathastu.ai</h3>
 
@@ -459,29 +451,29 @@ December 2019, AWS re:Invent 2019, Las Vegas, NV, USA</p>
     <div class="home-power-items">
 
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/uber.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/uber.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/aws.jpg" /></div>
+        <div class="power-item"><img src="/assets/images/powers/aws.jpg" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/alibaba.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/alibaba.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/emis.jpg" /></div>
+        <div class="power-item"><img src="/assets/images/powers/emis.jpg" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/yield.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/yield.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/qq.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/qq.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/tongcheng.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/tongcheng.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/yotpo.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/yotpo.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/kyligence.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/kyligence.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/tathastu.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/tathastu.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/shunfeng.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/shunfeng.png" /></div>
       
-        <div class="power-item"><img src="/hudi-staging-site/assets/images/powers/lingyue.png" /></div>
+        <div class="power-item"><img src="/assets/images/powers/lingyue.png" /></div>
       
 
     </div>
@@ -512,7 +504,7 @@ December 2019, AWS re:Invent 2019, Las Vegas, NV, USA</p>
         <tr>
           <td>
             <a class="footer-link-img" href="https://apache.org">
-              <img width="250px" src="/hudi-staging-site/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
+              <img width="250px" src="/assets/images/asf_logo.svg" alt="The Apache Software Foundation">
             </a>
           </td>
           <td>
@@ -534,9 +526,6 @@ December 2019, AWS re:Invent 2019, Las Vegas, NV, USA</p>
 </div>
       </footer>
     </div>
-
-    
-<script src="/hudi-staging-site/assets/js/main.min.js"></script>
 
 
   </body>
