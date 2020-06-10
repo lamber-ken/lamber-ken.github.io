@@ -59,10 +59,10 @@
 
 
 
+
 <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 <script src="/assets/js/jquery.min.js"></script>
-
     
 <script src="/assets/js/main.min.js"></script>
 
@@ -360,33 +360,33 @@
 
 <p>Add the required configs in your core-site.xml from where Hudi can fetch them. Replace the <code class="highlighter-rouge">fs.defaultFS</code> with your OSS bucket name, replace <code class="highlighter-rouge">fs.oss.endpoint</code> with your OSS endpoint, replace <code class="highlighter-rouge">fs.oss.accessKeyId</code> with your OSS key, replace <code class="highlighter-rouge">fs.oss.accessKeySecret</code> with your OSS secret. Hudi should be able to read/write from the bucket.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;property&gt;</span>
-        <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
-        <span class="nt">&lt;value&gt;</span>oss://bucketname/<span class="nt">&lt;/value&gt;</span>
-    <span class="nt">&lt;/property&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>oss://bucketname/<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 
-    <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.oss.endpoint<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>oss-endpoint-address<span class="nt">&lt;/value&gt;</span>
-      <span class="nt">&lt;description&gt;</span>Aliyun OSS endpoint to connect to.<span class="nt">&lt;/description&gt;</span>
-    <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.oss.endpoint<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>oss-endpoint-address<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Aliyun OSS endpoint to connect to.<span class="nt">&lt;/description&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 
-    <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.oss.accessKeyId<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>oss_key<span class="nt">&lt;/value&gt;</span>
-      <span class="nt">&lt;description&gt;</span>Aliyun access key ID<span class="nt">&lt;/description&gt;</span>
-    <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.oss.accessKeyId<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>oss_key<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Aliyun access key ID<span class="nt">&lt;/description&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 
-    <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.oss.accessKeySecret<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>oss-secret<span class="nt">&lt;/value&gt;</span>
-      <span class="nt">&lt;description&gt;</span>Aliyun access key secret<span class="nt">&lt;/description&gt;</span>
-    <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.oss.accessKeySecret<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>oss-secret<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Aliyun access key secret<span class="nt">&lt;/description&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 
-    <span class="nt">&lt;property&gt;</span>
-      <span class="nt">&lt;name&gt;</span>fs.oss.impl<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;value&gt;</span>org.apache.hadoop.fs.aliyun.oss.AliyunOSSFileSystem<span class="nt">&lt;/value&gt;</span>
-    <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.oss.impl<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>org.apache.hadoop.fs.aliyun.oss.AliyunOSSFileSystem<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 </code></pre></div></div>
 
 <h3 id="aliyun-oss-libs">Aliyun OSS Libs</h3>
@@ -394,19 +394,19 @@
 <p>Aliyun hadoop libraries jars to add to our pom.xml. Since hadoop-aliyun depends on the version of hadoop 2.9.1+, you need to use the version of hadoop 2.9.1 or later.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.apache.hadoop<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>hadoop-aliyun<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>3.2.1<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.apache.hadoop<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>hadoop-aliyun<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>3.2.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>com.aliyun.oss<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>aliyun-sdk-oss<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.aliyun.oss<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>aliyun-sdk-oss<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.jdom<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>jdom<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.jdom<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>jdom<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></div>
 
